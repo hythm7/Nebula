@@ -1,0 +1,19 @@
+---
+name: nebula
+cro: 1
+id: nebula
+env:
+  - name: NEBULA_HOST
+    value: galaxy
+  - name: NEBULA_PORT
+    value: '7777'
+
+links:  []
+entrypoint: t/01-service.p6
+endpoints: 
+  - 
+    id: http
+    name: HTTP
+    protocol: http
+    host-env: NEBULA_HOST
+    port-env: NEBULA_PORT
