@@ -4,14 +4,9 @@ use Cro::HTTP::Log::File;
 use Cro::HTTP::Server;
 use Routes;
 use Nebula;
+use Nebula::Star;
 
-my $raku = { :name<raku>, :age<0.0.1>, :core<x86_64>, :form<0> };
-my $dovy = { :name<dovy>, :age<0.0.2>, :core<x86_64>, :form<1> };
-my $nimo = { :name<nimo>, :age<0.0.3>, :core<x86_64>, :form<2> };
-
-my @star = $raku, $dovy, $nimo;
-
-my $nebula = Nebula.new: origin => $*CWD, :@star;
+my $nebula = Nebula.new: origin => $*CWD;
 my $application = routes($nebula);
 
 my Cro::Service $http = Cro::HTTP::Server.new(
