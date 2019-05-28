@@ -1,6 +1,5 @@
 use File::Find;
 use Nebula::Grammar::Meta;
-#use Nebula::Star;
 
 unit class Nebula;
 

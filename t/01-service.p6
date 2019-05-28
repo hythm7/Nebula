@@ -4,7 +4,6 @@ use Cro::HTTP::Log::File;
 use Cro::HTTP::Server;
 use Routes;
 use Nebula;
-use Nebula::Star;
 
 my $nebula = Nebula.new: origin => $*CWD;
 my $application = routes($nebula);
