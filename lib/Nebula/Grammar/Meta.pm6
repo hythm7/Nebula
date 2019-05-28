@@ -9,16 +9,12 @@ grammar Nebula::Grammar::Meta {
   token sections { <.ws> <section>* %% <.nl> }
 
   proto rule section { * }
-  rule section:sym<main>    { <lt> <starname> <gt> <.nl> <main>+ % <.nl> }
-  rule section:sym<cluster> { <lt> <sym> <gt> <.nl> <cluster>+ % <.nl> }
+  rule section:sym<main>    { <lt> <starname> <gt> <.nl> <main>+     % <.nl> }
+  rule section:sym<cluster> { <lt> <sym>      <gt> <.nl> <starname>* % <.nl> }
 
   proto rule main { * }
   rule main:sym<chksum>   { <.ws> <sym> <chksum> }
   rule main:sym<location> { <.ws> <sym> <uri> }
-
-  proto rule cluster { * }
-  rule cluster:sym<req> { <.ws> <sym> <starname> }
-  rule cluster:sym<opt> { <.ws> <sym> <starname> }
 
   token uri { <alpha>+ <colon> <slash> <slash> <hostname> [ <colon> <digit>+ ]? <slash>? <path>? }
   token chksum  { <.alnum> ** 32 }
@@ -51,20 +47,10 @@ class Nebula::Grammar::Meta::Actions {
     %!meta.push: $<main>».ast;
   }
 
-  method section:sym<cluster> ( $/ ) { %!meta.push: $<cluster>».ast }
+  method section:sym<cluster> ( $/ ) { %!meta.push: ( cluster => $<starname>».ast ) }
 
   method main:sym<chksum>   ( $/ ) { make $<sym>.Str => $<chksum>.Str }
   method main:sym<location> ( $/ ) { make $<sym>.Str => Cro::Uri.new: uri => $<uri>.Str }
-
-
-  method cluster:sym<req> ( $/ ) {
-    make $<sym>.Str => $<starname>.ast;
-  }
-
-  method cluster:sym<opt> ( $/ ) {
-    make $<sym>.Str => $<starname>.ast;
-  }
-
 
 }
 
