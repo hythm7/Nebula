@@ -43,9 +43,8 @@ method stars ( ) {
 
 multi infix:<≅> ( %left, %right --> Bool:D ) {
 
-  # TODO: name match with '*'
   return False unless %left<name> ~~ %right<name>;
-  return False unless Version.new: %left<age>  ~~ Version.new: %right<age>;
+  return False unless %left<age>  ~~ Version.new: %right<age>;
   return False unless %left<core> ~~ %right<core>;
   return False unless %left<form> ~~ %right<form>;
   return False unless %left<tag>  ~~ %right<tag>;

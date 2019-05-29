@@ -1,4 +1,3 @@
-use Cro::Uri;
 use Galaxy::Grammar::Star;
 
 grammar Nebula::Grammar::Meta {
@@ -50,7 +49,7 @@ class Nebula::Grammar::Meta::Actions {
   method section:sym<cluster> ( $/ ) { %!meta.push: ( cluster => $<starname>».ast ) }
 
   method main:sym<chksum>   ( $/ ) { make $<sym>.Str => $<chksum>.Str }
-  method main:sym<location> ( $/ ) { make $<sym>.Str => Cro::Uri.new: uri => $<uri>.Str }
+  method main:sym<location> ( $/ ) { make $<sym>.Str => $<uri>.Str }
 
 }
 
