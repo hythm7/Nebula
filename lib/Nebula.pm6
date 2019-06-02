@@ -22,7 +22,7 @@ method TWEAK ( ) {
 
 }
 
-method star ( $name, $age = '', $core = 'x86_64', $form = 0, $tag = '' ) {
+method star ( $name, $age?, $core?, $form?, $tag? ) {
 
   my %star;
 
