@@ -32,9 +32,7 @@ method star ( $name, $age?, $core?, $form?, $tag? ) {
   %star.push: ( form => $form.Int ) if $form;
   %star.push: ( tag  => $tag )      if $tag;
 
-  my @candi = @!star.grep( * ≅ %star );
-
-  @candi;
+  @!star.grep( * ≅ %star );
 }
 
 method stars ( ) {
@@ -44,7 +42,7 @@ method stars ( ) {
 multi infix:<≅> ( %left, %right --> Bool:D ) {
 
   return False unless %left<name> ~~ %right<name>;
-  return False unless %left<age>  ~~ Version.new: %right<age> // '';
+  return False unless Version.new(%left<age>) ~~ Version.new(%right<age> // '');
   return False unless %left<core> ~~ %right<core>;
   return False unless %left<form> ~~ %right<form>;
   return False unless %left<tag>  ~~ %right<tag>;
