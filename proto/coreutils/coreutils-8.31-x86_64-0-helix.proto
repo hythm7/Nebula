@@ -1,0 +1,29 @@
+<proto>
+star coreutils-8.31-x86_64-0-helix
+source https://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
+
+<law>
+prefix                 /usr
+bindir                 /bin
+sysconfdir             /etc
+libdir                 /usr/lib64
+without-gmp 
+enable-install-program arch
+infodir                /usr/info
+mandir                 /usr/man
+build                  x86_64-galaxy-linux
+
+<env>
+FORCE_UNSAFE_CONFIGURE 1
+DEFAULT_POSIX2_VERSION 199209
+LDFLAGS                GLXLDFLAGS
+CXXFLAGS               GLXCFLAGS
+CFLAGS                 GLXCFLAGS
+
+# <post-gravity>
+
+# <pre-blackhole>
+
+#<desc>
+#The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating sys#tem. These are the core utilities which are expected to exist on every operating system. 
+
