@@ -1,7 +1,10 @@
+no precompilation;
+use Grammar::Tracer;
+
 use Galaxy::Grammar::Star;
 
 grammar Nebula::Grammar::Meta {
-  also does Galaxy::Grammar::Star;
+  also is Galaxy::Grammar::Star;
 
   token TOP { <sections> }
 
@@ -34,7 +37,7 @@ grammar Nebula::Grammar::Meta {
 
 
 class Nebula::Grammar::Meta::Actions {
-  also does Galaxy::Grammar::Star::Actions;
+  also is Galaxy::Grammar::Star::Actions;
 
   has %!meta;
 

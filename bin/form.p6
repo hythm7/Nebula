@@ -1,14 +1,16 @@
 #!/usr/bin/env perl6
 #
 use lib 'lib';
-use Nebula::Grammar::Proto;
+use Nebula;
 
-multi MAIN ( Str $file ) {
+multi MAIN ( Str :$star ) {
 
-  my $parser  = Nebula::Grammar::Proto;
-  my $actions = Nebula::Grammar::Proto::Actions.new;
+  Nebula.new.form: $star;
 
-  my %proto = $parser.parsefile( $file, :$actions ).ast;
+}
 
-  say %proto;
+multi MAIN ( Str $proto where *.IO.e ) {
+
+  Nebula.new.form: $proto.IO;
+
 }

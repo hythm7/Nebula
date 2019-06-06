@@ -2,6 +2,10 @@
 star coreutils-8.31-x86_64-0-helix
 source https://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
 
+<cluster>
+galaxy
+rakudo
+
 <law>
 prefix                 /usr
 bindir                 /bin
