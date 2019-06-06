@@ -11,9 +11,7 @@ my $actions = Nebula::Grammar::Proto::Actions.new;
 
 my $parser = Nebula::Grammar::Proto.new;
 
-#my $m = $parser.parsefile($proto, :$actions);
-my $m = $parser.parsefile($proto);
+my $m = $parser.parsefile($proto, :$actions);
 
-#say $m.ast;
-say $m;
+say $m.ast;
 
