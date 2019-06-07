@@ -2,6 +2,7 @@ use DDT;
 use File::Temp;
 use File::Find;
 use Archive::Libarchive;
+use Archive::Libarchive::Constants;
 use LibCurl::Easy;
 use Nebula::Grammar::Proto;
 use Nebula::Grammar::Meta;
@@ -13,13 +14,14 @@ has Str $!name;
 has IO  $!origin;
 has IO  $!proto;
 has IO  $!halo;
-has     @!star;
+has     $!star;
 
 submethod BUILD (
 
   :$!name   = chomp qx<hostname>;
   :$!origin = $*CWD;
   :$!proto  = $!origin.add: 'proto';
+  :$!star   = $!origin.add: 'star';
   :$!halo   = '/var/nebula/halo'.IO;
 
   ) {
@@ -29,7 +31,8 @@ submethod BUILD (
 
 multi method form ( :%star! ) {
 
-  my $protodir   = "$!proto/%star<name>/%star<star>/".IO;
+  my $protodir = "$!proto/%star<name>/%star<star>/".IO;
+
   my $proto = $protodir.add: "star.proto";
 
   fail "proto not found for %star<star>" unless $proto.IO.e;
@@ -48,14 +51,21 @@ multi method form ( :%star! ) {
 
   my $tmpdir = tempdir;
 
-  my $a = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str;
+  my $a = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
+    flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
   $a.extract: $tmpdir;
+  $a.close;
 
   my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
 
-  shell "./configure %form<law>", cwd => $formdir, env => %form<env>;
+  shell "%form<env> ./configure %form<law>", cwd => $formdir;
   shell "make", cwd => $formdir;
-  shell "make DESTDIR=$formdir", cwd => $formdir;
+  shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
+
+  $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
+    file => $!star.add( "%star<name> %star<star>.xyz" ).Str;
+
+  $a.close;
 
 }
 
@@ -69,11 +79,11 @@ method star ( $name, $age?, $core?, $form?, $tag? ) {
   %star.push: ( form => $form.Int ) if $form;
   %star.push: ( tag  => $tag )      if $tag;
 
-  @!star.grep( * ≅ %star );
+  #@!star.grep( * ≅ %star );
 }
 
 method stars ( ) {
-  @!star;
+  #@!star;
 }
 
 multi infix:<≅> ( %left, %right --> Bool:D ) {
