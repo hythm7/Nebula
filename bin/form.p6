@@ -1,16 +1,19 @@
 #!/usr/bin/env perl6
 #
+use Galaxy::Grammar::Star;
+
 use lib 'lib';
 use Nebula;
 
-multi MAIN ( Str :$star ) {
+multi MAIN ( Str :$star! ) {
 
-  Nebula.new.form: :$star;
+  my $parser  = Galaxy::Grammar::Star;
+  my $actions = Galaxy::Grammar::Star::Actions.new;
+  my $m       = $parser.parse( $star, :$actions );
 
-}
+  fail "Can not parse star $star" unless $m;
 
-multi MAIN ( Str $proto where *.IO.e ) {
-
-  Nebula.new.form: $proto.IO;
+  my %star = $m.ast;
+  Nebula.new.form: :%star;
 
 }

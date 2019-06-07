@@ -27,29 +27,36 @@ submethod BUILD (
 
 }
 
-multi method form ( :$star ) {
+multi method form ( :%star! ) {
 
-  my $parser  = Galaxy::Grammar::Star;
-  my $actions = Galaxy::Grammar::Star::Actions.new;
-  my %star    = $parser.parse( $star, :$actions ).ast;
-  #fail 'proto not found for' unless "$!proto/$name/$age/$core/$form/$tag.proto".IO.e;
-  say %star;
+  my $protodir   = "$!proto/%star<name>/%star<star>/".IO;
+  my $proto = $protodir.add: "star.proto";
 
-
-
-}
-
-multi method form ( IO $proto ) {
+  fail "proto not found for %star<star>" unless $proto.IO.e;
 
   my $parser  = Nebula::Grammar::Proto;
   my $actions = Nebula::Grammar::Proto::Actions.new;
-  my %form    = $parser.parsefile( $proto, :$actions ).ast;
+  my $m       = $parser.parsefile( $proto, :$actions );
+
+  fail "Can not parse $proto" unless $m;
+
+  my %form = $m.ast;
+
+  my $source = $protodir.add: %form<source>.path.IO.basename;
+
+  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str).perform unless $source.e;
 
   my $tmpdir = tempdir;
-  my $source = $tmpdir.IO.add: %form<source>.path.IO.basename;
 
-  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str).perform;
-  say $tmpdir.IO.dir;
+  my $a = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str;
+  $a.extract: $tmpdir;
+
+  my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
+
+  shell "./configure %form<law>", cwd => $formdir, env => %form<env>;
+  shell "make", cwd => $formdir;
+  shell "make DESTDIR=$formdir", cwd => $formdir;
+
 }
 
 method star ( $name, $age?, $core?, $form?, $tag? ) {
