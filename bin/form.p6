@@ -5,7 +5,7 @@ use Nebula;
 
 multi MAIN ( Str :$star ) {
 
-  Nebula.new.form: $star;
+  Nebula.new.form: :$star;
 
 }
 

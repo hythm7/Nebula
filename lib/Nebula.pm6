@@ -27,26 +27,11 @@ submethod BUILD (
 
 }
 
-submethod TWEAK ( ) {
+multi method form ( :$star ) {
 
-  # Temporary
-  my @file = find( dir => 'meta', name => / '.meta' $ / );
-
-  for @file -> $file {
-
-    my %meta = Nebula::Grammar::Meta.parsefile( $file, :actions(Nebula::Grammar::Meta::Actions.new) ).ast;
-
-    @!star.push: %meta;
-
-  }
-
-}
-
-multi method form ( $star ) {
-
-  #my $parser  = Galaxy::Grammar::Star;
-  #my $actions = Galaxy::Grammar::Star::Actions.new;
-  #my %star    = $parser.parse( $star, :$actions ).ast;
+  my $parser  = Galaxy::Grammar::Star;
+  my $actions = Galaxy::Grammar::Star::Actions.new;
+  my %star    = $parser.parse( $star, :$actions ).ast;
   #fail 'proto not found for' unless "$!proto/$name/$age/$core/$form/$tag.proto".IO.e;
   say %star;
 
