@@ -1,11 +1,10 @@
 use DDT;
 use File::Temp;
-use File::Find;
+use Path::Finder;
 use Archive::Libarchive;
 use Archive::Libarchive::Constants;
 use LibCurl::Easy;
 use Nebula::Grammar::Proto;
-use Nebula::Grammar::Meta;
 use Galaxy::Grammar::Star;
 
 unit class Nebula;
@@ -47,7 +46,7 @@ multi method form ( :%star! ) {
 
   my $source = $protodir.add: %form<source>.path.IO.basename;
 
-  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str).perform unless $source.e;
+  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
 
   my $tmpdir = tempdir;
 
@@ -62,8 +61,16 @@ multi method form ( :%star! ) {
   shell "make", cwd => $formdir;
   shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
 
+  my @file = find "$tmpdir/%star<star>", :file;
+
   $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
-    file => $!star.add( "%star<name> %star<star>.xyz" ).Str;
+    format => 'v7tar', filters => ['xz'],
+    file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
+
+  for @file -> $file {
+      $a.write-header($file.Str);
+      $a.write-data($file.Str);
+  }
 
   $a.close;
 

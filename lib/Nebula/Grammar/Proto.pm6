@@ -1,5 +1,5 @@
-#no precompilation;
-#use Grammar::Tracer;
+no precompilation;
+#use Grammar::Tracer::Compact;
 use Cro::Uri;
 use Galaxy::Grammar::Star;
 

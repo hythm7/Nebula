@@ -1,0 +1,22 @@
+<proto>
+star acl-2.2.53-x86_64-0-helix
+source http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz
+
+<cluster>
+galaxy
+rakudo
+
+<law>
+prefix                 /
+exec-prefix            /
+sbindir                /bin
+bindir                 /usr/bin
+disable-static 
+libdir                 /lib64
+libexecdir             /usr/lib64
+includedir             /usr/include
+mandir                 /usr/man
+build                  x86_64-galaxy-linux
+
+#<desc>
+#The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.
