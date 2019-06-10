@@ -4,7 +4,7 @@ source https://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
 
 <cluster>
 galaxy
-rakudo
+rakudo-0.0.7
 
 <law>
 prefix                 /usr
@@ -25,5 +25,5 @@ DEFAULT_POSIX2_VERSION 199209
 
 # <pre-blackhole>
 
-<desc>
-The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.
+#<desc>
+#The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.

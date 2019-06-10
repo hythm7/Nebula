@@ -1,14 +1,17 @@
 use DDT;
+use DB::SQLite;
 use File::Temp;
 use Path::Finder;
 use Path::Through;
 use Archive::Libarchive;
 use Archive::Libarchive::Constants;
 use LibCurl::Easy;
+use Nebula::DB;
 use Nebula::Grammar::Proto;
 use Galaxy::Grammar::Star;
 
 unit class Nebula;
+  also does Nebula::DB;
 
 has Str $!name;
 has IO  $!origin;
@@ -22,7 +25,7 @@ submethod BUILD (
   :$!origin = $*CWD;
   :$!proto  = $!origin.add: 'proto';
   :$!star   = $!origin.add: 'star';
-  :$!halo   = '/var/nebula/halo'.IO;
+  :$!halo   = '/var/nebula/'.IO;
 
   ) {
 
@@ -45,35 +48,37 @@ multi method form ( :%star! ) {
 
   my %form = $m.ast;
 
-  my $source = $protodir.add: %form<source>.path.IO.basename;
+  self.add-star: |%form;
 
-  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
+  #my $source = $protodir.add: %form<source>.path.IO.basename;
 
-  my $tmpdir = tempdir;
+  #LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
 
-  my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
-    flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
-  $e.extract: $tmpdir;
-  $e.close;
+  #my $tmpdir = tempdir;
 
-  my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
+  #my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
+  #  flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
+  #$e.extract: $tmpdir;
+  #$e.close;
 
-  shell "%form<env> ./configure %form<law>", cwd => $formdir;
-  shell "make", cwd => $formdir;
-  shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
+  #my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
 
-  my @file = find "$tmpdir/%star<star>", :file;
+  #shell "%form<env> ./configure %form<law>", cwd => $formdir;
+  #shell "make", cwd => $formdir;
+  #shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
 
-  my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
-    format => 'v7tar', filters => ['xz'],
-    file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
+  #my @file = find "$tmpdir/%star<star>", :file;
 
-  for @file -> $file {
-      $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
-      $a.write-data( ~$file );
-  }
+  #my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
+  #  format => 'v7tar', filters => ['xz'],
+  #  file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
 
-  $a.close;
+  #for @file -> $file {
+  #    $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
+  #    $a.write-data( ~$file );
+  #}
+
+  #$a.close;
 
 }
 
@@ -104,3 +109,4 @@ multi infix:<≅> ( %left, %right --> Bool:D ) {
 
   True;
 }
+

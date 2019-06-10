@@ -55,18 +55,19 @@ grammar Nebula::Grammar::Proto {
 class Nebula::Grammar::Proto::Actions {
   also is Galaxy::Grammar::Star::Actions;
 
-  has %!meta;
+  has %!proto;
 
 
-  method TOP ( $/ ) { make %!meta; }
+  method TOP ( $/ ) { make %!proto; }
 
-  method proto:sym<star>   ( $/ ) { %!meta.push: ( $<starname>.ast ) }
-  method proto:sym<source> ( $/ ) { %!meta.push: ( $<sym>.Str => Cro::Uri.parse: $<uri> ) }
+  method proto:sym<star>   ( $/ ) { %!proto.push: ( $<starname>.ast ) }
+  method proto:sym<source> ( $/ ) { %!proto.push: ( $<sym>.Str => ~$<uri> ) }
+  #method proto:sym<source> ( $/ ) { %!proto.push: ( $<sym>.Str => Cro::Uri.parse: $<uri> ) }
 
-  method section:sym<law>     ( $/ ) { %!meta.push: ( $<sym>.Str => $<law>».ast ) }
-  method section:sym<env>     ( $/ ) { %!meta.push: ( $<sym>.Str => $<env>».ast ) }
-  method section:sym<cluster> ( $/ ) { %!meta.push: ( $<sym>.Str => $<starname>».ast ) }
-  method section:sym<desc>    ( $/ ) { %!meta.push: ( $<sym>.Str => $/.Str ) }
+  method section:sym<law>     ( $/ ) { %!proto.push: ( $<sym>.Str => $<law>».ast ) }
+  method section:sym<env>     ( $/ ) { %!proto.push: ( $<sym>.Str => $<env>».ast ) }
+  method section:sym<cluster> ( $/ ) { %!proto.push: ( $<sym>.Str => $<starname>».ast ) }
+  method section:sym<desc>    ( $/ ) { %!proto.push: ( $<sym>.Str => $<desc>.Str ) }
 
 
   method law:sym<key> ( $/ ) { make "--$<key>" }
