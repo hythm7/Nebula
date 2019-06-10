@@ -1,6 +1,7 @@
 use DDT;
 use File::Temp;
 use Path::Finder;
+use Path::Through;
 use Archive::Libarchive;
 use Archive::Libarchive::Constants;
 use LibCurl::Easy;
@@ -50,10 +51,10 @@ multi method form ( :%star! ) {
 
   my $tmpdir = tempdir;
 
-  my $a = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
+  my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
     flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
-  $a.extract: $tmpdir;
-  $a.close;
+  $e.extract: $tmpdir;
+  $e.close;
 
   my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
 
@@ -63,13 +64,13 @@ multi method form ( :%star! ) {
 
   my @file = find "$tmpdir/%star<star>", :file;
 
-  $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
+  my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
     format => 'v7tar', filters => ['xz'],
     file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
 
   for @file -> $file {
-      $a.write-header($file.Str);
-      $a.write-data($file.Str);
+      $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
+      $a.write-data( ~$file );
   }
 
   $a.close;

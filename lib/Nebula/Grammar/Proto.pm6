@@ -15,7 +15,7 @@ grammar Nebula::Grammar::Proto {
   rule section:sym<law>     { <.lt> <sym> <.gt> <.nl> <law>*      % <.nl> }
   rule section:sym<env>     { <.lt> <sym> <.gt> <.nl> <env>*      % <.nl> }
   rule section:sym<cluster> { <.lt> <sym> <.gt> <.nl> <starname>* % <.nl> }
-  #rule section:sym<desc> { <.lt> <sym> <.gt> <.nl> <desc>           }
+  rule section:sym<desc>    { <.lt> <sym> <.gt> <.nl> <desc>           }
   #rule section:sym<postgrv> { <.lt> <sym> <.gt> <.nl> <postgrv> }
  # rule section:sym<preblk>  { <lt> <sym> <gt> <.nl> <preblk>  % <.nl> }
 
@@ -29,7 +29,7 @@ grammar Nebula::Grammar::Proto {
 
   rule env { <key> <value> }
 
-  #token desc { <-[<>]>+ }
+  token desc { <-[<>]>+ }
 
   token key   { <!before \s> <-[\n\s<>;]>+ <!after \s> }
   token value { <!before \s> <-[\n;<>]>+   <!after \s> }
@@ -66,7 +66,7 @@ class Nebula::Grammar::Proto::Actions {
   method section:sym<law>     ( $/ ) { %!meta.push: ( $<sym>.Str => $<law>».ast ) }
   method section:sym<env>     ( $/ ) { %!meta.push: ( $<sym>.Str => $<env>».ast ) }
   method section:sym<cluster> ( $/ ) { %!meta.push: ( $<sym>.Str => $<starname>».ast ) }
-  #method section:sym<desc> ( $/ ) { %!meta.push: ( $<sym>.Str => $<desc>.Str ) }
+  method section:sym<desc>    ( $/ ) { %!meta.push: ( $<sym>.Str => $/.Str ) }
 
 
   method law:sym<key> ( $/ ) { make "--$<key>" }

@@ -4,5 +4,4 @@
 /.panda-work
 /resources/*.so
 /resources/*.dylib
-.precomp/
 /Nebula-*
