@@ -33,25 +33,9 @@ submethod BUILD (
 
   ) {
 
-    #@!star = $!db.query( 'select * from star' ).hashes; 
+    #@!star = $!db.query( 'select * from star' ).hashes;
 }
 
-method star ( $name, $age?, $core?, $form?, $tag? ) {
-
-  my %star;
-
-  %star.push: ( name => $name );
-  %star.push: ( age  => $age )      if $age;
-  %star.push: ( core => $core )     if $core;
-  %star.push: ( form => $form.Int ) if $form;
-  %star.push: ( tag  => $tag )      if $tag;
-
-  #$!db.query( 'select * from star where name = $name', :$name ).hashes;
-}
-
-method stars ( ) {
-  $!db.query( 'select * from star' ).hashes;
-}
 
 multi method form ( :%star! ) {
 
@@ -105,14 +89,14 @@ multi method form ( :%star! ) {
 }
 
 
-method serve ( ) {
+method serve ( :$host = 'localhost', :$port = 7777 ) {
 
   my $application = self.routes;
 
   my Cro::Service $http = Cro::HTTP::Server.new(
     http => <1.1>,
-    host => %*ENV<NEBULA_HOST> // 'localhost',
-    port => %*ENV<NEBULA_PORT> // 7777,
+    :$host,
+    :$port,
     :$application,
     after => [
       Cro::HTTP::Log::File.new(logs => $*OUT, errors => $*ERR)
@@ -121,7 +105,7 @@ method serve ( ) {
 
   $http.start;
 
-  say "Listening at http://%*ENV<NEBULA_HOST>:%*ENV<NEBULA_PORT>";
+  say "Listening at http://$host:$port";
 
   react {
     whenever signal(SIGINT) {
@@ -130,16 +114,5 @@ method serve ( ) {
       done;
     }
   }
-}
-
-multi infix:<≅> ( %left, %right --> Bool:D ) {
-
-  return False unless %left<name> ~~ %right<name>;
-  return False unless Version.new(%left<age>) ~~ Version.new(%right<age> // '');
-  return False unless %left<core> ~~ %right<core>;
-  return False unless %left<form> ~~ %right<form>;
-  return False unless %left<tag>  ~~ %right<tag>;
-
-  True;
 }
 

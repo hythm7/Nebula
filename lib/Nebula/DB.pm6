@@ -10,6 +10,56 @@ submethod TWEAK ( ) {
 
 }
 
+method !select-star ( $name, $age?, $core?, $form?, $tag? ) {
+
+  my %star;
+
+  %star.push: ( name => $name );
+  %star.push: ( age  => $age )      if $age;
+  %star.push: ( core => $core )     if $core;
+  %star.push: ( form => $form.Int ) if $form;
+  %star.push: ( tag  => $tag )      if $tag;
+
+
+  my @star = $!db.query( 'select * from star where name = $name', :$name).hashes
+    ==> grep * ≅ %star
+    ==> map({ .push: ( cluster => self!select-cluster: .<star> ) })
+    ==> map({ .push: ( law     => self!select-law:     .<star> ) })
+    ==> map({ .push: ( env     => self!select-env:     .<star> ) }) ;
+
+  @star;
+}
+
+
+method !all-stars ( ) {
+
+  my @star = $!db.query( 'select * from star' ).hashes
+    ==> map({ .push: ( cluster => self!select-cluster: .<star> ) })
+    ==> map({ .push: ( law     => self!select-law:     .<star> ) })
+    ==> map({ .push: ( env     => self!select-env:     .<star> ) }) ;
+
+  @star;
+}
+
+
+method !select-cluster ( Str:D $star ) {
+
+  $!db.query( 'select name, age, core, form, tag from cluster where star = $star', $star).hashes;
+
+}
+
+method !select-law ( Str:D $star ) {
+
+  $!db.query( 'select law from law where star = $star', $star).arrays.flat;
+
+}
+
+method !select-env ( Str:D $star ) {
+
+  $!db.query( 'select env from env where star = $star', $star).arrays.flat;
+
+}
+
 method add-star (
 
   Str:D :$star!,
@@ -33,15 +83,13 @@ method add-star (
       :$star, :$name, :$age, :$core, :$form, :$tag, :$source, :$desc, :$location
   );
 
-  @cluster.map( -> %cluster {
 
     $!db.query(
       'insert into cluster ( star, name, age, core, form, tag )
         values ( $star, $name, $age, $core, $form, $tag )',
-        |%cluster, :$star
-    );
+        |$_, :$star
+    ) for @cluster;
 
-  });
 
   $!db.query( 'insert into law ( star, law ) values ( $star, $law )', law => $_, :$star) for @law;
 
@@ -90,5 +138,16 @@ method !init-db ( ) {
     )
     SQL
 
+}
+
+multi infix:<≅> ( %left, %right --> Bool:D ) {
+
+  return False unless %left<name> ~~ %right<name>;
+  return False unless Version.new(%left<age>) ~~ Version.new(%right<age> // '');
+  return False unless %left<core> ~~ %right<core>;
+  return False unless %left<form> ~~ %right<form>;
+  return False unless %left<tag>  ~~ %right<tag>;
+
+  True;
 }
 
