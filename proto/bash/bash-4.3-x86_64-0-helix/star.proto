@@ -1,0 +1,15 @@
+<proto>
+star bash-4.3-x86_64-0-helix
+source http://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz
+
+<cluster>
+galaxy
+
+<law>
+prefix  /usr
+mandir  /usr/man
+infodir /usr/info
+build   x86_64-galaxy-linux
+
+<desc>
+The GNU Bourne-Again SHell.

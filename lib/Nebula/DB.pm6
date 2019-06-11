@@ -5,10 +5,9 @@ has $!db;
 
 submethod TWEAK ( ) {
 
-
-  $!db     = DB::SQLite.new: filename => '/var/nebula/nebula.db';
-
+  $!db = DB::SQLite.new: filename => '/var/nebula/nebula.db';
   self!init-db;
+
 }
 
 method add-star (
@@ -28,7 +27,6 @@ method add-star (
 
 ) {
 
-  say 'Yaaaaaaaaaay!';
   $!db.query(
     'insert into star ( star, name, age, core, form, tag, source, desc, location )
       values ( $star, $name, $age, $core, $form, $tag, $source, $desc, $location )',

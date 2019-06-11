@@ -6,11 +6,15 @@ use Path::Through;
 use Archive::Libarchive;
 use Archive::Libarchive::Constants;
 use LibCurl::Easy;
+use Cro::HTTP::Log::File;
+use Cro::HTTP::Server;
+use Nebula::Routes;
 use Nebula::DB;
 use Nebula::Grammar::Proto;
 use Galaxy::Grammar::Star;
 
 unit class Nebula;
+  also does Nebula::Routes;
   also does Nebula::DB;
 
 has Str $!name;
@@ -29,7 +33,24 @@ submethod BUILD (
 
   ) {
 
+    #@!star = $!db.query( 'select * from star' ).hashes; 
+}
 
+method star ( $name, $age?, $core?, $form?, $tag? ) {
+
+  my %star;
+
+  %star.push: ( name => $name );
+  %star.push: ( age  => $age )      if $age;
+  %star.push: ( core => $core )     if $core;
+  %star.push: ( form => $form.Int ) if $form;
+  %star.push: ( tag  => $tag )      if $tag;
+
+  #$!db.query( 'select * from star where name = $name', :$name ).hashes;
+}
+
+method stars ( ) {
+  $!db.query( 'select * from star' ).hashes;
 }
 
 multi method form ( :%star! ) {
@@ -48,55 +69,67 @@ multi method form ( :%star! ) {
 
   my %form = $m.ast;
 
+
+  my $source = $protodir.add: %form<source>.path.IO.basename;
+
+  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
+
+  my $tmpdir = tempdir;
+
+  my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
+    flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
+  $e.extract: $tmpdir;
+  $e.close;
+
+  my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
+
+  shell "%form<env> ./configure %form<law>", cwd => $formdir;
+  shell "make", cwd => $formdir;
+  shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
+
+  my @file = find "$tmpdir/%star<star>", :file;
+
+  $!star.add(%star<name>).mkdir;
+  my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
+    format => 'v7tar', filters => ['xz'],
+    file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
+
+  for @file -> $file {
+      $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
+      $a.write-data( ~$file );
+  }
+
+  $a.close;
+
   self.add-star: |%form;
-
-  #my $source = $protodir.add: %form<source>.path.IO.basename;
-
-  #LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
-
-  #my $tmpdir = tempdir;
-
-  #my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
-  #  flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
-  #$e.extract: $tmpdir;
-  #$e.close;
-
-  #my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
-
-  #shell "%form<env> ./configure %form<law>", cwd => $formdir;
-  #shell "make", cwd => $formdir;
-  #shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
-
-  #my @file = find "$tmpdir/%star<star>", :file;
-
-  #my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
-  #  format => 'v7tar', filters => ['xz'],
-  #  file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
-
-  #for @file -> $file {
-  #    $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
-  #    $a.write-data( ~$file );
-  #}
-
-  #$a.close;
-
 }
 
-method star ( $name, $age?, $core?, $form?, $tag? ) {
 
-  my %star;
+method serve ( ) {
 
-  %star.push: ( name => $name );
-  %star.push: ( age  => $age )      if $age;
-  %star.push: ( core => $core )     if $core;
-  %star.push: ( form => $form.Int ) if $form;
-  %star.push: ( tag  => $tag )      if $tag;
+  my $application = self.routes;
 
-  #@!star.grep( * ≅ %star );
-}
+  my Cro::Service $http = Cro::HTTP::Server.new(
+    http => <1.1>,
+    host => %*ENV<NEBULA_HOST> // 'localhost',
+    port => %*ENV<NEBULA_PORT> // 7777,
+    :$application,
+    after => [
+      Cro::HTTP::Log::File.new(logs => $*OUT, errors => $*ERR)
+    ]
+  );
 
-method stars ( ) {
-  #@!star;
+  $http.start;
+
+  say "Listening at http://%*ENV<NEBULA_HOST>:%*ENV<NEBULA_PORT>";
+
+  react {
+    whenever signal(SIGINT) {
+      say "Shutting down...";
+      $http.stop;
+      done;
+    }
+  }
 }
 
 multi infix:<≅> ( %left, %right --> Bool:D ) {
