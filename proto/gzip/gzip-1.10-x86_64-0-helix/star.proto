@@ -1,9 +1,9 @@
 <proto>
-star gzip-1.6-x86_64-0-helix
-source http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.gz
+star   gzip-1.10-x86_64-0-helix
+source http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz
 
 <cluster>
-galaxy
+coreutils
 
 <law>
 prefix  /usr

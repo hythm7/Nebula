@@ -3,7 +3,7 @@ star bash-4.3-x86_64-0-helix
 source http://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz
 
 <cluster>
-galaxy
+coreutils
 
 <law>
 prefix  /usr

@@ -22,10 +22,10 @@ method !select-star ( $name, $age?, $core?, $form?, $tag? ) {
 
 
   my @star = $!db.query( 'select * from star where name = $name', :$name).hashes
-    ==> grep * ≅ %star
-    ==> map({ .push: ( cluster => self!select-cluster: .<star> ) })
-    ==> map({ .push: ( law     => self!select-law:     .<star> ) })
-    ==> map({ .push: ( env     => self!select-env:     .<star> ) }) ;
+    .grep( * ≅ %star )
+    .map({ .push: ( cluster => self!select-cluster: .<star> ) })
+    .map({ .push: ( law     => self!select-law:     .<star> ) })
+    .map({ .push: ( env     => self!select-env:     .<star> ) });
 
   @star;
 }
@@ -34,9 +34,9 @@ method !select-star ( $name, $age?, $core?, $form?, $tag? ) {
 method !all-stars ( ) {
 
   my @star = $!db.query( 'select * from star' ).hashes
-    ==> map({ .push: ( cluster => self!select-cluster: .<star> ) })
-    ==> map({ .push: ( law     => self!select-law:     .<star> ) })
-    ==> map({ .push: ( env     => self!select-env:     .<star> ) }) ;
+    .map({ .push: ( cluster => self!select-cluster: .<star> ) })
+    .map({ .push: ( law     => self!select-law:     .<star> ) })
+    .map({ .push: ( env     => self!select-env:     .<star> ) }) ;
 
   @star;
 }
@@ -99,6 +99,10 @@ method add-star (
 
 method !init-db ( ) {
   $!db.execute: q:to /SQL/;
+    PRAGMA foreign_keys = ON
+    SQL
+
+  $!db.execute: q:to /SQL/;
     create table if not exists star (
       star     text primary key not null,
       name     text,
@@ -115,26 +119,27 @@ method !init-db ( ) {
 
   $!db.execute: q:to /SQL/;
     create table if not exists cluster (
-      star text references star(star),
       name text,
       age  text,
       core text,
       form int,
-      tag  text
+      tag  text,
+      star text references star(star) ON DELETE CASCADE
     )
     SQL
 
   $!db.execute: q:to /SQL/;
     create table if not exists law (
-      star text references star(star),
-      law  text
+      law  text,
+      star text references star(star) ON DELETE CASCADE
     )
     SQL
 
   $!db.execute: q:to /SQL/;
     create table if not exists env (
-      star text,
-      env  text
+      env  text,
+      star text references star(star) ON DELETE CASCADE
+
     )
     SQL
 
