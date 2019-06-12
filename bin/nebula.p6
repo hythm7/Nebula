@@ -1,25 +1,23 @@
 #!/usr/bin/env perl6
-#
-use Galaxy::Grammar::Star;
 
 use lib 'lib';
-use Nebula;
+use Nebula::Cloud;
+use Nebula::Routes;
 
 multi MAIN ( 'form', Str $star ) {
 
-  my $parser  = Galaxy::Grammar::Star;
-  my $actions = Galaxy::Grammar::Star::Actions.new;
-  my $m       = $parser.parse( $star, :$actions );
-
-  fail "Can not parse star $star" unless $m;
-
-  my %star = $m.ast;
-  Nebula.new.form: :%star;
+  Nebula::Cloud.new.form: :$star;
 
 }
 
-multi MAIN ( 'serve' ) {
+multi MAIN ( 'blackhole', Str $star ) {
 
-  Nebula.new.serve;
+  Nebula::Cloud.new.blackhole: :$star;
+
+}
+
+multi MAIN ( 'serve', Str:D :$host = 'localhost', Int:D :$port = 7777 ) {
+
+  Nebula::Routes.new( :$host, :$port ).serve;
 
 }
