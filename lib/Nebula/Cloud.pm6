@@ -67,7 +67,8 @@ multi method form ( Str:D :$star! ) {
 
   $a.close;
 
-  self.add-star: |%form;
+  my $location = "http://localhost:7777/star/%star<name>/%star<star>.xyz";
+  self.add-star: |%form, :$location;
 }
 
 

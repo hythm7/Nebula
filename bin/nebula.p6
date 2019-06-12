@@ -1,23 +1,29 @@
 #!/usr/bin/env perl6
 
 use lib 'lib';
-use Nebula::Cloud;
-use Nebula::Routes;
+use Nebula;
 
-multi MAIN ( 'form', Str $star ) {
 
-  Nebula::Cloud.new.form: :$star;
+multi MAIN ( 'form',  *@star ) {
 
-}
-
-multi MAIN ( 'blackhole', Str $star ) {
-
-  Nebula::Cloud.new.blackhole: :$star;
+  Nebula.new.form: |@star;
 
 }
 
-multi MAIN ( 'serve', Str:D :$host = 'localhost', Int:D :$port = 7777 ) {
+multi MAIN ( 'blackhole',  *@star ) {
 
-  Nebula::Routes.new( :$host, :$port ).serve;
+  Nebula.new.blackhole: |@star;
+
+}
+
+multi MAIN ( 'clean' ) {
+
+  Nebula.new.clean;
+
+}
+
+multi MAIN ( 'serve' ) {
+
+  Nebula.new.serve;
 
 }

@@ -62,15 +62,6 @@ method !select-env ( Str:D $star ) {
 
 }
 
-method remove-star ( Str:D :$star! ) {
-
-  $!core.query( 'delete from star    where star = $star', $star);
-  $!core.query( 'delete from cluster where star = $star', $star);
-  $!core.query( 'delete from env     where star = $star', $star);
-  $!core.query( 'delete from law     where star = $star', $star);
-
-}
-
 method add-star (
 
   Str:D :$star!,
@@ -105,6 +96,24 @@ method add-star (
   $!core.query( 'insert into law ( star, law ) values ( $star, $law )', law => $_, :$star) for @law;
 
   $!core.query( 'insert into env ( star, env ) values ( $star, $env )', env => $_, :$star) for @env;
+
+}
+
+method remove-star ( Str:D :$star! ) {
+
+  $!core.query( 'delete from star    where star = $star', $star);
+  $!core.query( 'delete from cluster where star = $star', $star);
+  $!core.query( 'delete from env     where star = $star', $star);
+  $!core.query( 'delete from law     where star = $star', $star);
+
+}
+
+method clean (  ) {
+
+  $!core.query( 'delete from star'    );
+  $!core.query( 'delete from cluster' );
+  $!core.query( 'delete from env'     );
+  $!core.query( 'delete from law'     );
 
 }
 
