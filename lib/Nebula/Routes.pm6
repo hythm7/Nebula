@@ -12,14 +12,21 @@ has Int:D $.port = 7777;
 method routes ( ) {
 
   route {
-    get -> 'stars' {
-      my $json = self!all-stars;
-      content 'application/json', $json;
-    }
-    get -> 'star', *@star {
+
+    get -> 'meta', *@star {
       my $json = self!select-star( |@star );
       content 'application/json', $json;
     }
+
+    get -> 'star', $name, $star {
+
+      static "{$!star.add($name).add($star)}";
+    }
+
+    #get -> 'stars' {
+    #  my $json = self!all-stars;
+    #  content 'application/json', $json;
+    #}
   }
 }
 

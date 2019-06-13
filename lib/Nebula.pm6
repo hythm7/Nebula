@@ -19,7 +19,7 @@ submethod TWEAK ( ) {
 
 method form ( *@star, :$replace  = True) {
 
-  for @star -> $star {
+  for @star.race -> $star {
 
     $!cloud.blackhole: :$star if $replace;
     $!cloud.form: :$star;
