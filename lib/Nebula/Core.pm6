@@ -72,6 +72,7 @@ method add-star (
   Str:D :$tag!,
   Str:D :$source!,
   Str   :$desc,
+  Str   :$chksum,
   Str   :$location,
         :@cluster,
         :@law,
@@ -80,9 +81,9 @@ method add-star (
 ) {
 
   $!core.query(
-    'insert into star ( star, name, age, core, form, tag, source, desc, location )
-      values ( $star, $name, $age, $core, $form, $tag, $source, $desc, $location )',
-      :$star, :$name, :$age, :$core, :$form, :$tag, :$source, :$desc, :$location
+    'insert into star ( star, name, age, core, form, tag, source, desc, location, chksum )
+      values ( $star, $name, $age, $core, $form, $tag, $source, $desc, $location, $chksum)',
+      :$star, :$name, :$age, :$core, :$form, :$tag, :$source, :$desc, :$location, :$chksum
   );
 
 
