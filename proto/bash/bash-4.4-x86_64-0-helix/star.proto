@@ -1,0 +1,15 @@
+<proto>
+star bash-4.4-x86_64-0-helix
+source http://ftp.gnu.org/gnu/bash/bash-4.4.tar.gz
+
+<cluster>
+coreutils
+
+<law>
+prefix  /usr
+mandir  /usr/man
+infodir /usr/info
+build   x86_64-galaxy-linux
+
+<desc>
+The GNU Bourne-Again SHell.
