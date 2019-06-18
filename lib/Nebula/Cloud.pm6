@@ -26,13 +26,14 @@ multi method form ( Str:D :$star! ) {
   my $protodir = "$!proto/%star<name>/%star<star>/".IO;
   my $proto    = $protodir.add: "star.proto";
 
-  fail "proto not found for %star<star>" unless $proto.IO.e;
+
+  die "proto not found for %star<star>" unless $proto.IO.e;
 
   $parser  = Nebula::Grammar::Proto;
   $actions = Nebula::Grammar::Proto::Actions.new;
   $m       = $parser.parsefile( $proto, :$actions );
 
-  fail "Can not parse $proto" unless $m;
+  die "Can not parse $proto" unless $m;
 
   my %form = $m.ast;
 
@@ -78,7 +79,7 @@ multi method blackhole ( Str:D :$star! ) {
   my $actions = Galaxy::Grammar::Star::Actions.new;
   my $m       = $parser.parse( $star, :$actions );
 
-  fail "Can't parse star $star" unless $m;
+  die "Can't parse star $star" unless $m;
 
   my %star = $m.ast;
 
