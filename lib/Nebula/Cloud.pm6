@@ -24,7 +24,8 @@ multi method form ( Str:D :$star! ) {
 
 
   my $protodir = "$!proto/%star<name>/%star<star>/".IO;
-  my $proto    = $protodir.add: "star.proto";
+  my $proto    = $protodir.add: "proto";
+  my $pre-form = $protodir.add: "pre-form";
 
 
   die "proto not found for %star<star>" unless $proto.IO.e;
@@ -50,6 +51,7 @@ multi method form ( Str:D :$star! ) {
 
   my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
 
+  run   "$pre-form", cwd => $formdir if $pre-form.x;
   shell "%form<env> ./configure %form<law>", cwd => $formdir;
   shell "make", cwd => $formdir;
   shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;

@@ -1,0 +1,28 @@
+<proto>
+star gcc-9.1.0-x86_64-0-helix
+source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
+
+<law>
+prefix                        /
+with-glibc-version            2.11
+with-sysroot                  /home/helganin/galaxy-linux
+with-local-prefix             /tools
+with-native-system-header-dir /tools/include
+enable-languages              c,c++
+target                        x86_64-galaxy-linux-gnu
+without-headers
+with-newlib
+disable-nls
+disable-shared
+disable-multilib
+disable-decimal-float
+disable-threads
+disable-libatomic
+disable-libgomp
+disable-libquadmath
+disable-libssp
+disable-libvtv
+disable-libstdcxx
+
+<desc>
+Access control list utilities.
