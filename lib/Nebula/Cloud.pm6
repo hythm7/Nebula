@@ -49,12 +49,21 @@ multi method form ( Str:D :$star! ) {
   $e.extract: $tmpdir;
   $e.close;
 
-  my $formdir = $tmpdir.IO.add( "%star<name>-%star<age>" );
+  my $formdir  = $tmpdir.IO.add( "%star<name>-%star<age>" );
+  my $builddir = $formdir.add: %form<builddir> // '';
 
-  run   "$pre-form", cwd => $formdir if $pre-form.x;
-  shell "%form<env> ./configure %form<law>", cwd => $formdir;
-  shell "make", cwd => $formdir;
-  shell "make DESTDIR=$tmpdir/%star<star> install", cwd => $formdir;
+  $builddir.mkdir;
+
+  my $env       = %form<env> // '';
+  my $law       = %form<law> // '';
+  my $configure = "$env { $formdir.add( 'configure' ) } $law";
+  my $make      = "make -j { %*ENV<NPROC> // chomp qx<nproc> }";
+  my $install   = "make DESTDIR=$tmpdir/%star<star> install";
+
+  run   $pre-form,  cwd => $formdir if $pre-form.x;
+  shell $configure, cwd => $builddir;
+  shell $make,      cwd => $builddir;
+  shell $install,   cwd => $builddir;
 
   my @file = find "$tmpdir/%star<star>", :file;
 

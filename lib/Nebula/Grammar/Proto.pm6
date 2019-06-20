@@ -20,8 +20,9 @@ grammar Nebula::Grammar::Proto {
  # rule section:sym<preblk>  { <lt> <sym> <gt> <.nl> <preblk>  % <.nl> }
 
   proto rule proto { * }
-  rule proto:sym<star>   { <.ws> <sym> <starname> }
-  rule proto:sym<source> { <.ws> <sym> <uri> }
+  rule proto:sym<star>     { <.ws> <sym> <starname> }
+  rule proto:sym<source>   { <.ws> <sym> <uri> }
+  rule proto:sym<builddir> { <.ws> <sym> <path> }
 
   proto rule law { * }
   rule law:sym<kv>  { <.ws> <key> <value> }
@@ -60,8 +61,9 @@ class Nebula::Grammar::Proto::Actions {
 
   method TOP ( $/ ) { make %!proto; }
 
-  method proto:sym<star>   ( $/ ) { %!proto.push: ( $<starname>.ast ) }
-  method proto:sym<source> ( $/ ) { %!proto.push: ( $<sym>.Str => ~$<uri> ) }
+  method proto:sym<star>     ( $/ ) { %!proto.push: ( $<starname>.ast ) }
+  method proto:sym<source>   ( $/ ) { %!proto.push: ( $<sym>.Str => ~$<uri> ) }
+  method proto:sym<builddir> ( $/ ) { %!proto.push: ( $<sym>.Str => $<path>.IO ) }
   #method proto:sym<source> ( $/ ) { %!proto.push: ( $<sym>.Str => Cro::Uri.parse: $<uri> ) }
 
   method section:sym<law>     ( $/ ) { %!proto.push: ( $<sym>.Str => $<law>».ast ) }
