@@ -1,0 +1,17 @@
+<proto>
+star kernel-headers-5.1.11-x86_64-0-helix
+source https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.1.11.tar.xz
+srcname linux
+srcage  5.1.11
+
+<make>
+cmd  make
+what mrproper
+
+<install>
+cmd make
+what  headers_install
+where INSTALL_HDR_PATH
+
+<desc>
+Kernel headers.

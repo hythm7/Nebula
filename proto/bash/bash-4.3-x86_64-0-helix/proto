@@ -5,11 +5,19 @@ source http://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz
 <cluster>
 coreutils
 
-<law>
-prefix  /usr
-mandir  /usr/man
-infodir /usr/info
-build   x86_64-galaxy-linux
+<configure>
+cmd configure
+
+--prefix  /usr
+--mandir  /usr/man
+--infodir /usr/info
+--build   x86_64-galaxy-linux
+
+<make>
+cmd make
+
+<install>
+cmd make
 
 <desc>
 The GNU Bourne-Again SHell.

@@ -2,17 +2,23 @@
 star binutils-2.32-x86_64-0-helix
 source http://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.xz
 
-<law>
-prefix        /
-with-sysroot  /home/helganin/galaxy-linux
-with-lib-path /lib64
-target        x86_64-galaxy-linux-gnu
-disable-nls
-disable-werror
+<configure>
+cmd configure
+env FORCE_UNSAFE_CONFIGURE 1
+env DEFAULT_POSIX2_VERSION 199209
 
-<env>
-FORCE_UNSAFE_CONFIGURE 1
-DEFAULT_POSIX2_VERSION 199209
+--prefix        /
+--with-sysroot  /home/helganin/galaxy-linux
+--with-lib-path /lib64
+--target        x86_64-galaxy-linux-gnu
+--disable-nls
+--disable-werror
+
+<make>
+cmd make
+
+<install>
+cmd make
 
 <desc>
 The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.

@@ -5,11 +5,17 @@ source http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz
 <cluster>
 bash-4.3
 
-<law>
-prefix  /usr
-mandir  /usr/man
-bindir  /bin
-build   x86_64-galaxy-linux
+<configure>
+--prefix  /usr
+--mandir  /usr/man
+--bindir  /bin
+--build   x86_64-galaxy-linux
+
+<make>
+cmd make
+
+<install>
+cmd make
 
 <desc>
 GNU Gzip is a popular data compression program originally written by Jean-loup Gailly for the GNU project.

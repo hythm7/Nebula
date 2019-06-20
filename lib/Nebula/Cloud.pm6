@@ -49,23 +49,35 @@ multi method form ( Str:D :$star! ) {
   $e.extract: $tmpdir;
   $e.close;
 
-  my $formdir  = $tmpdir.IO.add( "%star<name>-%star<age>" );
-  my $builddir = $formdir.add: %form<builddir> // '';
+  my $srcdir   = $tmpdir.IO.add( "{ %form<srcname> // %star<name> }-{ %form<srcage> // %star<age> }" );
+  my $builddir = $srcdir.add: %form<builddir> // '';
+
+  my $stardir  = $tmpdir.IO.add: %star<star>;
 
   $builddir.mkdir;
+  $stardir.mkdir;
 
-  my $env       = %form<env> // '';
-  my $law       = %form<law> // '';
-  my $configure = "$env { $formdir.add( 'configure' ) } $law";
-  my $make      = "make -j { %*ENV<NPROC> // chomp qx<nproc> }";
-  my $install   = "make DESTDIR=$tmpdir/%star<star> install";
+  my $configure-env = %form<configure><env> // '';
+  my $configure-cmd = $srcdir.add: %form<configure><cmd> // 'configure';
+  my $configure-law = %form<configure><law> // '';
 
-  run   $pre-form,  cwd => $formdir if $pre-form.x;
-  shell $configure, cwd => $builddir;
-  shell $make,      cwd => $builddir;
-  shell $install,   cwd => $builddir;
+  my $make-cmd  = %form<make><cmd> // 'make';
+  my $make-what = %form<make><what> // '';
 
-  my @file = find "$tmpdir/%star<star>", :file;
+  my $install-cmd   = %form<install><cmd>   // 'make';
+  my $install-what  = %form<install><what>  // 'install';
+  my $install-where = %form<install><where> // 'DESTDIR';
+
+  my $configure = "$configure-env $configure-cmd $configure-law";
+  my $make      = "$make-cmd -j { %*ENV<NPROC> // chomp qx<nproc> } $make-what";
+  my $install   = "$install-cmd $install-where=$stardir $install-what" ;
+
+  run   $pre-form,  cwd => $srcdir   if $pre-form.x;
+  shell $configure, cwd => $builddir if %form<configure>;
+  shell $make,      cwd => $builddir if %form<make>;
+  shell $install,   cwd => $builddir if %form<install>;
+
+  my @file = find $stardir, :file;
 
   $!star.add(%star<name>).mkdir;
   my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,

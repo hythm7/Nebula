@@ -5,7 +5,7 @@ use lib <lib>;
 use Nebula::Grammar::Proto;
 
 
-my $proto = 'proto/coreutils/coreutils-8.31-x86_64-0-helix.proto'.IO;
+my $proto = 'proto/acl/acl-2.2.53-x86_64-0-helix/proto'.IO;
 
 my $actions = Nebula::Grammar::Proto::Actions.new;
 

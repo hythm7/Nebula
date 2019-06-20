@@ -5,17 +5,26 @@ source http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz
 <cluster>
 bash-4.3+
 
-<law>
-prefix                 /
-exec-prefix            /
-sbindir                /bin
-bindir                 /usr/bin
-disable-static 
-libdir                 /lib64
-libexecdir             /usr/lib64
-includedir             /usr/include
-mandir                 /usr/man
-build                  x86_64-galaxy-linux
+<configure>
+cmd configure
+
+--prefix         /
+--exec-prefix    /
+--sbindir        /bin
+--bindir         /usr/bin
+--libdir         /lib64
+--libexecdir     /usr/lib64
+--includedir     /usr/include
+--mandir         /usr/man
+--build          x86_64-galaxy-linux
+--disable-static
+
+<make>
+cmd make
+
+<install>
+cmd  make
+
 
 <desc>
 Access control list utilities.

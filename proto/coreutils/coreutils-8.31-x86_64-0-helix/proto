@@ -2,20 +2,24 @@
 star coreutils-8.31-x86_64-0-helix
 source https://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
 
-<law>
-prefix                 /usr
-bindir                 /bin
-sysconfdir             /etc
-libdir                 /usr/lib64
-without-gmp 
-enable-install-program arch
-infodir                /usr/info
-mandir                 /usr/man
-build                  x86_64-galaxy-linux
+<configure>
+env FORCE_UNSAFE_CONFIGURE 1
+env DEFAULT_POSIX2_VERSION 199209
+--prefix                 /usr
+--bindir                 /bin
+--sysconfdir             /etc
+--libdir                 /usr/lib64
+--enable-install-program arch
+--infodir                /usr/info
+--mandir                 /usr/man
+--build                  x86_64-galaxy-linux
+--without-gmp 
 
-<env>
-FORCE_UNSAFE_CONFIGURE 1
-DEFAULT_POSIX2_VERSION 199209
+<make>
+cmd make
+
+<install>
+cmd make
 
 <desc>
 The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.
