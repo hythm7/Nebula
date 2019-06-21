@@ -7,9 +7,9 @@ cmd configure
 env FORCE_UNSAFE_CONFIGURE 1
 env DEFAULT_POSIX2_VERSION 199209
 
---prefix        /
---with-sysroot  /home/helganin/galaxy-linux
---with-lib-path /lib64
+--prefix        /tools
+--with-sysroot  /home/hythm/galaxy-linux
+--with-lib-path /tools/lib
 --target        x86_64-galaxy-linux-gnu
 --disable-nls
 --disable-werror

@@ -1,0 +1,20 @@
+<proto>
+star glibc-2.29-x86_64-0-helix
+source http://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.xz
+builddir build
+
+<configure>
+--prefix        /tools
+--host          x86_64-galaxy-linux-gnu
+--build         x86_64-pc-linux-gnu
+--enable-kernel 3.2
+--with-headers  /tools/include
+
+<make>
+cmd make
+
+<install>
+cmd make
+
+<desc>
+The main C library.

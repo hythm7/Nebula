@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -x
+
 wget http://www.mpfr.org/mpfr-4.0.2/mpfr-4.0.2.tar.xz
 wget http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz
 wget https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
@@ -13,6 +15,7 @@ mv     mpc-1.1.0 mpc
 
 for file in gcc/config/{linux,i386/linux{,64}}.h
 do
+  ls -l $file
   cp  -u $file{,.orig}
   sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' \
       -e 's@/usr@/tools@g' $file.orig > $file

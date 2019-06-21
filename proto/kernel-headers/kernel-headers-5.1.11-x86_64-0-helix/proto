@@ -9,7 +9,7 @@ cmd  make
 what mrproper
 
 <install>
-cmd make
+cmd   make
 what  headers_install
 where INSTALL_HDR_PATH
 
