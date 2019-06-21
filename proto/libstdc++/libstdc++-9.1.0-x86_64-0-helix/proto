@@ -1,0 +1,26 @@
+<proto>
+star libstdc++-9.1.0-x86_64-0-helix
+source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
+srcname  gcc
+srcage   9.1.0
+builddir build
+
+<configure>
+cmd libstdc++-v3/configure
+
+--prefix                    /tools
+--with-gxx-include-dir      /tools/x86_64-galaxy-linux-gnu/include/c++/9.1.0
+--host                      x86_64-galaxy-linux-gnu
+--disable-libstdcxx-pch
+--disable-multilib
+--disable-nls
+--disable-libstdcxx-threads
+
+<make>
+cmd make
+
+<install>
+cmd make
+
+<desc>
+The standard C++ library.

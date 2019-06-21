@@ -1,0 +1,28 @@
+<proto>
+star gcc-9.1.0-x86_64-0-helix
+source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
+builddir build
+
+<configure>
+env CC=x86_64-galaxy-linux-gnu-gcc
+env CXX=x86_64-galaxy-linux-gnu-g++
+env AR=x86_64-galaxy-linux-gnu-ar
+env RANLIB=x86_64-galaxy-linux-gnu-ranlib
+
+--prefix                        /tools
+--with-local-prefix             /tools
+--with-native-system-header-dir /tools/include
+--enable-languages              c,c++
+--disable-libstdcxx-pch
+--disable-multilib
+--disable-bootstrap
+--disable-libgomp
+
+<make>
+cmd make
+
+<install>
+cmd make
+
+<desc>
+Access control list utilities.
