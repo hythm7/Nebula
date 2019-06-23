@@ -10,7 +10,6 @@ env RANLIB=x86_64-galaxy-linux-gnu-ranlib
 
 --prefix        /tools
 --with-lib-path /tools/lib
---target        x86_64-galaxy-linux-gnu
 --disable-nls
 --disable-werror
 --with-sysroot

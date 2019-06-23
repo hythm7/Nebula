@@ -81,7 +81,7 @@ multi method form ( Str:D :$star! ) {
 
   $!star.add(%star<name>).mkdir;
   my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
-    format => 'v7tar', filters => ['xz'],
+    format => 'gnutar', filters => ['xz'],
     file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
 
   for @file -> $file {
