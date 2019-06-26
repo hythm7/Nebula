@@ -12,6 +12,4 @@ my $actions = Nebula::Grammar::Proto::Actions.new;
 my $parser = Nebula::Grammar::Proto.new;
 
 my $m = $parser.parsefile($proto, :$actions);
-
-say $m.ast;
-
+say $m.ast<compile>;

@@ -1,20 +1,26 @@
 <proto>
 star glibc-2.29-x86_64-0-helix
 source http://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.xz
-builddir build
 
 <configure>
---prefix        /tools
---host          x86_64-galaxy-linux-gnu
---build         x86_64-pc-linux-gnu
---enable-kernel 3.2
---with-headers  /tools/include
+  mkdir build;
+  cd build;
 
-<make>
-cmd make
+  ../configure                   \
+  --prefix=/tools                \
+  --host=[GALAXY]                \
+  --build=x86_64-pc-linux-gnu    \
+  --enable-kernel=3.2            \
+  --with-headers=/tools/include;
+
+<compile>
+  cd build;
+  make -j [NPROC];
 
 <install>
-cmd make
+  cd build;
+  make DESTDIR=[XYZ] install;
+
 
 <desc>
 The main C library.

@@ -1,24 +1,35 @@
 <proto>
-star binutils-2.32-x86_64-1-helix
-source http://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.xz
+  star binutils-2.32-x86_64-1-helix
+  source http://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.xz
+
 
 <configure>
 
-env CC=x86_64-galaxy-linux-gnu-gcc
-env AR=x86_64-galaxy-linux-gnu-ar
-env RANLIB=x86_64-galaxy-linux-gnu-ranlib
+  mkdir build;
+  cd    build;
 
---prefix        /tools
---with-lib-path /tools/lib
---disable-nls
---disable-werror
---with-sysroot
+  CC=[GALAXY]-gcc
+  AR=[GALAXY]-ar
+  RANLIB=[GALAXY]-ranlib
 
-<make>
-cmd make
+  ../configure               \
+  --prefix=/tools            \
+  --with-lib-path=/tools/lib \
+  --disable-nls              \
+  --disable-werror           \
+  --with-sysroot;
+
+<compile>
+
+  cd build;
+  
+  make -j [NPROC];
 
 <install>
-cmd make
+
+  cd build;
+  
+  make DESTDIR=[XYZ] install;
 
 <desc>
-The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system.
+  Binutils.

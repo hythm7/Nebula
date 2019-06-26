@@ -1,4 +1,5 @@
 no precompilation;
+#use Grammar::Tracer;
 
 use Cro::Uri;
 use Galaxy::Grammar::Star;
@@ -11,11 +12,11 @@ grammar Nebula::Grammar::Proto {
   token sections { <.ws> <section>* %% <.nl> }
 
   proto rule section { * }
-  rule section:sym<proto>     { <.lt> <sym> <.gt> <.nl> <proto>*     % <.nl> }
-  rule section:sym<cluster>   { <.lt> <sym> <.gt> <.nl> <starname>*  % <.nl> }
-  rule section:sym<configure> { <.lt> <sym> <.gt> <.nl> <configure>* % <.nl> }
-  rule section:sym<make>      { <.lt> <sym> <.gt> <.nl> <make>*      % <.nl> }
-  rule section:sym<install>   { <.lt> <sym> <.gt> <.nl> <install>*   % <.nl> }
+  rule section:sym<proto>     { <.lt> <sym> <.gt> <.nl> <proto>*    % <.nl> }
+  rule section:sym<cluster>   { <.lt> <sym> <.gt> <.nl> <starname>* % <.nl> }
+  rule section:sym<configure> { <.lt> <sym> <.gt> <.nl> <cmd>+      % <.nl> }
+  rule section:sym<compile>   { <.lt> <sym> <.gt> <.nl> <cmd>+      % <.nl> }
+  rule section:sym<install>   { <.lt> <sym> <.gt> <.nl> <cmd>+      % <.nl> }
   rule section:sym<desc>      { <.lt> <sym> <.gt> <.nl> <desc>               }
 
   proto rule proto { * }
@@ -25,31 +26,10 @@ grammar Nebula::Grammar::Proto {
   rule proto:sym<srcage>   { <.ws> <sym> <age> }
   rule proto:sym<builddir> { <.ws> <sym> <path> }
 
-  proto rule configure { * }
-  rule configure:sym<env> { <.ws> <sym> <law> }
-  rule configure:sym<cmd> { <.ws> <sym> <law> }
-  rule configure:sym<law> { <.ws> <law> }
 
-  proto rule make { * }
-  rule make:sym<cmd>  { <.ws> <sym> <value> }
-  rule make:sym<what> { <.ws> <sym> <value> }
-
-  proto rule install { * }
-  rule install:sym<cmd>   { <.ws> <sym> <value> }
-  rule install:sym<what>  { <.ws> <sym> <value> }
-  rule install:sym<where> { <.ws> <sym> <value> }
-
-
-  proto rule law { * }
-  rule law:sym<kv>  { <.ws> <key> <value> }
-  rule law:sym<key> { <.ws> <key> }
-
-  rule env { <key> <value> }
+  token cmd { <!before \s> <-[<>;]>+ <.semicolon> <!after \s> }
 
   token desc { <-[<>]>+ }
-
-  token key   { <!before \s> <-[\n\s<>;]>+ <!after \s> }
-  token value { <!before \s> <-[\n;<>]>+   <!after \s> }
 
   token uri { <.alpha>+ <colon> <slash> <slash> <hostname> [ <colon> <digit>+ ]? <slash>? <path>? }
 
@@ -60,6 +40,7 @@ grammar Nebula::Grammar::Proto {
   token hostname { (\w+) ( <dot> \w+ )* }
   token path { <[ a..z A..Z 0..9 \-_.!~*'():@&=+$,/ ]>+ }
 
+  token semicolon { ';' }
   token colon { ':' }
   token slash { '/' }
   token lt  { '<' }
@@ -82,23 +63,11 @@ class Nebula::Grammar::Proto::Actions {
   method proto:sym<srcage>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<age>.Str ) }
   method proto:sym<builddir> ( $/ ) { %!proto.push: ( $<sym>.Str => $<path>.IO ) }
 
-  method configure:sym<env> ( $/ ) { %!proto<configure><env>.push: $<law>.ast  }
-  method configure:sym<cmd> ( $/ ) { %!proto<configure><cmd>.push: $<law>.ast  }
-  method configure:sym<law> ( $/ ) { %!proto<configure><law>.push: $<law>.ast  }
-
-  method make:sym<cmd>  ( $/ ) { %!proto<make><cmd>.push:  $<value>.Str  }
-  method make:sym<what> ( $/ ) { %!proto<make><what>.push: $<value>.Str  }
-
-  method install:sym<cmd>   ( $/ ) { %!proto<install><cmd>.push:   $<value>.Str  }
-  method install:sym<what>  ( $/ ) { %!proto<install><what>.push:  $<value>.Str  }
-  method install:sym<where> ( $/ ) { %!proto<install><where>.push: $<value>.Str  }
-
   method section:sym<cluster>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<starname>».ast ) }
   method section:sym<desc>      ( $/ ) { %!proto.push: ( $<sym>.Str => $<desc>.Str ) }
-
-
-  method law:sym<key> ( $/ ) { make "$<key>" }
-  method law:sym<kv>  ( $/ ) { make "$<key>=$<value>" }
+  method section:sym<compile>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<cmd>>>.Str ) }
+  method section:sym<configure> ( $/ ) { %!proto.push: ( $<sym>.Str => $<cmd>>>.Str ) }
+  method section:sym<install>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<cmd>>>.Str ) }
 
 }
 

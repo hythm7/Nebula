@@ -1,7 +1,9 @@
 #!/usr/bin/env sh
 
+set -x
+
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
-  `dirname $(x86_64-galaxy-linux-gnu-gcc -print-libgcc-file-name)`/include-fixed/limits.h
+  `dirname $(x86_64-galaxy-linux-gcc -print-libgcc-file-name)`/include-fixed/limits.h
 
 for file in gcc/config/{linux,i386/linux{,64}}.h
 do

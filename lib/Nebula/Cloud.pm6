@@ -11,6 +11,9 @@ use Galaxy::Grammar::Star;
 unit class Nebula::Cloud;
   also does Nebula::Core;
 
+has $!target = 'x86_64-galaxy-linux';
+has $!nproc  = chomp qx<nproc>;
+
 
 multi method form ( Str:D :$star! ) {
 
@@ -50,32 +53,25 @@ multi method form ( Str:D :$star! ) {
   $e.close;
 
   my $srcdir   = $tmpdir.IO.add( "{ %form<srcname> // %star<name> }-{ %form<srcage> // %star<age> }" );
-  my $builddir = $srcdir.add: %form<builddir> // '';
 
   my $stardir  = $tmpdir.IO.add: %star<star>;
 
-  $builddir.mkdir;
   $stardir.mkdir;
 
-  my $configure-env = %form<configure><env> // '';
-  my $configure-cmd = $srcdir.add: %form<configure><cmd> // 'configure';
-  my $configure-law = %form<configure><law> // '';
+  my ( $configure, $compile, $install );
 
-  my $make-cmd  = %form<make><cmd> // 'make';
-  my $make-what = %form<make><what> // '';
+  $configure = %form<configure>.map: *.&translate if %form<configure>;
+  $compile   = %form<compile>.map:   *.&translate if %form<compile>;
+  $install   = %form<install>.map:   *.&translate if %form<install>;
 
-  my $install-cmd   = %form<install><cmd>   // 'make';
-  my $install-what  = %form<install><what>  // 'install';
-  my $install-where = %form<install><where> // 'DESTDIR';
+  .say with $configure;
+  .say with $compile;
+  .say with $install;
 
-  my $configure = "$configure-env $configure-cmd $configure-law";
-  my $make      = "$make-cmd -j { %*ENV<NPROC> // chomp qx<nproc> } $make-what";
-  my $install   = "$install-cmd $install-where=$stardir $install-what" ;
-
-  run   $pre-form,  cwd => $srcdir   if $pre-form.x;
-  shell $configure, cwd => $builddir if %form<configure>;
-  shell $make,      cwd => $builddir if %form<make>;
-  shell $install,   cwd => $builddir if %form<install>;
+  run   $pre-form,  cwd => $srcdir if $pre-form.x;
+  shell $configure, cwd => $srcdir if $configure;
+  shell $compile,   cwd => $srcdir if $compile;
+  shell $install,   cwd => $srcdir if $install;
 
   my @file = find $stardir, :file;
 
@@ -93,6 +89,13 @@ multi method form ( Str:D :$star! ) {
 
   my $location = "http://localhost:7777/star/%star<name>/%star<star>.xyz";
   self.add-star: |%form, :$location;
+
+  sub translate ( Str $s --> Str ) {
+
+  $s.trans: < [GALAXY]   [NPROC]    [XYZ] >
+    =>      ( $!target, $!nproc, $stardir )
+}
+
 }
 
 
