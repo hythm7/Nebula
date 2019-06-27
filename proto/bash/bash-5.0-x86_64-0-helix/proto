@@ -1,0 +1,18 @@
+<proto>
+  star bash-5.0-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/bash/bash-5.0.tar.gz
+
+<configure>
+
+  ./configure              \
+    --prefix=/tools        \
+    --without-bash-malloc;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  Bash is the GNU Project's shell.

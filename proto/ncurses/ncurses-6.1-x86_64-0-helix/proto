@@ -1,0 +1,22 @@
+<proto>
+  star ncurses-6.1-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
+
+<configure>
+
+  ./configure           \
+    --prefix=/tools     \
+    --with-shared       \
+    --without-debug     \
+    --without-ada       \
+    --enable-widec      \
+    --enable-overwrite;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  The ncurses (new curses) library is a free software emulation of curses in System V Release 4.0 (SVr4), and more.

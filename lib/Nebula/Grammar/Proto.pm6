@@ -22,9 +22,7 @@ grammar Nebula::Grammar::Proto {
   proto rule proto { * }
   rule proto:sym<star>     { <.ws> <sym> <starname> }
   rule proto:sym<source>   { <.ws> <sym> <uri> }
-  rule proto:sym<srcname>  { <.ws> <sym> <name> }
-  rule proto:sym<srcage>   { <.ws> <sym> <age> }
-  rule proto:sym<builddir> { <.ws> <sym> <path> }
+  rule proto:sym<srcdir>   { <.ws> <sym> <path> }
 
 
   token cmd { <!before \s> <-[<>;]>+ <.semicolon> <!after \s> }
@@ -59,8 +57,7 @@ class Nebula::Grammar::Proto::Actions {
 
   method proto:sym<star>     ( $/ ) { %!proto.push: ( $<starname>.ast ) }
   method proto:sym<source>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<uri>.Str ) }
-  method proto:sym<srcname>  ( $/ ) { %!proto.push: ( $<sym>.Str => $<name>.Str ) }
-  method proto:sym<srcage>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<age>.Str ) }
+  method proto:sym<srcdir>  ( $/ ) { %!proto.push: ( $<sym>.Str => $<path>.IO ) }
   method proto:sym<builddir> ( $/ ) { %!proto.push: ( $<sym>.Str => $<path>.IO ) }
 
   method section:sym<cluster>   ( $/ ) { %!proto.push: ( $<sym>.Str => $<starname>».ast ) }

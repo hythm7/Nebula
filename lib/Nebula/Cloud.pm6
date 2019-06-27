@@ -26,9 +26,10 @@ multi method form ( Str:D :$star! ) {
   my %star = $m.ast;
 
 
-  my $protodir = "$!proto/%star<name>/%star<star>/".IO;
-  my $proto    = $protodir.add: "proto";
-  my $pre-form = $protodir.add: "pre-form";
+  my $protodir  = "$!proto/%star<name>/%star<star>/".IO;
+  my $proto     = $protodir.add: "proto";
+  my $pre-form  = $protodir.add: "pre-form";
+  my $post-form = $protodir.add: "post-form";
 
 
   die "proto not found for %star<star>" unless $proto.IO.e;
@@ -45,14 +46,14 @@ multi method form ( Str:D :$star! ) {
 
   LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
 
-  my $tmpdir = tempdir;
+  my $tmpdir = tempdir :!unlink;
 
   my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
     flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
   $e.extract: $tmpdir;
   $e.close;
 
-  my $srcdir   = $tmpdir.IO.add( "{ %form<srcname> // %star<name> }-{ %form<srcage> // %star<age> }" );
+  my $srcdir   = $tmpdir.IO.add( %form<srcdir> // "{%star<name>}-{%star<age> }" );
 
   my $stardir  = $tmpdir.IO.add: %star<star>;
 
@@ -64,14 +65,15 @@ multi method form ( Str:D :$star! ) {
   $compile   = %form<compile>.map:   *.&translate if %form<compile>;
   $install   = %form<install>.map:   *.&translate if %form<install>;
 
-  .say with $configure;
-  .say with $compile;
-  .say with $install;
+  #.say with $configure;
+  #.say with $compile;
+  #.say with $install;
 
-  run   $pre-form,  cwd => $srcdir if $pre-form.x;
-  shell $configure, cwd => $srcdir if $configure;
-  shell $compile,   cwd => $srcdir if $compile;
-  shell $install,   cwd => $srcdir if $install;
+  shell $pre-form,  cwd => $srcdir  if $pre-form.x;
+  shell $configure, cwd => $srcdir  if $configure;
+  shell $compile,   cwd => $srcdir  if $compile;
+  shell $install,   cwd => $srcdir  if $install;
+  shell $post-form, cwd => $stardir if $post-form.x;
 
   my @file = find $stardir, :file;
 
