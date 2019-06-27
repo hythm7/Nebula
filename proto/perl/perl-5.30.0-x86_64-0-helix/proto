@@ -1,0 +1,20 @@
+<proto>
+  star perl-5.30.0-x86_64-0-helix
+  source https://www.cpan.org/src/5.0/perl-5.30.0.tar.xz
+
+<configure>
+
+  sh Configure -des -Dprefix=/tools -Dlibs=-lm -Uloclibpth -Ulocincpth;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+
+  mkdir -pv [XYZ]/tools/bin
+  cp -v perl cpan/podlators/scripts/pod2man [XYZ]/tools/bin;
+  mkdir -pv [XYZ]/tools/lib/perl5/5.30.0;
+  cp -Rv lib/* [XYZ]/tools/lib/perl5/5.30.0;
+
+<desc>
+  perl.

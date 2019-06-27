@@ -1,0 +1,16 @@
+<proto>
+  star texinfo-6.6-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/texinfo/texinfo-6.6.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  texinfo.

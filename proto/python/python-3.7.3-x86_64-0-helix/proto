@@ -1,0 +1,17 @@
+<proto>
+  star python-3.7.3-x86_64-0-helix
+  source https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
+  srcdir Python-3.7.3
+
+<configure>
+
+  ./configure --prefix=/tools --without-ensurepip;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  python.

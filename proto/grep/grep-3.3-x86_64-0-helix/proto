@@ -1,0 +1,16 @@
+<proto>
+  star grep-3.3-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  grep.

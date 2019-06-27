@@ -1,0 +1,16 @@
+<proto>
+  star sed-4.7-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/sed/sed-4.7.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  sed.

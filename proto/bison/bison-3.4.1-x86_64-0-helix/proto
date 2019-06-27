@@ -1,0 +1,16 @@
+<proto>
+  star bison-3.4.1-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/bison/bison-3.4.1.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  Bash is the GNU Project's shell.

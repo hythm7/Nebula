@@ -1,0 +1,16 @@
+<proto>
+  star file-5.36-x86_64-0-helix
+  source http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/8.4/file-5.36.tar.gz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  File;

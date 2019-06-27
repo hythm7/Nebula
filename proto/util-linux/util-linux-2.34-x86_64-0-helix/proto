@@ -1,0 +1,21 @@
+<proto>
+  star util-linux-2.34-x86_64-0-helix
+  source https://www.kernel.org/pub/linux/utils/util-linux/v2.34/util-linux-2.34.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools      \
+    --without-python               \
+    --disable-makeinstall-chown    \
+    --without-systemdsystemunitdir \
+    --without-ncurses              \
+    PKG_CONFIG="";
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  util-linux.

@@ -1,0 +1,16 @@
+<proto>
+  star findutils-4.6.0-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/findutils/findutils-4.6.0.tar.gz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  Findutils;

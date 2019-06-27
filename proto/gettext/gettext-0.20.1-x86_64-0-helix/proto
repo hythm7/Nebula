@@ -1,0 +1,19 @@
+<proto>
+  star gettext-0.20.1-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/gettext/gettext-0.20.1.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools \
+    --disable-shared;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  #make DESTDIR=[XYZ] install;
+  mkdir -p [XYZ]/tools/bin;
+  cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} [XYZ]/tools/bin;
+
+<desc>
+  gettext.

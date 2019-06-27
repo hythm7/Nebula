@@ -1,0 +1,16 @@
+<proto>
+  star tar-1.32-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/tar/tar-1.32.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  tar.

@@ -1,0 +1,12 @@
+<proto>
+  star bzip2-1.0.6-x86_64-0-helix
+  source https://www.sourceware.org/pub/bzip2/bzip2-1.0.6.tar.gz
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make PREFIX=[XYZ]/tools install;
+
+<desc>
+  Bzip2.

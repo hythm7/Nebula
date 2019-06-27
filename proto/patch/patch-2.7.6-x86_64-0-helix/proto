@@ -1,0 +1,16 @@
+<proto>
+  star patch-2.7.6-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz
+
+<configure>
+
+  ./configure --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  patch.
