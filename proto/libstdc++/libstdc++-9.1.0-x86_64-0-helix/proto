@@ -1,8 +1,7 @@
 <proto>
   star libstdc++-9.1.0-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
-  srcname  gcc
-  srcage   9.1.0
+  srcdir  gcc-9.1.0
 
 <configure>
 

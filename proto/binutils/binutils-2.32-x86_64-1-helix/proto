@@ -8,10 +8,9 @@
   mkdir build;
   cd    build;
 
-  CC=[GALAXY]-gcc
-  AR=[GALAXY]-ar
-  RANLIB=[GALAXY]-ranlib
-
+  CC=[GALAXY]-gcc            \
+  AR=[GALAXY]-ar             \
+  RANLIB=[GALAXY]-ranlib     \
   ../configure               \
   --prefix=/tools            \
   --with-lib-path=/tools/lib \
