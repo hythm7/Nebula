@@ -1,0 +1,27 @@
+<proto>
+  star sqlite-3.28.0-x86_64-0-helix
+  source https://sqlite.org/2019/sqlite-autoconf-3280000.tar.gz
+  srcdir sqlite-autoconf-3280000
+
+<configure>
+
+  ./configure --prefix=/tools         \
+    --disable-static                  \
+    --enable-fts5                     \
+    CFLAGS="-g -O2                    \
+    -DSQLITE_ENABLE_FTS3=1            \
+    -DSQLITE_ENABLE_FTS4=1            \
+    -DSQLITE_ENABLE_COLUMN_METADATA=1 \
+    -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+    -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+    -DSQLITE_SECURE_DELETE=1          \
+    -DSQLITE_ENABLE_FTS3_TOKENIZER=1";
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  sqlite.

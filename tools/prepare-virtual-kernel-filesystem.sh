@@ -2,8 +2,8 @@
 
 GLX="/home/hythm/galaxy-linux"
 
-mknod -m 600 $GLX/dev/console c 5 1
-mknod -m 666 $GLX/dev/null c 1 3
+#mknod -m 600 $GLX/dev/console c 5 1
+#mknod -m 666 $GLX/dev/null c 1 3
 
 mount -v --bind /dev $GLX/dev
 
@@ -15,3 +15,6 @@ mount -vt tmpfs tmpfs $GLX/run
 if [ -h $GLX/dev/shm ]; then
   mkdir -pv $GLX/$(readlink $GLX/dev/shm)
 fi
+
+mount --bind /home/hythm/ /home/hythm/galaxy-linux/home/hythm
+
