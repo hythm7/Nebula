@@ -2,8 +2,8 @@
 
 GLX="/home/hythm/galaxy-linux"
 
-#mknod -m 600 $GLX/dev/console c 5 1
-#mknod -m 666 $GLX/dev/null c 1 3
+mknod -m 600 $GLX/dev/console c 5 1
+mknod -m 666 $GLX/dev/null c 1 3
 
 mount -v --bind /dev $GLX/dev
 
