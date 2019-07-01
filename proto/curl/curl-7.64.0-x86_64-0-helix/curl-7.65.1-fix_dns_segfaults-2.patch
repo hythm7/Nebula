@@ -1,0 +1,319 @@
+Submitted By:            Douglas R. Reno (renodr at linuxfromscratch dot org)
+Original patch by:       Tim Tassonis (stuff at decentral dot ch)
+Initial Package Version: 7.65.1
+Origin:                  Upstream + self (improvements)
+Upstream Status:         Applied
+Description:             Fixes the sockhash function and DNS resolution
+                         segmentation faults.
+
+diff -Naurp curl-7.65.1.orig/lib/hash.h curl-7.65.1/lib/hash.h
+--- curl-7.65.1.orig/lib/hash.h	2019-03-25 03:42:46.000000000 -0500
++++ curl-7.65.1/lib/hash.h	2019-06-28 13:29:56.103933198 -0500
+@@ -7,7 +7,7 @@
+  *                            | (__| |_| |  _ <| |___
+  *                             \___|\___/|_| \_\_____|
+  *
+- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
++ * Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
+  *
+  * This software is licensed as described in the file COPYING, which
+  * you should have received as part of this distribution. The terms
+@@ -80,7 +80,7 @@ int Curl_hash_delete(struct curl_hash *h
+ void *Curl_hash_pick(struct curl_hash *, void *key, size_t key_len);
+ void Curl_hash_apply(struct curl_hash *h, void *user,
+                      void (*cb)(void *user, void *ptr));
+-int Curl_hash_count(struct curl_hash *h);
++#define Curl_hash_count(h) ((h)->size)
+ void Curl_hash_destroy(struct curl_hash *h);
+ void Curl_hash_clean(struct curl_hash *h);
+ void Curl_hash_clean_with_criterium(struct curl_hash *h, void *user,
+diff -Naurp curl-7.65.1.orig/lib/multi.c curl-7.65.1/lib/multi.c
+--- curl-7.65.1.orig/lib/multi.c	2019-06-02 16:06:16.000000000 -0500
++++ curl-7.65.1/lib/multi.c	2019-06-28 13:39:28.624208848 -0500
+@@ -189,13 +189,14 @@ static void mstate(struct Curl_easy *dat
+  */
+ 
+ struct Curl_sh_entry {
+-  struct curl_llist list; /* list of easy handles using this socket */
++  struct curl_hash transfers; /* hash of transfers using this socket */
+   unsigned int action;  /* what combined action READ/WRITE this socket waits
+                            for */
+   void *socketp; /* settable by users with curl_multi_assign() */
+   unsigned int users; /* number of transfers using this */
+   unsigned int readers; /* this many transfers want to read */
+   unsigned int writers; /* this many transfers want to write */
++  
+ };
+ /* bits for 'action' having no bits means this socket is not expecting any
+    action */
+@@ -206,12 +207,35 @@ struct Curl_sh_entry {
+ static struct Curl_sh_entry *sh_getentry(struct curl_hash *sh,
+                                          curl_socket_t s)
+ {
+-  if(s != CURL_SOCKET_BAD)
++  if(s != CURL_SOCKET_BAD) {
+     /* only look for proper sockets */
+-    return Curl_hash_pick(sh, (char *)&s, sizeof(curl_socket_t));
++   return Curl_hash_pick(sh, (char *)&s, sizeof(curl_socket_t));
++  }
+   return NULL;
+ }
+ 
++#define THRASH_SIZE 13
++static size_t thrash(void *key, size_t key_length, size_t slots_num)
++{
++   size_t keyval = (size_t)*(struct Curl_easy **)key;
++   (void) key_length;
++
++   return (keyval % slots_num);
++}
++
++static size_t thrash_compare(void *k1, size_t k1_len, void *k2, size_t k2_len)
++{
++   (void)k1_len;
++   (void)k2_len;
++
++   return *(struct Curl_easy **)k1 == *(struct Curl_easy **)k2;
++}
++
++static void thrash_dtor(void *nada)
++{
++   (void)nada;
++}
++
+ /* make sure this socket is present in the hash for this handle */
+ static struct Curl_sh_entry *sh_addentry(struct curl_hash *sh,
+                                          curl_socket_t s)
+@@ -219,16 +243,21 @@ static struct Curl_sh_entry *sh_addentry
+   struct Curl_sh_entry *there = sh_getentry(sh, s);
+   struct Curl_sh_entry *check;
+ 
+-  if(there)
++  if(there) {
+     /* it is present, return fine */
+     return there;
++  }
+ 
+   /* not present, add it */
+   check = calloc(1, sizeof(struct Curl_sh_entry));
+   if(!check)
+     return NULL; /* major failure */
+ 
+-  Curl_llist_init(&check->list, NULL);
++  if(Curl_hash_init(&check->transfers, THRASH_SIZE, thrash,
++                    thrash_compare, thrash_dtor)) {
++     free(check);
++     return NULL;
++  }
+ 
+   /* make/add new hash entry */
+   if(!Curl_hash_add(sh, (char *)&s, sizeof(curl_socket_t), check)) {
+@@ -244,14 +273,8 @@ static struct Curl_sh_entry *sh_addentry
+ static void sh_delentry(struct Curl_sh_entry *entry,
+                         struct curl_hash *sh, curl_socket_t s)
+ {
+-  struct curl_llist *list = &entry->list;
+-  struct curl_llist_element *e;
+-  /* clear the list of transfers first */
+-  for(e = list->head; e; e = list->head) {
+-    struct Curl_easy *dta = e->ptr;
+-    Curl_llist_remove(&entry->list, e, NULL);
+-    dta->sh_entry = NULL;
+-  }
++  Curl_hash_destroy(&entry->transfers);
++
+   /* We remove the hash entry. This will end up in a call to
+      sh_freeentry(). */
+   Curl_hash_delete(sh, (char *)&s, sizeof(curl_socket_t));
+@@ -320,17 +343,6 @@ static CURLMcode multi_addmsg(struct Cur
+   return CURLM_OK;
+ }
+ 
+-/*
+- * multi_freeamsg()
+- *
+- * Callback used by the llist system when a single list entry is destroyed.
+- */
+-static void multi_freeamsg(void *a, void *b)
+-{
+-  (void)a;
+-  (void)b;
+-}
+-
+ struct Curl_multi *Curl_multi_handle(int hashsize, /* socket hash */
+                                      int chashsize) /* connection hash */
+ {
+@@ -350,8 +362,8 @@ struct Curl_multi *Curl_multi_handle(int
+   if(Curl_conncache_init(&multi->conn_cache, chashsize))
+     goto error;
+ 
+-  Curl_llist_init(&multi->msglist, multi_freeamsg);
+-  Curl_llist_init(&multi->pending, multi_freeamsg);
++  Curl_llist_init(&multi->msglist, NULL);
++  Curl_llist_init(&multi->pending, NULL);
+ 
+   /* -1 means it not set by user, use the default value */
+   multi->maxconnects = -1;
+@@ -789,11 +801,6 @@ bool Curl_multiplex_wanted(const struct
+ static void detach_connnection(struct Curl_easy *data)
+ {
+   struct connectdata *conn = data->conn;
+-  if(data->sh_entry) {
+-    /* still listed as a user of a socket hash entry, remove it */
+-    Curl_llist_remove(&data->sh_entry->list, &data->sh_queue, NULL);
+-    data->sh_entry = NULL;
+-  }
+   if(conn)
+     Curl_llist_remove(&conn->easyq, &data->conn_queue, NULL);
+   data->conn = NULL;
+@@ -1266,6 +1273,10 @@ static CURLMcode multi_runsingle(struct
+     bool stream_error = FALSE;
+     rc = CURLM_OK;
+ 
++    DEBUGASSERT((data->mstate <= CURLM_STATE_CONNECT) ||
++                (data->mstate >= CURLM_STATE_DONE) ||
++                data->conn);
++
+     if(!data->conn &&
+        data->mstate > CURLM_STATE_CONNECT &&
+        data->mstate < CURLM_STATE_DONE) {
+@@ -2287,30 +2298,22 @@ static CURLMcode singlesocket(struct Cur
+       if(action & CURL_POLL_OUT)
+         entry->writers++;
+ 
+-      /* add 'data' to the list of handles using this socket! */
+-      Curl_llist_insert_next(&entry->list, entry->list.tail,
+-                             data, &data->sh_queue);
+-      data->sh_entry = entry;
++      /* add 'data' to the transfer hash on this socket! */
++      if(!Curl_hash_add(&entry->transfers, (char *)&data, /* hash key*/
++                        sizeof(struct Curl_easy *), data))
++         return CURLM_OUT_OF_MEMORY;
+     }
+ 
+     comboaction = (entry->writers? CURL_POLL_OUT : 0) |
+       (entry->readers ? CURL_POLL_IN : 0);
+ 
+-#if 0
+-    infof(data, "--- Comboaction: %u readers %u writers\n",
+-          entry->readers, entry->writers);
+-#endif
+-    /* check if it has the same action set */
+-    if(entry->action == comboaction)
++    /* socket existed before and has the same action set as before */
++    if(sincebefore && (entry->action == comboaction))
+       /* same, continue */
+       continue;
+ 
+-    /* we know (entry != NULL) at this point, see the logic above */
+     if(multi->socket_cb)
+-      multi->socket_cb(data,
+-                       s,
+-                       comboaction,
+-                       multi->socket_userp,
++      multi->socket_cb(data, s, comboaction, multi->socket_userp,
+                        entry->socketp);
+ 
+     entry->action = comboaction; /* store the current action state */
+@@ -2352,6 +2355,13 @@ static CURLMcode singlesocket(struct Cur
+                            entry->socketp);
+         sh_delentry(entry, &multi->sockhash, s);
+       }
++      else {
++         /* still users, but remove this handle as a user of this socket */
++         if(Curl_hash_delete(&entry->transfers, (char *)&data,
++                             sizeof(struct Curl_easy *))) {
++            DEBUGASSERT(NULL);
++         }
++      }
+     }
+   } /* for loop over numsocks */
+ 
+@@ -2495,19 +2505,14 @@ static CURLMcode multi_socket(struct Cur
+          and just move on. */
+       ;
+     else {
+-      struct curl_llist *list = &entry->list;
+-      struct curl_llist_element *e;
+-      struct curl_llist_element *enext;
+-      SIGPIPE_VARIABLE(pipe_st);
+-
+-      /* the socket can be shared by many transfers, iterate */
+-      for(e = list->head; e; e = enext) {
+-        data = (struct Curl_easy *)e->ptr;
+-
+-        /* assign 'enext' here since the 'e' struct might be cleared
+-           further down in the singlesocket() call */
+-        enext = e->next;
++      struct curl_hash_iterator iter;
++      struct curl_hash_element *he;
+ 
++        /* the socket can be shared by many transfers, iterate */
++        Curl_hash_start_iterate(&entry->transfers, &iter);
++        for(he = Curl_hash_next_element(&iter); he;
++            he = Curl_hash_next_element(&iter)) {
++        data = (struct Curl_easy *)he->ptr;
+         DEBUGASSERT(data);
+         DEBUGASSERT(data->magic == CURLEASY_MAGIC_NUMBER);
+ 
+@@ -2515,21 +2520,7 @@ static CURLMcode multi_socket(struct Cur
+           /* set socket event bitmask if they're not locked */
+           data->conn->cselect_bits = ev_bitmask;
+ 
+-        sigpipe_ignore(data, &pipe_st);
+-        result = multi_runsingle(multi, now, data);
+-        sigpipe_restore(&pipe_st);
+-
+-        if(data->conn && !(data->conn->handler->flags & PROTOPT_DIRLOCK))
+-          /* clear the bitmask only if not locked */
+-          data->conn->cselect_bits = 0;
+-
+-        if(CURLM_OK >= result) {
+-          /* get the socket(s) and check if the state has been changed since
+-             last */
+-          result = singlesocket(multi, data);
+-          if(result)
+-            return result;
+-        }
++        Curl_expire(data, 0, EXPIRE_RUN_NOW);
+       }
+ 
+       /* Now we fall-through and do the timer-based stuff, since we don't want
+diff -Naurp curl-7.65.1.orig/lib/url.c curl-7.65.1/lib/url.c
+--- curl-7.65.1.orig/lib/url.c	2019-06-02 09:55:05.000000000 -0500
++++ curl-7.65.1/lib/url.c	2019-06-28 12:09:12.266986168 -0500
+@@ -1673,13 +1673,6 @@ static void free_idnconverted_hostname(s
+ #endif
+ }
+ 
+-static void llist_dtor(void *user, void *element)
+-{
+-  (void)user;
+-  (void)element;
+-  /* Do nothing */
+-}
+-
+ /*
+  * Allocate and initialize a new connectdata object.
+  */
+@@ -1791,7 +1784,7 @@ static struct connectdata *allocate_conn
+ #endif
+ 
+   /* Initialize the easy handle list */
+-  Curl_llist_init(&conn->easyq, (curl_llist_dtor) llist_dtor);
++  Curl_llist_init(&conn->easyq, NULL);
+ 
+ #ifdef HAVE_GSSAPI
+   conn->data_prot = PROT_CLEAR;
+diff -Naurp curl-7.65.1.orig/lib/urldata.h curl-7.65.1/lib/urldata.h
+--- curl-7.65.1.orig/lib/urldata.h	2019-06-04 15:28:08.000000000 -0500
++++ curl-7.65.1/lib/urldata.h	2019-06-28 12:09:33.052737077 -0500
+@@ -1778,8 +1778,6 @@ struct Curl_easy {
+ 
+   struct connectdata *conn;
+   struct curl_llist_element connect_queue;
+-  struct curl_llist_element sh_queue; /* list per Curl_sh_entry */
+-  struct Curl_sh_entry *sh_entry; /* the socket hash this was added to */
+   struct curl_llist_element conn_queue; /* list per connectdata */
+ 
+   CURLMstate mstate;  /* the handle's state */

@@ -16,7 +16,8 @@
   make -j [NPROC];
 
 <install>
-  make DESTDIR=[XYZ] install;
+  sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile;
+  make DESTDIR=[XYZ] MANSUFFIX=ssl install;
 
 <desc>
   openssl.

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+sed -i '/\} data/s/ =.*$/;\n    memset(\&data, 0, sizeof(data));/' \
+  crypto/rand/rand_lib.c

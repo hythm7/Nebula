@@ -3,10 +3,15 @@
   source https://www.sourceware.org/pub/bzip2/bzip2-1.0.6.tar.gz
 
 <compile>
+  sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile;
+  make -f Makefile-libbz2_so;
+  make clean;
   make -j [NPROC];
 
 <install>
-  make PREFIX=[XYZ]/tools install;
+  make PREFIX=[XYZ]/usr install;
+  cp -v bzip2-shared [XYZ]/usr/bin/bzip2;
+  cp -av libbz2.so* [XYZ]/usr/lib;
 
 <desc>
   Bzip2.

@@ -1,14 +1,17 @@
 <proto>
   star curl-7.64.0-x86_64-0-helix
-  source ftp://ftp.lfs-matrix.net/pub/blfs/8.4/c/curl-7.64.0.tar.xz
+  source http://ftp.lfs-matrix.net/pub/blfs/8.4/c/curl-7.64.0.tar.xz
 
 <configure>
 
+  # patch -Np1 -i [PROTO]/curl-7.65.1-fix_dns_segfaults-2.patch;
+  
   ./configure                     \
     --prefix=/tools               \
     --disable-static              \
     --enable-threaded-resolver    \
-    --with-ca-path=/etc/ssl/certs ;
+    --with-ssl                    \
+    --with-ca-path=/etc/ssl/certs;
 
 <compile>
   make -j [NPROC];

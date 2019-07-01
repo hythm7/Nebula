@@ -25,7 +25,6 @@ multi method form ( Str:D :$star! ) {
 
   my %star = $m.ast;
 
-
   my $protodir  = "$!proto/%star<name>/%star<star>/".IO;
   my $proto     = $protodir.add: "proto";
   my $pre-form  = $protodir.add: "pre-form";
@@ -94,8 +93,8 @@ multi method form ( Str:D :$star! ) {
 
   sub translate ( Str $s --> Str ) {
 
-  $s.trans: < [GALAXY]   [NPROC]    [XYZ] >
-    =>      ( $!target, $!nproc, $stardir )
+  $s.trans: < [GALAXY]   [NPROC]    [XYZ] [PROTO] >
+    =>      ( $!target, $!nproc, $stardir, $protodir )
 }
 
 }

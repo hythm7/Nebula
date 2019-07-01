@@ -1,0 +1,21 @@
+<proto>
+  star libarchive-3.4.0-x86_64-0-helix
+  source https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
+
+<configure>
+
+  CFLAGS='-fPIC ' \
+  ./configure        \
+    --prefix=/tools  \
+    --without-xml2   \
+    --without-nettle \
+    --disable-static;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  libarchive.
