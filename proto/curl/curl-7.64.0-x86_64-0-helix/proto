@@ -1,0 +1,20 @@
+<proto>
+  star curl-7.64.0-x86_64-0-helix
+  source ftp://ftp.lfs-matrix.net/pub/blfs/8.4/c/curl-7.64.0.tar.xz
+
+<configure>
+
+  ./configure                     \
+    --prefix=/tools               \
+    --disable-static              \
+    --enable-threaded-resolver    \
+    --with-ca-path=/etc/ssl/certs ;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  curl.

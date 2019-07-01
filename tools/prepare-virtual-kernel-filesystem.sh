@@ -15,3 +15,6 @@ mount -vt tmpfs tmpfs $GLX/run
 if [ -h $GLX/dev/shm ]; then
   mkdir -pv $GLX/$(readlink $GLX/dev/shm)
 fi
+
+mount --bind /home/hythm/ /home/hythm/galaxy-linux/home/hythm
+

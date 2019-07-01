@@ -1,0 +1,17 @@
+<proto>
+  star zlib-1.2.11-x86_64-0-helix
+  source https://zlib.net/zlib-1.2.11.tar.xz
+
+<configure>
+
+  ./configure        \
+    --prefix=/tools;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  zlib.

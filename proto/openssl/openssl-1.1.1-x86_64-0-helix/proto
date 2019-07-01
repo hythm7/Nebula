@@ -1,0 +1,22 @@
+<proto>
+  star openssl-1.1.1-x86_64-0-helix
+  source https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+  srcdir openssl-1.1.1c
+
+<configure>
+
+  ./config                \
+    --prefix=/tools       \
+    --openssldir=/etc/ssl \
+    --libdir=lib          \
+    zlib-dynamic          \
+    shared;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  openssl.
