@@ -6,10 +6,10 @@ source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
   mkdir build;
   cd build;
   
-  CC=[GALAXY]-gcc \
-  CXX=[GALAXY]-g++ \
-  AR=[GALAXY]-ar \
-  RANLIB=[GALAXY]-ranlib \
+  CC=[GALAXY]-gcc                                \
+  CXX=[GALAXY]-g++                               \
+  AR=[GALAXY]-ar                                 \
+  RANLIB=[GALAXY]-ranlib                         \
   ../configure                                   \
   --prefix=/tools                                \
   --with-local-prefix=/tools                     \

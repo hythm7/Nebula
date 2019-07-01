@@ -6,30 +6,31 @@
   mkdir build;
   cd build;
   
-  ../configure \
-  --prefix=/tools \
-  --with-glibc-version=2.11 \
-  --with-sysroot=/home/hythm/galaxy-linux \
-  --with-local-prefix=/tools \
+  ../configure                                   \
+  --prefix=/tools                                \
+  --with-glibc-version=2.11                      \
+  --with-sysroot=/home/hythm/galaxy-linux        \
+  --with-local-prefix=/tools                     \
   --with-native-system-header-dir=/tools/include \
-  --enable-languages=c,c++ \
-  --target=[GALAXY] \
-  --without-headers \
-  --with-newlib \
-  --disable-nls \
-  --disable-shared \
-  --disable-multilib \
-  --disable-decimal-float \
-  --disable-threads \
-  --disable-libatomic \
-  --disable-libgomp \
-  --disable-libquadmath \
-  --disable-libssp \
-  --disable-libvtv \
+  --enable-languages=c,c++                       \
+  --target=[GALAXY]                              \
+  --without-headers                              \
+  --with-newlib                                  \
+  --disable-nls                                  \
+  --disable-shared                               \
+  --disable-multilib                             \
+  --disable-decimal-float                        \
+  --disable-threads                              \
+  --disable-libatomic                            \
+  --disable-libgomp                              \
+  --disable-libquadmath                          \
+  --disable-libssp                               \
+  --disable-libvtv                               \
   --disable-libstdcxx;
 
 
 <compile>
+
   cd build;
   make -j [NPROC];
 

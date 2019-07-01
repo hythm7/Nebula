@@ -6,14 +6,14 @@
   mkdir build;
   cd build;
 
-  FORCE_UNSAFE_CONFIGURE=1
-  DEFAULT_POSIX2_VERSION=199209
-  ../configure \
-  --prefix=/tools \
+  FORCE_UNSAFE_CONFIGURE=1                \
+  DEFAULT_POSIX2_VERSION=199209           \
+  ../configure                            \
+  --prefix=/tools                         \
   --with-sysroot=/home/hythm/galaxy-linux \
-  --with-lib-path=/tools/lib \
-  --target=[GALAXY] \
-  --disable-nls \
+  --with-lib-path=/tools/lib              \
+  --target=[GALAXY]                       \
+  --disable-nls                           \
   --disable-werror;
 
 <compile>
