@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
-set -x
 
-ln -s lib/ld-linux-x86-64.so.2 lib64/
+ln -sv ../lib/ld-linux-x86-64.so.2 lib64/
 
 cat > etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf

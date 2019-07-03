@@ -2,13 +2,6 @@
   star man-pages-5.01-x86_64-0-helix
   source https://www.kernel.org/pub/linux/docs/man-pages/man-pages-5.01.tar.xz
 
-<configure>
-
-  ./configure --prefix=/tools;
-
-<compile>
-  make -j [NPROC];
-
 <install>
   make DESTDIR=[XYZ] install;
 

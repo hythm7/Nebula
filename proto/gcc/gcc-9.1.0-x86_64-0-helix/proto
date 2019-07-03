@@ -9,7 +9,7 @@
   ../configure                                   \
   --prefix=/tools                                \
   --with-glibc-version=2.11                      \
-  --with-sysroot=/home/hythm/galaxy-linux        \
+  --with-sysroot=/home/hythm/glx                 \
   --with-local-prefix=/tools                     \
   --with-native-system-header-dir=/tools/include \
   --enable-languages=c,c++                       \

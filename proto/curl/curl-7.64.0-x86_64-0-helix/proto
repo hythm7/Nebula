@@ -4,8 +4,6 @@
 
 <configure>
 
-  # patch -Np1 -i [PROTO]/curl-7.65.1-fix_dns_segfaults-2.patch;
-  
   ./configure                     \
     --prefix=/tools               \
     --disable-static              \

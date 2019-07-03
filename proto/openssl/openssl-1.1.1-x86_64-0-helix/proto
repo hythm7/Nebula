@@ -5,11 +5,11 @@
 
 <configure>
 
-  ./config                \
-    --prefix=/tools       \
-    --openssldir=/etc/ssl \
-    --libdir=lib          \
-    zlib-dynamic          \
+  ./config                      \
+    --prefix=/tools             \
+    --openssldir=/tools/etc/ssl \
+    --libdir=/tools/lib         \
+    zlib-dynamic                \
     shared;
 
 <compile>

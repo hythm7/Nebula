@@ -9,9 +9,9 @@
   make -j [NPROC];
 
 <install>
-  make PREFIX=[XYZ]/usr install;
-  cp -v bzip2-shared [XYZ]/usr/bin/bzip2;
-  cp -av libbz2.so* [XYZ]/usr/lib;
+  make PREFIX=[XYZ]/tools install;
+  cp -v bzip2-shared [XYZ]/tools/bin/bzip2;
+  cp -av libbz2.so* [XYZ]/tools/lib;
 
 <desc>
   Bzip2.
