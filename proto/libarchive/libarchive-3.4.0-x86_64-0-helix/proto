@@ -4,7 +4,6 @@
 
 <configure>
 
-  CFLAGS='-fPIC ' \
   ./configure        \
     --prefix=/tools  \
     --without-xml2   \

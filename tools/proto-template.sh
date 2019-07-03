@@ -28,6 +28,7 @@ if [ "$4" == "pre-form" ]; then
 
 fi
 
+wget -q -O "$PROTO/$NAME/$NAME-$AGE-x86_64-0-helix/$(basename $SOURCE)" $SOURCE
 cat << PROTO > "$PROTO/$NAME/$NAME-$AGE-x86_64-0-helix/proto"
 <proto>
   star $NAME-$AGE-x86_64-0-helix
