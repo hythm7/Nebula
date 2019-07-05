@@ -14,7 +14,7 @@
   make DESTDIR=[XYZ] install;
   mkdir [XYZ]/lib;
   mv -v [XYZ]/usr/lib/libz.so.* [XYZ]/lib;
-ln -sfv ../../lib/$(readlink usr/lib/libz.so) [XYZ]/usr/lib/libz.so;
+ln -sfv [XYZ]/lib/$(readlink [XYZ]/lib/libz.so.?) [XYZ]/usr/lib/libz.so;
 
 <desc>
   zlib.

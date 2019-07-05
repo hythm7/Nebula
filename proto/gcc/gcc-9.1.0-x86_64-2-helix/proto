@@ -1,0 +1,30 @@
+<proto>
+star gcc-9.1.0-x86_64-2-helix
+source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
+
+<configure>
+  mkdir build;
+  cd build;
+  
+  SED=sed                  \
+  ../configure             \
+  --prefix=/usr            \
+  --enable-languages=c,c++ \
+  --disable-multilib       \
+  --disable-bootstrap      \
+  --with-system-zlib;
+
+<compile>
+
+  cd build;
+
+  make -j [NPROC];
+
+<install>
+
+  cd build;
+
+  make DESTDIR=[XYZ] install;
+  
+<desc>
+GCC.

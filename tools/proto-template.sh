@@ -36,7 +36,8 @@ cat << PROTO > "$PROTO/$NAME/$NAME-$AGE-x86_64-0-helix/proto"
 
 <configure>
 
-  ./configure --prefix=/tools;
+  ./configure    \\
+    --prefix=/usr;
 
 <compile>
   make -j [NPROC];

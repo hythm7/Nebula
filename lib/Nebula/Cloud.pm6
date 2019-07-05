@@ -64,7 +64,7 @@ multi method form ( Str:D :$star! ) {
   $compile   = %form<compile>.map:   *.&translate if %form<compile>;
   $install   = %form<install>.map:   *.&translate if %form<install>;
 
-  .say with $configure;
+  #.say with $configure;
   #.say with $compile;
   #.say with $install;
 
