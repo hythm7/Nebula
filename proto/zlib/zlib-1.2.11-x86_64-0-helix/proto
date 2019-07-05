@@ -5,13 +5,16 @@
 <configure>
 
   ./configure        \
-    --prefix=/tools;
+    --prefix=/usr;
 
 <compile>
   make -j [NPROC];
 
 <install>
   make DESTDIR=[XYZ] install;
+  mkdir [XYZ]/lib;
+  mv -v [XYZ]/usr/lib/libz.so.* [XYZ]/lib;
+ln -sfv ../../lib/$(readlink usr/lib/libz.so) [XYZ]/usr/lib/libz.so;
 
 <desc>
   zlib.

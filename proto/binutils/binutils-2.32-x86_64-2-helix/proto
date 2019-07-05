@@ -1,0 +1,28 @@
+<proto>
+  star binutils-2.32-x86_64-2-helix
+  source http://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.xz
+
+<configure>
+  mkdir build;
+  cd build;
+
+  ../configure          \
+    --prefix=/usr       \
+    --enable-gold       \
+    --enable-ld=default \
+    --enable-plugins    \
+    --enable-shared     \
+    --disable-werror    \
+    --enable-64-bit-bfd \
+    --with-system-zlib;
+
+<compile>
+  cd build;
+  make -j [NPROC] tooldir=/usr;
+
+<install>
+  cd build;
+  make DESTDIR=[XYZ] tooldir=/usr install;
+
+<desc>
+  Binutils.
