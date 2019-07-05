@@ -1,0 +1,30 @@
+<proto>
+  star inetutils-1.9.4-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/inetutils/inetutils-1.9.4.tar.xz
+
+<configure>
+
+  ./configure            \
+    --prefix=/usr        \
+    --localstatedir=/var \
+    --disable-logger     \
+    --disable-whois      \
+    --disable-rcp        \
+    --disable-rexec      \
+    --disable-rlogin     \
+    --disable-rsh        \
+    --disable-servers;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  
+  make DESTDIR=[XYZ] install;
+  
+  mkdir -pv [XYZ]/bin [XYZ]/sbin;
+  mv -v [XYZ]/usr/bin/{hostname,ping,ping6,traceroute} [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/ifconfig [XYZ]/sbin;
+
+<desc>
+  inetutils.

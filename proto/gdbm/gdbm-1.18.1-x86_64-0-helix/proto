@@ -1,0 +1,20 @@
+<proto>
+  star gdbm-1.18.1-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz
+
+<configure>
+
+  ./configure               \
+    --prefix=/usr           \
+    --disable-static        \
+    --enable-libgdbm-compat;
+
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  gdbm.

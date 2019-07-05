@@ -4,8 +4,10 @@
 
 <configure>
 
-  ./configure              \
-    --prefix=/tools        \
+  ./configure                        \
+    --prefix=/usr                    \
+    --docdir=/usr/share/doc/bash-5.0 \
+    --with-installed-readline        \
     --without-bash-malloc;
 
 <compile>
@@ -13,6 +15,9 @@
 
 <install>
   make DESTDIR=[XYZ] install;
+  
+  mkdir [XYZ]/bin;
+  mv -vf [XYZ]/usr/bin/bash [XYZ]/bin;
 
 <desc>
   Bash is the GNU Project's shell.

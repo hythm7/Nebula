@@ -4,17 +4,23 @@
 
 <configure>
 
-  sh Configure -des -Dprefix=/tools -Dlibs=-lm -Uloclibpth -Ulocincpth;
+  BUILD_ZLIB=False \
+  BUILD_BZIP2=0    \
+  sh Configure -des               \
+    -Dprefix=/usr                 \
+    -Dvendorprefix=/usr           \
+    -Dman1dir=/usr/share/man/man1 \
+    -Dman3dir=/usr/share/man/man3 \
+    -Dpager="/usr/bin/less -isR"  \
+    -Duseshrplib                  \
+    -Dusethreads; 
 
 <compile>
   make -j [NPROC];
 
 <install>
 
-  mkdir -pv [XYZ]/tools/bin
-  cp -v perl cpan/podlators/scripts/pod2man [XYZ]/tools/bin;
-  mkdir -pv [XYZ]/tools/lib/perl5/5.30.0;
-  cp -Rv lib/* [XYZ]/tools/lib/perl5/5.30.0;
+  make DESTDIR=[XYZ] install;
 
 <desc>
   perl.

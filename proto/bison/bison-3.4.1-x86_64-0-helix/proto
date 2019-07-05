@@ -4,10 +4,13 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  sed -i '6855 s/mv/cp/' Makefile.in;
+  ./configure                         \
+  --prefix=/usr                       \
+  --docdir=/usr/share/doc/bison-3.4.1;
 
 <compile>
-  make -j [NPROC];
+  make -j1;
 
 <install>
   make DESTDIR=[XYZ] install;

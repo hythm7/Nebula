@@ -4,13 +4,18 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  ./configure      \
+    --prefix=/usr  \
+    --bindir=/bin;
 
 <compile>
   make -j [NPROC];
+  make -j [NPROC] html;
 
 <install>
   make DESTDIR=[XYZ] install;
+  #install -d -m755           [XYZ]/usr/share/doc/sed-4.7;
+  #install -m644 doc/sed.html [XYZ]/usr/share/doc/sed-4.7;
 
 <desc>
   sed.

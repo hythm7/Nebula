@@ -1,0 +1,20 @@
+<proto>
+  star psmisc-23.2-x86_64-0-helix
+  source https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.2.tar.xz
+
+<configure>
+
+  ./configure    \
+    --prefix=/usr;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+  mkdir [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/fuser   [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/killall [XYZ]/bin;
+
+<desc>
+  psmisc.

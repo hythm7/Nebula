@@ -1,0 +1,20 @@
+<proto>
+  star libcap-2.27-x86_64-0-helix
+  source https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.27.tar.xz
+
+<compile>
+  sed -i '/install.*STALIBNAME/d' libcap/Makefile;
+  
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] RAISE_SETFCAP=no lib=lib prefix=/usr install
+  chmod -v 755 [XYZ]/usr/lib/libcap.so.2.27
+
+  mkdir -pv [XYZ]/lib;
+  mv [XYZ]/usr/lib/libcap.so.* [XYZ]/lib;
+  ln -sfv ../../lib/$(readlink [XYZ]/usr/lib/libcap.so) [XYZ]/usr/lib/libcap.so;
+
+
+<desc>
+  libcap.
