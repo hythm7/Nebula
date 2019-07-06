@@ -6,7 +6,7 @@ use Cro::HTTP::Log::File;
 unit class Nebula::Routes;
   also does Nebula::Core;
 
-has Str:D $.host = 'galaxy';
+has Str:D $.host = 'localhost';
 has Int:D $.port = 7777;
 
 method routes ( ) {

@@ -1,11 +1,12 @@
 <proto>
-  star curl-7.64.0-x86_64-0-helix
-  source http://ftp.lfs-matrix.net/pub/blfs/8.4/c/curl-7.64.0.tar.xz
+  star curl-7.65.1-x86_64-0-helix
+  source https://github.com/curl/curl/releases/download/curl-7_65_1/curl-7.65.1.tar.xz
 
 <configure>
 
+   patch -Np1 -i [PROTO]/curl-7.65.1-fix_dns_segfaults-2.patch;
   ./configure                     \
-    --prefix=/tools               \
+    --prefix=/usr                 \
     --disable-static              \
     --enable-threaded-resolver    \
     --with-ssl                    \

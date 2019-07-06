@@ -1,0 +1,21 @@
+<proto>
+  star wget-1.20.3-x86_64-0-helix
+  source ftp://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
+
+<configure>
+
+
+  ./configure                 \
+    --prefix=/usr             \
+    --sysconfdir=/etc         \
+    --with-ssl=openssl        \
+    --with-libssl-prefix=/usr;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  wget.

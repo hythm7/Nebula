@@ -5,7 +5,7 @@
 <configure>
 
   ./configure                       \
-    --prefix=/tools                 \
+    --prefix=/usr                 \
     --with-gitconfig=/etc/gitconfig ;
 
 <compile>
