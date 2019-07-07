@@ -1,0 +1,12 @@
+<proto>
+  star meson-0.51.0-x86_64-0-helix
+  source https://github.com/mesonbuild/meson/releases/download/0.51.0/meson-0.51.0.tar.gz
+
+<compile>
+  python3 setup.py build;
+
+<install>
+  python3 setup.py install --root=[XYZ];
+
+<desc>
+  meson.

@@ -4,10 +4,10 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  PAGE=letter ./configure --prefix=/usr;
 
 <compile>
-  make -j [NPROC];
+  make -j1;
 
 <install>
   make DESTDIR=[XYZ] install;

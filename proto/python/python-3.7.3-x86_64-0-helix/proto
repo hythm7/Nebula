@@ -5,13 +5,21 @@
 
 <configure>
 
-  ./configure --prefix=/tools --without-ensurepip;
+  ./configure           \
+    --prefix=/usr       \
+    --enable-shared     \
+    --with-system-expat \
+    --with-system-ffi   \
+    --with-ensurepip=yes;
 
 <compile>
   make -j [NPROC];
 
 <install>
   make DESTDIR=[XYZ] install;
+  chmod -v 755 [XYZ]/usr/lib/libpython3.7m.so;
+  chmod -v 755 [XYZ]/usr/lib/libpython3.so;
+  ln -sfv pip3.7 [XYZ]/usr/bin/pip3;
 
 <desc>
   python.

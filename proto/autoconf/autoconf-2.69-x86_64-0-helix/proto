@@ -1,0 +1,19 @@
+<proto>
+  star autoconf-2.69-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz
+
+<configure>
+
+  sed '361 s/{/\\{/' -i bin/autoscan.in;
+
+  ./configure    \
+    --prefix=/usr;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  autoconf.

@@ -1,0 +1,17 @@
+<proto>
+  star elfutils-0.176-x86_64-0-helix
+  source https://sourceware.org/ftp/elfutils/0.176/elfutils-0.176.tar.bz2
+
+<configure>
+
+  ./configure    \
+    --prefix=/usr;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  elfutils.

@@ -4,16 +4,19 @@
 
 <configure>
 
-  ./configure --prefix=/tools \
-    --disable-shared;
+  ./configure                             \
+    --prefix=/usr                         \
+    --disable-static                      \
+    --docdir=/usr/share/doc/gettext-0.20.1;
+
 
 <compile>
   make -j [NPROC];
 
 <install>
-  #make DESTDIR=[XYZ] install;
-  mkdir -p [XYZ]/tools/bin;
-  cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} [XYZ]/tools/bin;
+  make DESTDIR=[XYZ] install;
+  chmod -v 0755 [XYZ]/usr/lib/preloadable_libintl.so;
+
 
 <desc>
   gettext.

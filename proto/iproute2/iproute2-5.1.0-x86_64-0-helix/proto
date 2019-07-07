@@ -1,0 +1,16 @@
+<proto>
+  star iproute2-5.1.0-x86_64-0-helix
+  source https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.1.0.tar.xz
+
+<compile>
+  sed -i /ARPD/d Makefile;
+  rm -fv man/man8/arpd.8;
+  sed -i 's/.m_ipt.o//' tc/Makefile;
+
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] DOCDIR=/usr/share/doc/iproute2-5.1.0 install;
+
+<desc>
+  iproute2.

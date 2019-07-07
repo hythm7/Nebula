@@ -4,15 +4,29 @@
 
 <configure>
 
-  ./configure              \
-    --prefix=/tools        \
-    --enable-install-program=hostname;
+  patch -Np1 -i ../coreutils-8.31-i18n-1.patch;
+
+  autoreconf -fiv;
+  FORCE_UNSAFE_CONFIGURE=1 ./configure     \
+    --prefix=/usr                          \
+    --enable-no-install-program=kill,uptime;
 
 <compile>
   make -j [NPROC];
 
 <install>
   make DESTDIR=[XYZ] install;
+
+  mkdir -pv [XYZ]/bin;
+  mkdir -pv [XYZ]/usr/sbin;
+  mv -v [XYZ]/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/{rmdir,stty,sync,true,uname} [XYZ]/bin;
+  mv -v [XYZ]/usr/bin/chroot [XYZ]/usr/sbin;
+  mv -v [XYZ]/usr/share/man/man1/chroot.1 [XYZ]/usr/share/man/man8/chroot.8;
+  sed -i s/\"1\"/\"8\"/1 [XYZ]/usr/share/man/man8/chroot.8;
+  mv -v [XYZ]/usr/bin/{head,nice,sleep,touch} [XYZ]/bin;
+
 
 <desc>
   Coreutils;

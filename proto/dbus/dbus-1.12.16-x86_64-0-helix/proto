@@ -1,0 +1,30 @@
+<proto>
+  star dbus-1.12.16-x86_64-0-helix
+  source https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz
+
+<configure>
+
+  ./configure --prefix=/usr              \
+    --sysconfdir=/etc                    \
+    --localstatedir=/var                 \
+    --disable-static                     \
+    --disable-doxygen-docs               \
+    --disable-xml-docs                   \
+    --docdir=/usr/share/doc/dbus-1.12.16 \
+    --with-console-auth-dir=/run/console;
+
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+  mkdir [XYZ]/lib;
+  mv -v [XYZ]/usr/lib/libdbus-1.so.* [XYZ]/lib;
+ln -sfv ../../lib/$(readlink [XYZ]/usr/lib/libdbus-1.so) [XYZ]/usr/lib/libdbus-1.so;
+  ln -sfv /etc/machine-id [XYZ]/var/lib/dbus;
+
+
+<desc>
+  d-bus.

@@ -4,13 +4,19 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  ./configure --prefix=/usr         \
+    --disable-static                \
+    --docdir=/usr/share/doc/xz-5.2.4;
 
 <compile>
   make -j [NPROC];
 
 <install>
   make DESTDIR=[XYZ] install;
+  mkdir [XYZ]/{bin,lib};
+  mv -v [XYZ]/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} [XYZ]/bin;
+  mv -v [XYZ]/usr/lib/liblzma.so.* [XYZ]/lib;
+  ln -svf ../../lib/$(readlink [XYZ]/usr/lib/liblzma.so) [XYZ]/usr/lib/liblzma.so;
 
 <desc>
   xz.

@@ -1,0 +1,22 @@
+<proto>
+  star intltool-0.51.0-x86_64-0-helix
+  source https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
+
+<configure>
+
+  sed -i 's:\\\${:\\\$\\{:' intltool-update.in;
+
+
+  ./configure    \
+    --prefix=/usr;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+  install -v -Dm644 doc/I18N-HOWTO [XYZ]/usr/share/doc/intltool-0.51.0/I18N-HOWTO;
+
+<desc>
+  intltool.

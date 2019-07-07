@@ -1,0 +1,25 @@
+<proto>
+  star grub-2.02-x86_64-0-helix
+  source https://ftp.gnu.org/gnu/grub/grub-2.02.tar.xz
+
+<configure>
+
+  ./configure         \
+    --prefix=/usr     \
+    --sbindir=/sbin   \
+    --sysconfdir=/etc \
+    --disable-efiemu  \
+    --disable-werror;
+
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+  mkdir -pv [XYZ]/usr/share/bash-completion/completions;
+  mv -v [XYZ]/etc/bash_completion.d/grub [XYZ]/usr/share/bash-completion/completions;
+
+<desc>
+  grub.

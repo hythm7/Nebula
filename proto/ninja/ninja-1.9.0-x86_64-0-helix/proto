@@ -1,0 +1,16 @@
+<proto>
+  star ninja-1.9.0-x86_64-0-helix
+  source https://github.com/ninja-build/ninja/archive/v1.9.0/ninja-1.9.0.tar.gz
+
+<compile>
+  NINJAJOBS=4 python3 configure.py --bootstrap; 
+
+<install>
+
+  mkdir -pv [XYZ]/usr/bin;
+  install -vm755 ninja [XYZ]/usr/bin/;
+  install -vDm644 misc/bash-completion [XYZ]/usr/share/bash-completion/completions/ninja;
+  install -vDm644 misc/zsh-completion  [XYZ]/usr/share/zsh/site-functions/_ninja;
+
+<desc>
+  ninja.

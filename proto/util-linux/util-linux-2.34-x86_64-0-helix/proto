@@ -4,17 +4,24 @@
 
 <configure>
 
-  ./configure --prefix=/tools      \
-    --without-python               \
-    --disable-makeinstall-chown    \
-    --without-systemdsystemunitdir \
-    --without-ncurses              \
-    PKG_CONFIG="";
+  ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+    --docdir=/usr/share/doc/util-linux-2.34 \
+    --disable-chfn-chsh  \
+    --disable-login      \
+    --disable-nologin    \
+    --disable-su         \
+    --disable-setpriv    \
+    --disable-runuser    \
+    --disable-pylibmount \
+    --disable-static     \
+    --without-python;
 
 <compile>
   make -j [NPROC];
 
 <install>
+  mkdir -pv [XYZ]/var/lib/hwclock;
+
   make DESTDIR=[XYZ] install;
 
 <desc>

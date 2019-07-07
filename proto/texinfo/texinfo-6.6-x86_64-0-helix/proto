@@ -4,13 +4,14 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  ./configure --prefix=/usr --disable-static;
 
 <compile>
   make -j [NPROC];
 
 <install>
   make DESTDIR=[XYZ] install;
+  make TEXMF=[XYZ]/usr/share/texmf install-tex;
 
 <desc>
   texinfo.

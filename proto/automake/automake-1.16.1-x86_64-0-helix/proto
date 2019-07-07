@@ -1,0 +1,17 @@
+<proto>
+  star automake-1.16.1-x86_64-0-helix
+  source http://ftp.gnu.org/gnu/automake/automake-1.16.1.tar.xz
+
+<configure>
+
+  ./configure    \
+    --prefix=/usr --docdir=/usr/share/doc/automake-1.16.1;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  automake.

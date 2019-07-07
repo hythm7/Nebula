@@ -4,7 +4,8 @@
 
 <configure>
 
-  ./configure --prefix=/tools;
+  sed -i 's/extras//' Makefile.in;
+  ./configure --prefix=/usr;
 
 <compile>
   make -j [NPROC];

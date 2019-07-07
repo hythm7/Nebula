@@ -4,8 +4,7 @@
 
 <configure>
 
-  ./configure --prefix=/tools \
-    --without-guile;
+  ./configure --prefix=/usr;
 
 <compile>
   make -j [NPROC];

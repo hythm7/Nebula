@@ -1,0 +1,25 @@
+<proto>
+  star procps-ng-3.3.15-x86_64-0-helix
+  source https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-3.3.15.tar.xz
+
+<configure>
+
+  ./configure --prefix=/usr                            \
+    --exec-prefix=                           \
+    --libdir=/usr/lib                        \
+    --docdir=/usr/share/doc/procps-ng-3.3.15 \
+    --disable-static                         \
+    --disable-kill                           \
+    --with-systemd;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+  mkdir [XYZ]/lib;
+  mv -v [XYZ]/usr/lib/libprocps.so.* [XYZ]/lib;
+  ln -sfv ../../lib/$(readlink [XYZ]/usr/lib/libprocps.so.?) [XYZ]/usr/lib/libprocps.so;
+
+<desc>
+  procps-ng.

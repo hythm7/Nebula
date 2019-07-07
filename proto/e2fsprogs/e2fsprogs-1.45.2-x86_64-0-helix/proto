@@ -1,0 +1,33 @@
+<proto>
+  star e2fsprogs-1.45.2-x86_64-0-helix
+  source https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.45.2/e2fsprogs-1.45.2.tar.gz
+
+<configure>
+
+  mkdir build;
+  cd    build;
+
+  ../configure --prefix=/usr   \
+    --bindir=/bin              \
+    --with-root-prefix=""      \
+    --enable-elf-shlibs        \
+    --disable-libblkid         \
+    --disable-libuuid          \
+    --enable-relative-symlinks \
+    --disable-uuidd            \
+    --disable-fsck;
+
+<compile>
+  cd build;
+  make -j [NPROC];
+
+<install>
+  cd build;
+  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install-libs;
+
+  chmod -v u+w [XYZ]/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a;
+
+
+<desc>
+  e2fsprogs.
