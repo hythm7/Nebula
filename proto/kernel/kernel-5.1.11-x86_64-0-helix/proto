@@ -1,0 +1,24 @@
+<proto>
+star kernel-5.1.11-x86_64-0-helix
+source https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.1.11.tar.xz
+srcdir linux-5.1.11
+
+<compile>
+  make -j [NPROC] mrproper;
+  make -j [NPROC] defconfig;
+  make -j [NPROC];
+
+<install>
+  make INSTALL_MOD_PATH=[XYZ] headers_install;
+
+  install -d [XYZ]/boot;
+  cp -iv arch/x86_64/boot/bzImage [XYZ]/boot/vmlinuz-5.1.11-x86_64-0-glx;
+  ln -s vmlinuz-5.1.11-x86_64-0-glx [XYZ]/boot/vmlinuz; 
+  cp -iv System.map [XYZ]/boot/System.map-5.1.11-x86_64-0-glx;
+  cp -iv .config [XYZ]/boot/config-5.1.11-x86_64-0-glx;
+
+  install -d [XYZ]/usr/share/doc/linux-5.1.11;
+  cp -r Documentation/* [XYZ]/usr/share/doc/linux-5.1.11;
+  
+<desc>
+Kernel headers.

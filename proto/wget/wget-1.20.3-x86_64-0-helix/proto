@@ -1,6 +1,6 @@
 <proto>
   star wget-1.20.3-x86_64-0-helix
-  source ftp://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
+  source https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
 
 <configure>
 
