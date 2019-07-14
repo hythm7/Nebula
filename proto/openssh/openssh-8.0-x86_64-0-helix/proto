@@ -1,0 +1,22 @@
+<proto>
+  star openssh-8.0-x86_64-0-helix
+  source http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz
+  srcdir openssh-8.0p1
+
+<configure>
+
+  ./configure                         \
+    --prefix=/usr                     \
+    --sysconfdir=/etc/ssh             \
+    --with-md5-passwords              \
+    --with-privsep-path=/var/lib/sshd; 
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+  install -v -m755    contrib/ssh-copy-id [XYZ]/usr/bin;
+
+<desc>
+  openssh.

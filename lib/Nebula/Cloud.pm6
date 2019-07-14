@@ -1,5 +1,5 @@
 use File::Temp;
-use Path::Finder;
+use File::Find;
 use Path::Through;
 use Archive::Libarchive;
 use Archive::Libarchive::Constants;
@@ -74,7 +74,7 @@ multi method form ( Str:D :$star! ) {
   shell $install,   cwd => $srcdir  if $install;
   shell $post-form, cwd => $stardir if $post-form.x;
 
-  my @file = find $stardir, :file;
+  my @file = find dir => $stardir, :type<file>;
 
   $!star.add(%star<name>).mkdir;
   my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
@@ -82,7 +82,12 @@ multi method form ( Str:D :$star! ) {
     file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
 
   for @file -> $file {
-      $a.write-header( ~$file, perm => $file.mode, pathname => ~$file.&shift: :4parts );
+
+    $a.write-header( ~$file,
+      filetype => ($file.IO.l ?? AE_IFLNK !! AE_IFREG),
+      perm     => $file.mode,
+      pathname => ~$file.&shift: :4parts,
+    );
       $a.write-data( ~$file );
   }
 

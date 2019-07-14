@@ -1,0 +1,17 @@
+<proto>
+  star dhcpcd-7.2.3-x86_64-0-helix
+  source https://roy.marples.name/downloads/dhcpcd/dhcpcd-7.2.3.tar.xz
+
+<configure>
+
+  ./configure --libexecdir=/lib/dhcpcd \
+            --dbdir=/var/lib/dhcpcd;
+
+<compile>
+  make -j [NPROC];
+
+<install>
+  make DESTDIR=[XYZ] install;
+
+<desc>
+  dhcpcd.
