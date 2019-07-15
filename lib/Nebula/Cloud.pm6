@@ -1,8 +1,7 @@
 use File::Temp;
-use File::Find;
+use Concurrent::File::Find;
 use Path::Through;
-use Archive::Libarchive;
-use Archive::Libarchive::Constants;
+use Libarchive::Simple;
 use LibCurl::Easy;
 use Nebula::Core;
 use Nebula::Grammar::Proto;
@@ -43,14 +42,11 @@ multi method form ( Str:D :$star! ) {
 
   my $source = $protodir.add: %form<source>.path.IO.basename;
 
-  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, :followlocation ).perform unless $source.e;
+  LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, ssl-verifypeer => 0, :followlocation ).perform unless $source.e;
 
   my $tmpdir = tempdir :!unlink;
 
-  my $e = Archive::Libarchive.new: operation => LibarchiveExtract, file => $source.Str,
-    flags => ARCHIVE_EXTRACT_TIME +| ARCHIVE_EXTRACT_PERM +| ARCHIVE_EXTRACT_ACL +| ARCHIVE_EXTRACT_FFLAGS;
-  $e.extract: $tmpdir;
-  $e.close;
+  .extract: destpath => $tmpdir for archive-read $source;
 
   my $srcdir   = $tmpdir.IO.add( %form<srcdir> // "{%star<name>}-{%star<age> }" );
 
@@ -74,24 +70,15 @@ multi method form ( Str:D :$star! ) {
   shell $install,   cwd => $srcdir  if $install;
   shell $post-form, cwd => $stardir if $post-form.x;
 
-  my @file = find dir => $stardir, :type<file>;
-
   $!star.add(%star<name>).mkdir;
-  my $a = Archive::Libarchive.new: operation => LibarchiveOverwrite,
-    format => 'gnutar', filters => ['xz'],
-    file   => $!star.add( "%star<name>/%star<star>.xyz" ).Str;
+  
+  with archive-write( $!star.add( "%star<name>/%star<star>.xyz" ),
+    :format<gnutar>, :filter<xz>
+    ) {
 
-  for @file -> $file {
-
-    $a.write-header( ~$file,
-      filetype => ($file.IO.l ?? AE_IFLNK !! AE_IFREG),
-      perm     => $file.mode,
-      pathname => ~$file.&shift: :4parts,
-    );
-      $a.write-data( ~$file );
+    indir $stardir, { .add: find $stardir.Str };
+    .close;
   }
-
-  $a.close;
 
   my $location = "http://localhost:7777/star/%star<name>/%star<star>.xyz";
   self.add-star: |%form, :$location;
