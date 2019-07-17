@@ -5,7 +5,9 @@
 
 <configure>
 
-  ./configure --prefix=/usr         \
+  autoreconf -f -i;
+
+  ./configure --prefix=/usr           \
     --disable-static                  \
     --enable-fts5                     \
     CFLAGS="-g -O2                    \

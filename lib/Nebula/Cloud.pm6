@@ -4,6 +4,7 @@ use Path::Through;
 use Libarchive::Simple;
 use LibCurl::Easy;
 use Nebula::Core;
+use Nebula::Constants;
 use Nebula::Grammar::Proto;
 use Galaxy::Grammar::Star;
 
@@ -34,7 +35,9 @@ multi method form ( Str:D :$star! ) {
 
   $parser  = Nebula::Grammar::Proto;
   $actions = Nebula::Grammar::Proto::Actions.new;
-  $m       = $parser.parsefile( $proto, :$actions );
+  $m       = $parser.parse( $proto.slurp.&translate, :$actions );
+
+  say $m;
 
   die "Can not parse $proto" unless $m;
 
@@ -56,9 +59,9 @@ multi method form ( Str:D :$star! ) {
 
   my ( $configure, $compile, $install );
 
-  $configure = %form<configure>.map: *.&translate if %form<configure>;
-  $compile   = %form<compile>.map:   *.&translate if %form<compile>;
-  $install   = %form<install>.map:   *.&translate if %form<install>;
+  $configure = %form<configure>;
+  $compile   = %form<compile>;
+  $install   = %form<install>;
 
   #.say with $configure;
   #.say with $compile;
@@ -85,8 +88,8 @@ multi method form ( Str:D :$star! ) {
 
   sub translate ( Str $s --> Str ) {
 
-  $s.trans: < [GALAXY]   [NPROC]    [XYZ] [PROTO] >
-    =>      ( $!target, $!nproc, $stardir, $protodir )
+  $s.trans: < [GALAXY] [NPROC] [XYZ] [PROTO] [GNUHTTP] >
+    =>      ( $!target, $!nproc, $stardir, $protodir, GNUHTTP )
 }
 
 }
