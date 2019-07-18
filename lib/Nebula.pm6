@@ -41,8 +41,15 @@ method form ( *@star, :$replace  = True) {
 method blackhole ( *@star ) {
 
   for @star -> $star {
+    my $parser  = Galaxy::Grammar::Star;
+    my $actions = Galaxy::Grammar::Star::Actions.new;
+    my $m       = $parser.parse( $star, :$actions );
 
-    $!cloud.blackhole: :$star;
+    fail "Can't parse star $star" unless $m;
+
+    my %star = $m.ast;
+
+    $!cloud.blackhole: :%star;
 
   }
 

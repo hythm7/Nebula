@@ -21,30 +21,38 @@ multi method form ( :%star! ) {
   my $name = %star<name>;
   my $age  = %star<age>  // '0.0.1';
   my $core = %star<core> // 'x86_64';
-  my $form = %star<form> // '0';
+  my $form = %star<form> // 0;
   my $tag  = %star<tag>  // $!name;
   my $star = "$name-$age-$core-$form-$tag";
   
- 
   my $protodir  = "$!proto/$name".IO;
   my $patchdir  = "$!proto/$name/.patch".IO;
-  my $protofile = $protodir.add: "proto";
-  my $pre-form  = $protodir.add: "pre-form";
-  my $post-form = $protodir.add: "post-form";
+  #my $protofile = $protodir.add: "$name-$age-$core-$form-$tag.proto"    // "$name.proto";
+  my $protofile = $protodir.add: "$name.proto";
+  my $preform   = $protodir.add: "$name.preform";
+  my $postform  = $protodir.add: "$name.postform";
 
   die "proto not found for $star" unless $protofile.IO.e;
   
-  my $halo = tempdir :!unlink;
+  my $halo = tempdir;
   my $stardir  = $halo.IO.add: $star;
   $stardir.mkdir;
 
- 
+  my %trans =
 
-  my Pair $trans = < [GALAXY] [NPROC] [NAME] [AGE] [CORE] [FORM] [TAG] [XYZ] [PROTO] [GNUHTTP] [TARGZ] >
-    => 
-  ( $!target, $!nproc, $name, $age, $core, $form, $tag, $stardir, $protodir, GNUHTTP, TARGZ );
+    '[GALAXY]'  => $!target,
+    '[NPROC]'   => $!nproc,
+    '[NAME]'    => $name, 
+    '[AGE]'     => $age,
+    '[CORE]'    => $core,
+    '[FORM]'    => $form,
+    '[TAG]'     => $tag,
+    '[XYZ]'     => $stardir,
+    '[PROTO]'   => $protodir,
+    '[GNUHTTP]' => GNUHTTP,
+    '[TARGZ]'   => TARGZ;
     
-  my $proto = $protofile.slurp.trans: $trans;
+  my $proto = $protofile.slurp.trans: %trans.keys => %trans.values;
 
   my $parser  = Nebula::Grammar::Proto;
   my $actions = Nebula::Grammar::Proto::Actions.new;
@@ -52,34 +60,35 @@ multi method form ( :%star! ) {
 
   die "Can not parse $proto" unless $m;
 
+  say $m.ast;
+
   my %form = $m.ast;
 
   my $source = $protodir.add: %form<source>.path.IO.basename;
   my $srcdir = $halo.IO.add( %form<srcdir> // "$name-$age" );
+
+  say $source;
 
   LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, ssl-verifypeer => 0, :followlocation ).perform unless $source.e;
 
 
   .extract: destpath => $halo for archive-read $source;
 
+  say 'extracted';
 
-  my ( $configure, $compile, $install );
-
-  $configure = %form<configure>;
-  $compile   = %form<compile>;
-  $install   = %form<install>;
+  my $law       = %form<law>;
+  my $install   = %form<install>;
 
   #.say with $configure;
   #.say with $compile;
   #.say with $install;
 
-  shell $pre-form,  cwd => $srcdir  if $pre-form.x;
-  shell $configure, cwd => $srcdir  if $configure;
-  shell $compile,   cwd => $srcdir  if $compile;
+  shell $preform,   cwd => $srcdir  if $preform.x;
+  shell $law,       cwd => $srcdir  if $law;
   shell $install,   cwd => $srcdir  if $install;
-  shell $post-form, cwd => $stardir if $post-form.x;
+  shell $postform,  cwd => $stardir if $postform.x;
 
-  $!star.add(%star<name>).mkdir;
+  $!star.add($name).mkdir;
   
   with archive-write( $!star.add( "$name/$star.xyz" ),
     :format<gnutar>, :filter<xz>
@@ -89,18 +98,18 @@ multi method form ( :%star! ) {
     .close;
   }
 
-  my $location = "http://localhost:7777/star/%star<name>/%star<star>.xyz";
-  self.add-star: |%form, :$location;
-
-
-
+  my $location = "http://localhost:7777/star/$name/$star.xyz";
+  my $chksum;
+  self.add-star: |%form, :$star, :$name, :$age, :$core, :$form, :$tag, :$location, :$chksum;
 }
 
 
 multi method blackhole ( :%star! ) {
 
-  self.remove-star: star => %star<star>;
-  $!star.add( "%star<name>/%star<star>.xyz" ).unlink;
+  my $name = %star<name>;
+  my $age  = %star<age>  // '0.0.1';
+
+  self.remove-star: :$name, :$age;
 
 }
 

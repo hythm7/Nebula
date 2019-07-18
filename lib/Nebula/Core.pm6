@@ -71,19 +71,17 @@ method add-star (
   Int:D :$form!,
   Str:D :$tag!,
   Str:D :$source!,
-  Str   :$desc,
-  Str   :$chksum,
-  Str   :$location,
+        :$law,
+        :$chksum,
+        :$desc,
+        :$location,
         :@cluster,
-        :@law,
-        :@env,
-
 ) {
 
   $!core.query(
-    'insert into star ( star, name, age, core, form, tag, source, desc, location, chksum )
-      values ( $star, $name, $age, $core, $form, $tag, $source, $desc, $location, $chksum)',
-      :$star, :$name, :$age, :$core, :$form, :$tag, :$source, :$desc, :$location, :$chksum
+    'insert into star ( star, name, age, core, form, tag, source, law, location, desc, chksum )
+      values ( $star, $name, $age, $core, $form, $tag, $source, $law, $location, $desc, $chksum)',
+      :$star, :$name, :$age, :$core, :$form, :$tag, :$source, :$law, :$location, :$desc, :$chksum
   );
 
 
@@ -92,30 +90,12 @@ method add-star (
         values ( $star, $name, $age, $core, $form, $tag )',
         |$_, :$star
     ) for @cluster;
-
-
-  $!core.query( 'insert into law ( star, law ) values ( $star, $law )', law => $_, :$star) for @law;
-
-  $!core.query( 'insert into env ( star, env ) values ( $star, $env )', env => $_, :$star) for @env;
-
 }
 
-method remove-star ( Str:D :$star! ) {
+method remove-star ( Str:D :$name!, Str :$age ) {
 
-  $!core.query( 'delete from star    where star = $star', $star);
-  $!core.query( 'delete from cluster where star = $star', $star);
-  $!core.query( 'delete from env     where star = $star', $star);
-  $!core.query( 'delete from law     where star = $star', $star);
-
-}
-
-method clean (  ) {
-
-  $!core.query( 'delete from star'    );
-  $!core.query( 'delete from cluster' );
-  $!core.query( 'delete from env'     );
-  $!core.query( 'delete from law'     );
-
+  $!core.query( 'delete from star    where name = $name and age = $age', $name, $age);
+  $!core.query( 'delete from cluster where name = $name and age = $age', $name, $age);
 }
 
 method !init-core ( ) {
@@ -132,6 +112,7 @@ method !init-core ( ) {
       form     int,
       tag      text,
       source   text,
+      law      text,
       desc     text,
       location text,
       chksum   text
@@ -148,22 +129,6 @@ method !init-core ( ) {
       star text references star(star) ON DELETE CASCADE
     )
     SQL
-
-  $!core.execute: q:to /SQL/;
-    create table if not exists law (
-      law  text,
-      star text references star(star) ON DELETE CASCADE
-    )
-    SQL
-
-  $!core.execute: q:to /SQL/;
-    create table if not exists env (
-      env  text,
-      star text references star(star) ON DELETE CASCADE
-
-    )
-    SQL
-
 }
 
 multi infix:<≅> ( %left, %right --> Bool:D ) {
