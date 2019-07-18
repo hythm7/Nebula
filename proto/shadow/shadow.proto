@@ -1,14 +1,12 @@
 <proto>
-  star shadow-4.7-x86_64-0-helix
   source https://github.com/shadow-maint/shadow/releases/download/4.7/shadow-4.7.tar.xz
 
-<configure>
+<law>
 
   ./configure                      \
     --sysconfdir=/etc              \
     --with-group-name-max-length=32;
 
-<compile>
   make -j [NPROC];
 
 <install>

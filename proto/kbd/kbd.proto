@@ -1,8 +1,7 @@
 <proto>
-  star kbd-2.0.4-x86_64-0-helix
   source https://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.4.tar.xz
 
-<configure>
+<law>
 
   patch -Np1 -i ../kbd-2.0.4-backspace-1.patch;
   
@@ -13,7 +12,6 @@
     --prefix=/usr --disable-vlock;
 
 
-<compile>
   make -j [NPROC];
 
 <install>

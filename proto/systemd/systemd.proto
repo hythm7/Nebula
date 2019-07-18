@@ -1,9 +1,8 @@
 <proto>
-  star systemd-241.0-x86_64-0-helix
   source https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
   srcdir systemd-241
 
-<configure>
+<law>
 
   tar xvf [PROTO]/systemd-man-pages-241.tar.xz;
 
@@ -36,9 +35,6 @@
         -Db_lto=false                \
         ..;
 
-<compile>
-
-  cd build;
   LANG=en_US.UTF-8 NINJAJOBS=4 ninja;
 
 <install>

@@ -1,8 +1,7 @@
 <proto>
-  star gdbm-1.18.1-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz
 
-<configure>
+<law>
 
   ./configure               \
     --prefix=/usr           \
@@ -10,7 +9,6 @@
     --enable-libgdbm-compat;
 
 
-<compile>
   make -j [NPROC];
 
 <install>

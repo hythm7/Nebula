@@ -1,8 +1,7 @@
 <proto>
-  star acl-2.2.53-x86_64-0-helix
   source http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz
 
-<configure>
+<law>
 
   ./configure                         \
     --prefix=/usr                     \
@@ -10,7 +9,6 @@
     --libexecdir=/usr/lib             \
     --docdir=/usr/share/doc/acl-2.2.53;
 
-<compile>
   make -j [NPROC];
 
 <install>

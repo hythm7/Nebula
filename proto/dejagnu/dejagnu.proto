@@ -1,12 +1,10 @@
 <proto>
-  star dejagnu-1.6.2-x86_64-0-helix
   source http://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.2.tar.gz
 
-<configure>
+<law>
 
   ./configure --prefix=/tools;
 
-<compile>
   make -j [NPROC];
 
 <install>

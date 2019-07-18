@@ -1,8 +1,7 @@
 <proto>
-  star gmp-6.1.2-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz
 
-<configure>
+<law>
 
   ./configure                        \
     --prefix=/usr                    \
@@ -10,7 +9,6 @@
     --disable-static                 \
     --docdir=/usr/share/doc/gmp-6.1.2;
 
-<compile>
   make -j [NPROC];
 
 <install>

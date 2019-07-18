@@ -1,13 +1,11 @@
 <proto>
-  star check-0.11.0-x86_64-0-helix
   source https://github.com/libcheck/check/releases/download/0.11.0/check-0.11.0.tar.gz
 
-<configure>
+<law>
 
   ./configure    \
     --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

@@ -1,8 +1,7 @@
 <proto>
-  star expat-2.2.7-x86_64-0-helix
   source https://prdownloads.sourceforge.net/expat/expat-2.2.7.tar.xz
 
-<configure>
+<law>
 
   sed -i 's|usr/bin/env |bin/|' run.sh.in;
   
@@ -11,7 +10,6 @@
     --disable-static                    \
     --docdir=/usr/share/doc/expat-2.2.7;
 
-<compile>
   make -j [NPROC];
 
 <install>

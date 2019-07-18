@@ -1,15 +1,13 @@
 <proto>
-  star bison-3.4.1-x86_64-0-helix
   source http://ftp.gnu.org/gnu/bison/bison-3.4.1.tar.xz
 
-<configure>
+<law>
 
   sed -i '6855 s/mv/cp/' Makefile.in;
   ./configure                         \
   --prefix=/usr                       \
   --docdir=/usr/share/doc/bison-3.4.1;
 
-<compile>
   make -j1;
 
 <install>

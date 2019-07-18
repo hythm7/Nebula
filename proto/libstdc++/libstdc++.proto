@@ -1,9 +1,8 @@
 <proto>
-  star libstdc++-9.1.0-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gcc/gcc-9.1.0/gcc-9.1.0.tar.xz
   srcdir  gcc-9.1.0
 
-<configure>
+<law>
 
   mkdir build;
   cd build;
@@ -17,8 +16,6 @@
   --disable-nls                                            \
   --disable-libstdcxx-threads;
 
-<compile>
-  cd build;
   make -j [NPROC];
 
 <install>

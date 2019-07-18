@@ -1,8 +1,7 @@
 <proto>
-  star e2fsprogs-1.45.2-x86_64-0-helix
   source https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.45.2/e2fsprogs-1.45.2.tar.gz
 
-<configure>
+<law>
 
   mkdir build;
   cd    build;
@@ -17,8 +16,6 @@
     --disable-uuidd            \
     --disable-fsck;
 
-<compile>
-  cd build;
   make -j [NPROC];
 
 <install>

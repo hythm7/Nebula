@@ -1,12 +1,10 @@
 <proto>
-  star patch-2.7.6-x86_64-0-helix
   source http://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz
 
-<configure>
+<law>
 
   ./configure --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

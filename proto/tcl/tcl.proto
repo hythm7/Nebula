@@ -1,16 +1,13 @@
 <proto>
-  star tcl-8.6.9-x86_64-0-helix
   source https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
   srcdir tcl8.6.9
 
-<configure>
+<law>
   cd unix;
 
   ./configure \
   --prefix=/tools;
 
-<compile>
-  cd unix;
   make -j [NPROC];
 
 <install>

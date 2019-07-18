@@ -7,11 +7,11 @@ for $*ARGFILES -> $file {
 
     my $xml = from-xml-file $file.Str;
      
-    say decode-xml-entities $xml.Str;
+    my $name    = $xml<id>;
+    my $law     = $xml.lookfor( :TAG<userinput> )[0].contents;
+    my $install = $xml.lookfor( :TAG<userinput> )[1].contents;
     
+   say $xml[7]; 
 
-    my $configure = $xml.lookfor( :TAG<userinput> )[0].contents[0].string;
-    
-    say $configure;
 
 }

@@ -1,9 +1,8 @@
 <proto>
-  star kmod-26.0-x86_64-0-helix
   source https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-26.tar.xz
 srcdir kmod-26
 
-<configure>
+<law>
 
   ./configure              \
     --prefix=/usr          \
@@ -13,7 +12,6 @@ srcdir kmod-26
     --with-xz              \
     --with-zlib;
 
-<compile>
   make -j [NPROC];
 
 <install>

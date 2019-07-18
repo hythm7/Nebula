@@ -1,13 +1,11 @@
 <proto>
-  star zlib-1.2.11-x86_64-0-helix
   source https://zlib.net/zlib-1.2.11.tar.xz
 
-<configure>
+<law>
 
   ./configure        \
     --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

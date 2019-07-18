@@ -1,9 +1,8 @@
 <proto>
-  star sqlite-3.28.0-x86_64-0-helix
   source https://sqlite.org/2019/sqlite-autoconf-3280000.tar.gz
   srcdir sqlite-autoconf-3280000
 
-<configure>
+<law>
 
   autoreconf -f -i;
 
@@ -19,7 +18,6 @@
     -DSQLITE_SECURE_DELETE=1          \
     -DSQLITE_ENABLE_FTS3_TOKENIZER=1";
 
-<compile>
   make -j [NPROC];
 
 <install>

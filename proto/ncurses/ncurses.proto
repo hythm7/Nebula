@@ -1,8 +1,7 @@
 <proto>
-  star ncurses-6.1-x86_64-0-helix
   source http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
 
-<configure>
+<law>
 
   sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in;
   
@@ -15,7 +14,6 @@
     --enable-pc-files       \
     --enable-widec;
 
-<compile>
   make -j [NPROC];
 
 <install>

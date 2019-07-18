@@ -1,13 +1,11 @@
 <proto>
-  star libpipeline-1.5.1-x86_64-0-helix
   source http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.1.tar.gz
 
-<configure>
+<law>
 
   ./configure    \
     --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

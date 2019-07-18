@@ -1,8 +1,7 @@
 <proto>
-  star wget-1.20.3-x86_64-0-helix
   source https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
 
-<configure>
+<law>
 
 
   ./configure                 \
@@ -11,7 +10,6 @@
     --with-ssl=openssl        \
     --with-libssl-prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

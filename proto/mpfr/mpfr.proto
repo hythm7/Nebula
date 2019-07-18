@@ -1,8 +1,7 @@
 <proto>
-  star mpfr-4.0.2-x86_64-0-helix
   source http://www.mpfr.org/mpfr-4.0.2/mpfr-4.0.2.tar.xz
 
-<configure>
+<law>
 
   ./configure                         \
     --prefix=/usr                     \
@@ -10,7 +9,6 @@
     --enable-thread-safe              \
     --docdir=/usr/share/doc/mpfr-4.0.2;
 
-<compile>
   make -j [NPROC];
 
 <install>

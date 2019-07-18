@@ -1,8 +1,7 @@
 <proto>
-  star [NAME]-[AGE]-[CORE]-[FORM]-[TAG]
   source http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz
 
-<configure>
+<law>
 
   ./configure                          \
     --prefix=/usr                      \
@@ -10,7 +9,6 @@
     --sysconfdir=/etc                  \
     --docdir=/usr/share/doc/attr-2.4.48;
 
-<compile>
   make -j [NPROC];
 
 <install>

@@ -1,15 +1,13 @@
 <proto>
-  star less-551.0-x86_64-0-helix
   source http://www.greenwoodsoftware.com/less/less-551.tar.gz
   srcdir less-551
 
-<configure>
+<law>
 
   ./configure        \
     --prefix=/usr    \
     --sysconfdir=/etc; 
 
-<compile>
   make -j [NPROC];
 
 <install>

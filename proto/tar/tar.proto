@@ -1,15 +1,13 @@
 <proto>
-  star tar-1.32-x86_64-0-helix
   source http://ftp.gnu.org/gnu/tar/tar-1.32.tar.xz
 
-<configure>
+<law>
 
   FORCE_UNSAFE_CONFIGURE=1  \
   ./configure --prefix=/usr \
             --bindir=/bin;
 
 
-<compile>
   make -j [NPROC];
 
 <install>

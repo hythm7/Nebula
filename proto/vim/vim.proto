@@ -1,13 +1,11 @@
 <proto>
-  star vim-8.1.1535-x86_64-0-helix
   source http://github.com/vim/vim/archive/v8.1.1535/vim-8.1.1535.tar.gz
 
-<configure>
+<law>
 
   ./configure    \
     --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

@@ -1,8 +1,7 @@
 <proto>
-star glibc-2.29-x86_64-0-helix
 source http://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.xz
 
-<configure>
+<law>
   mkdir build;
   cd build;
 
@@ -13,8 +12,6 @@ source http://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.xz
   --enable-kernel=3.2            \
   --with-headers=/tools/include;
 
-<compile>
-  cd build;
   make -j [NPROC];
 
 <install>

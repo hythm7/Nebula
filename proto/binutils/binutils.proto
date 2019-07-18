@@ -1,8 +1,7 @@
 <proto>
-  star binutils-2.32-x86_64-2-helix
   source http://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.xz
 
-<configure>
+<law>
   mkdir build;
   cd build;
 
@@ -16,8 +15,6 @@
     --enable-64-bit-bfd \
     --with-system-zlib;
 
-<compile>
-  cd build;
   make -j [NPROC] tooldir=/usr;
 
 <install>

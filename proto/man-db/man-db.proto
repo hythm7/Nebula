@@ -1,8 +1,7 @@
 <proto>
-  star man-db-2.8.5-x86_64-0-helix
   source http://download.savannah.gnu.org/releases/man-db/man-db-2.8.5.tar.xz
 
-<configure>
+<law>
 
   sed -i '/find/s@/usr@@' init/systemd/man-db.service.in
 
@@ -14,7 +13,6 @@
               --with-browser=/usr/bin/lynx         \
               --with-vgrind=/usr/bin/vgrind        \
               --with-grap=/usr/bin/grap;
-<compile>
   make -j [NPROC];
 
 <install>

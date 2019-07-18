@@ -1,16 +1,14 @@
 <proto>
-  star expect-5.45.4-x86_64-0-helix
   source https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
   srcdir expect5.45.4
 
-<configure>
+<law>
 
   ./configure \
     --prefix=/tools                   \
     --with-tcl=/tools/lib             \
     --with-tclinclude=/tools/include;
 
-<compile>
   make -j [NPROC];
 
 <install>

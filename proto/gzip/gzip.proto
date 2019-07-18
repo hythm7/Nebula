@@ -1,12 +1,10 @@
 <proto>
-  star gzip-1.10-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.xz
 
-<configure>
+<law>
 
   ./configure --prefix=/usr;
 
-<compile>
   make -j [NPROC];
 
 <install>

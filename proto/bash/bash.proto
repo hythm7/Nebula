@@ -1,8 +1,7 @@
 <proto>
-  star [NAME]-[AGE]-[CORE]-[FORM]-[TAG]
   source [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
 
-<configure>
+<law>
 
   ./configure                        \
     --prefix=/usr                    \
@@ -10,7 +9,6 @@
     --with-installed-readline        \
     --without-bash-malloc;
 
-<compile>
   make -j [NPROC];
 
 <install>

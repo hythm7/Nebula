@@ -1,8 +1,7 @@
 <proto>
-  star bc-1.07.1-x86_64-0-helix
   source http://ftp.gnu.org/gnu/bc/bc-1.07.1.tar.gz
 
-<configure>
+<law>
 
   ./configure                 \
     --prefix=/usr             \
@@ -10,7 +9,6 @@
     --mandir=/usr/share/man   \
     --infodir=/usr/share/info;
 
-<compile>
   make -j [NPROC];
 
 <install>

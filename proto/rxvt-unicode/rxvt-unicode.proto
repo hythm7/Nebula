@@ -1,13 +1,11 @@
 <proto>
-  star rxvt-unicode-9.22-x86_64-0-helix
   source http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.22.tar.bz2
 
-<configure>
+<law>
 
   ./configure    \
     --prefix=/usr --enable-everything;
 
-<compile>
   make -j [NPROC];
 
 <install>

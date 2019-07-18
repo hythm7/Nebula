@@ -1,8 +1,6 @@
 <proto>
-  star iana-etc-2.30-x86_64-0-helix
   source http://anduin.linuxfromscratch.org/LFS/iana-etc-2.30.tar.bz2
 
-<compile>
   make -j [NPROC];
 
 <install>

@@ -1,14 +1,12 @@
 <proto>
-  star gperf-3.1-x86_64-0-helix
   source http://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz
 
-<configure>
+<law>
 
   ./configure                        \
     --prefix=/usr                    \
     --docdir=/usr/share/doc/gperf-3.1;
 
-<compile>
   make -j [NPROC];
 
 <install>

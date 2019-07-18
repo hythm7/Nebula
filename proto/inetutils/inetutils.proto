@@ -1,8 +1,7 @@
 <proto>
-  star inetutils-1.9.4-x86_64-0-helix
   source http://ftp.gnu.org/gnu/inetutils/inetutils-1.9.4.tar.xz
 
-<configure>
+<law>
 
   ./configure            \
     --prefix=/usr        \
@@ -15,7 +14,6 @@
     --disable-rsh        \
     --disable-servers;
 
-<compile>
   make -j [NPROC];
 
 <install>

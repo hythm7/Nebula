@@ -1,8 +1,7 @@
 <proto>
-  star libarchive-3.4.0-x86_64-0-helix
   source https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
 
-<configure>
+<law>
 
   ./configure        \
     --prefix=/usr  \
@@ -10,7 +9,6 @@
     --without-nettle \
     --disable-static;
 
-<compile>
   make -j [NPROC];
 
 <install>

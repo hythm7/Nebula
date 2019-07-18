@@ -1,13 +1,11 @@
 <proto>
-  star xml-parser-2.44-x86_64-0-helix
   source https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz
   srcdir XML-Parser-2.44
 
-<configure>
+<law>
 
   perl Makefile.PL;
 
-<compile>
   make -j [NPROC];
 
 <install>

@@ -1,15 +1,13 @@
 <proto>
-  star flex-2.6.4-x86_64-0-helix
   source https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz
 
-<configure>
+<law>
 
   HELP2MAN=/tools/bin/true             \
   ./configure                          \
     --prefix=/usr                      \
     --docdir=/usr/share/doc/flex-2.6.4;
 
-<compile>
   make -j [NPROC];
 
 <install>

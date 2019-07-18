@@ -1,14 +1,12 @@
 <proto>
-  star xz-5.2.4-x86_64-0-helix
   source https://tukaani.org/xz/xz-5.2.4.tar.xz
 
-<configure>
+<law>
 
   ./configure --prefix=/usr         \
     --disable-static                \
     --docdir=/usr/share/doc/xz-5.2.4;
 
-<compile>
   make -j [NPROC];
 
 <install>

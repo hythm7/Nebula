@@ -1,9 +1,7 @@
 <proto>
-star kernel-headers-5.1.11-x86_64-0-helix
 source https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.1.11.tar.xz
 srcdir linux-5.1.11
 
-<compile>
   make -j [NPROC] mrproper;
 
 <install>

@@ -1,8 +1,6 @@
 <proto>
-  star bzip2-1.0.7-x86_64-0-helix
   source https://www.sourceware.org/pub/bzip2/bzip2-1.0.7.tar.gz
 
-<compile>
   sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile;
   sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile;
   

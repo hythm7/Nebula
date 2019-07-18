@@ -1,8 +1,7 @@
 <proto>
-  star libffi-3.2.1-x86_64-0-helix
   source ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz
 
-<configure>
+<law>
 
   sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
     -i include/Makefile.in;
@@ -14,7 +13,6 @@ sed -e '/^includedir/ s/=.*$/=@includedir@/' \
   ./configure    \
     --prefix=/usr --disable-static --with-gcc-arch=native;
 
-<compile>
   make -j [NPROC];
 
 <install>

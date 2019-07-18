@@ -1,8 +1,7 @@
 <proto>
-  star readline-8.0-x86_64-0-helix
   source http://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz
 
-<configure>
+<law>
 
   sed -i '/MV.*old/d' Makefile.in;
   sed -i '/{OLDSUFF}/c:' support/shlib-install;
@@ -13,7 +12,6 @@
     --docdir=/usr/share/doc/readline-8.0;
 
 
-<compile>
   make -j [NPROC] SHLIB_LIBS="-L/tools/lib -lncursesw";
 
 <install>
