@@ -11,51 +11,57 @@ use Galaxy::Grammar::Star;
 unit class Nebula::Cloud;
   also does Nebula::Core;
 
-has $!target = 'x86_64-galaxy-linux';
-has $!nproc  = chomp qx<nproc>;
+has Str $!name   = 'helix';
+has Str $!target = 'x86_64-galaxy-linux';
+has Str $!nproc  = chomp qx<nproc>;
 
 
-multi method form ( Str:D :$star! ) {
+multi method form ( :%star! ) {
 
-  my $parser  = Galaxy::Grammar::Star;
-  my $actions = Galaxy::Grammar::Star::Actions.new;
-  my $m       = $parser.parse( $star, :$actions );
-
-  fail "Can't parse star $star" unless $m;
-
-  my %star = $m.ast;
-
-  my $protodir  = "$!proto/%star<name>/%star<star>/".IO;
-  my $proto     = $protodir.add: "proto";
+  my $name = %star<name>;
+  my $age  = %star<age>  // '0.0.1';
+  my $core = %star<core> // 'x86_64';
+  my $form = %star<form> // '0';
+  my $tag  = %star<tag>  // $!name;
+  my $star = "$name-$age-$core-$form-$tag";
+  
+ 
+  my $protodir  = "$!proto/$name".IO;
+  my $patchdir  = "$!proto/$name/.patch".IO;
+  my $protofile = $protodir.add: "proto";
   my $pre-form  = $protodir.add: "pre-form";
   my $post-form = $protodir.add: "post-form";
 
+  die "proto not found for $star" unless $protofile.IO.e;
+  
+  my $halo = tempdir :!unlink;
+  my $stardir  = $halo.IO.add: $star;
+  $stardir.mkdir;
 
-  die "proto not found for %star<star>" unless $proto.IO.e;
+ 
 
-  $parser  = Nebula::Grammar::Proto;
-  $actions = Nebula::Grammar::Proto::Actions.new;
-  $m       = $parser.parse( $proto.slurp.&translate, :$actions );
+  my Pair $trans = < [GALAXY] [NPROC] [NAME] [AGE] [CORE] [FORM] [TAG] [XYZ] [PROTO] [GNUHTTP] [TARGZ] >
+    => 
+  ( $!target, $!nproc, $name, $age, $core, $form, $tag, $stardir, $protodir, GNUHTTP, TARGZ );
+    
+  my $proto = $protofile.slurp.trans: $trans;
 
-  say $m;
+  my $parser  = Nebula::Grammar::Proto;
+  my $actions = Nebula::Grammar::Proto::Actions.new;
+  my $m       = $parser.parse( $proto, :$actions );
 
   die "Can not parse $proto" unless $m;
 
   my %form = $m.ast;
 
   my $source = $protodir.add: %form<source>.path.IO.basename;
+  my $srcdir = $halo.IO.add( %form<srcdir> // "$name-$age" );
 
   LibCurl::Easy.new( URL => %form<source>.Str, download => $source.Str, ssl-verifypeer => 0, :followlocation ).perform unless $source.e;
 
-  my $tmpdir = tempdir :!unlink;
 
-  .extract: destpath => $tmpdir for archive-read $source;
+  .extract: destpath => $halo for archive-read $source;
 
-  my $srcdir   = $tmpdir.IO.add( %form<srcdir> // "{%star<name>}-{%star<age> }" );
-
-  my $stardir  = $tmpdir.IO.add: %star<star>;
-
-  $stardir.mkdir;
 
   my ( $configure, $compile, $install );
 
@@ -75,7 +81,7 @@ multi method form ( Str:D :$star! ) {
 
   $!star.add(%star<name>).mkdir;
   
-  with archive-write( $!star.add( "%star<name>/%star<star>.xyz" ),
+  with archive-write( $!star.add( "$name/$star.xyz" ),
     :format<gnutar>, :filter<xz>
     ) {
 
@@ -86,24 +92,12 @@ multi method form ( Str:D :$star! ) {
   my $location = "http://localhost:7777/star/%star<name>/%star<star>.xyz";
   self.add-star: |%form, :$location;
 
-  sub translate ( Str $s --> Str ) {
 
-  $s.trans: < [GALAXY] [NPROC] [XYZ] [PROTO] [GNUHTTP] >
-    =>      ( $!target, $!nproc, $stardir, $protodir, GNUHTTP )
-}
 
 }
 
 
-multi method blackhole ( Str:D :$star! ) {
-
-  my $parser  = Galaxy::Grammar::Star;
-  my $actions = Galaxy::Grammar::Star::Actions.new;
-  my $m       = $parser.parse( $star, :$actions );
-
-  die "Can't parse star $star" unless $m;
-
-  my %star = $m.ast;
+multi method blackhole ( :%star! ) {
 
   self.remove-star: star => %star<star>;
   $!star.add( "%star<name>/%star<star>.xyz" ).unlink;

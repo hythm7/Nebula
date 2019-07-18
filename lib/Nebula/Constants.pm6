@@ -15,3 +15,6 @@ constant XORGHTTP    is export = 'https://www.x.org/pub/individual';
 constant XORGFTP     is export = 'ftp://ftp.x.org/pub/individual';
 constant PYPI        is export = 'https://pypi.python.org/pypi';
 constant GENTOOFTP   is export = 'ftp://ftp.mirrorservice.org/sites/distfiles.gentoo.org/distfiles';
+
+
+constant TARGZ     is export = 'tar.gz';

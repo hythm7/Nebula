@@ -1,6 +1,6 @@
 <proto>
-  star bash-5.0-x86_64-0-helix
-  source [GNUHTTP]/bash/bash-5.0.tar.gz
+  star [NAME]-[AGE]-[CORE]-[FORM]-[TAG]
+  source [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
 
 <configure>
 
