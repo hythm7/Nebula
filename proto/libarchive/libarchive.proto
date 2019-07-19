@@ -1,5 +1,5 @@
 <proto>
-  source https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
+  srcurl https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
 
 <law>
 

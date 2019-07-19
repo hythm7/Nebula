@@ -1,5 +1,5 @@
 <proto>
-  source https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
+  srcurl https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
   srcdir tcl8.6.9
 
 <law>

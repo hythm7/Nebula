@@ -1,5 +1,5 @@
 <proto>
-  source https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.1.0.tar.xz
+  srcurl https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.1.0.tar.xz
 
   sed -i /ARPD/d Makefile;
   rm -fv man/man8/arpd.8;

@@ -1,5 +1,5 @@
 <proto>
-  source https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
+  srcurl https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
   srcdir Python-3.7.3
 
 <law>

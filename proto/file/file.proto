@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/8.4/file-5.36.tar.gz
+  srcurl http://ftp.lfs-matrix.net/pub/lfs/lfs-packages/8.4/file-5.36.tar.gz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source https://sourceware.org/ftp/elfutils/0.176/elfutils-0.176.tar.bz2
+  srcurl https://sourceware.org/ftp/elfutils/0.176/elfutils-0.176.tar.bz2
 
 <law>
 

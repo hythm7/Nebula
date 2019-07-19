@@ -19,7 +19,7 @@ grammar Nebula::Grammar::Proto {
   rule section:sym<desc>      { <.lt> <sym> <.gt> <.nl> <desc>               }
 
   proto rule proto { * }
-  rule proto:sym<source>   { <.ws> <sym> <uri> }
+  rule proto:sym<srcurl>   { <.ws> <sym> <uri> }
   rule proto:sym<srcdir>   { <.ws> <sym> <path> }
 
   token cmd { <!before \s> <-[<>;]>+ <.semicolon> <!after \s> }
@@ -52,7 +52,7 @@ class Nebula::Grammar::Proto::Actions {
 
   method TOP ( $/ ) { make %!proto; }
 
-  method proto:sym<source> ( $/ ) { %!proto.push: ( $<sym>.Str => $<uri>.Str ) }
+  method proto:sym<srcurl> ( $/ ) { %!proto.push: ( $<sym>.Str => $<uri>.Str ) }
   method proto:sym<srcdir> ( $/ ) { %!proto.push: ( $<sym>.Str => $<path>.IO ) }
 
   method section:sym<cluster> ( $/ ) { %!proto.push: ( $<sym>.Str => $<starname>».ast ) }

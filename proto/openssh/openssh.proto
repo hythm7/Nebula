@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz
+  srcurl http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz
   srcdir openssh-8.0p1
 
 <law>

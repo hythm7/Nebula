@@ -1,5 +1,5 @@
 <proto>
-  source https://github.com/shadow-maint/shadow/releases/download/4.7/shadow-4.7.tar.xz
+  srcurl https://github.com/shadow-maint/shadow/releases/download/4.7/shadow-4.7.tar.xz
 
 <law>
 

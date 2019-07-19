@@ -1,5 +1,5 @@
 <proto>
-  source https://roy.marples.name/downloads/dhcpcd/dhcpcd-7.2.3.tar.xz
+  srcurl https://roy.marples.name/downloads/dhcpcd/dhcpcd-7.2.3.tar.xz
 
 <law>
 

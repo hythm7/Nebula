@@ -1,5 +1,5 @@
 <proto>
-  source http://download.savannah.gnu.org/releases/man-db/man-db-2.8.5.tar.xz
+  srcurl http://download.savannah.gnu.org/releases/man-db/man-db-2.8.5.tar.xz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
+  srcurl http://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
 
 <law>
 

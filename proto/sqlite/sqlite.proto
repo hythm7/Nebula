@@ -1,5 +1,5 @@
 <proto>
-  source https://sqlite.org/2019/sqlite-autoconf-3280000.tar.gz
+  srcurl https://sqlite.org/2019/sqlite-autoconf-3280000.tar.gz
   srcdir sqlite-autoconf-3280000
 
 <law>

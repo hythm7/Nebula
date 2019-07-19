@@ -1,5 +1,5 @@
 <proto>
-  source https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+  srcurl https://www.openssl.org/source/openssl-1.1.1c.tar.gz
   srcdir openssl-1.1.1c
 
 <law>

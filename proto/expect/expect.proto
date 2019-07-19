@@ -1,5 +1,5 @@
 <proto>
-  source https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
+  srcurl https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
   srcdir expect5.45.4
 
 <law>

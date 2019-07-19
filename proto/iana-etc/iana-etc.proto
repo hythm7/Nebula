@@ -1,5 +1,5 @@
 <proto>
-  source http://anduin.linuxfromscratch.org/LFS/iana-etc-2.30.tar.bz2
+  srcurl http://anduin.linuxfromscratch.org/LFS/iana-etc-2.30.tar.bz2
 
   make -j [NPROC];
 

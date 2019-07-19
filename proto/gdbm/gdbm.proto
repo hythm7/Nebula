@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz
+  srcurl http://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz
 
 <law>
 

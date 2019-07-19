@@ -1,5 +1,5 @@
 <proto>
-  source https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz
+  srcurl https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz
   srcdir XML-Parser-2.44
 
 <law>

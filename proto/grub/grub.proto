@@ -1,5 +1,5 @@
 <proto>
-  source https://ftp.gnu.org/gnu/grub/grub-2.02.tar.xz
+  srcurl https://ftp.gnu.org/gnu/grub/grub-2.02.tar.xz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
+  srcurl http://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
 
 <law>
 

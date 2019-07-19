@@ -1,5 +1,5 @@
 <proto>
-  source https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
+  srcurl https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
 
 <law>
 

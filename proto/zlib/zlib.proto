@@ -1,5 +1,5 @@
 <proto>
-  source https://zlib.net/zlib-1.2.11.tar.xz
+  srcurl https://zlib.net/zlib-1.2.11.tar.xz
 
 <law>
 

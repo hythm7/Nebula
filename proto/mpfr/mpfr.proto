@@ -1,5 +1,5 @@
 <proto>
-  source http://www.mpfr.org/mpfr-4.0.2/mpfr-4.0.2.tar.xz
+  srcurl http://www.mpfr.org/mpfr-4.0.2/mpfr-4.0.2.tar.xz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
 
 <law>
 

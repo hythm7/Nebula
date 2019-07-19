@@ -1,5 +1,5 @@
 <proto>
-  source https://www.kernel.org/pub/software/scm/git/git-2.22.0.tar.xz
+  srcurl https://www.kernel.org/pub/software/scm/git/git-2.22.0.tar.xz
 
 <law>
 

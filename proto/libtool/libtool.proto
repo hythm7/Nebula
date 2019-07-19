@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz
+  srcurl http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz
 
 <law>
 

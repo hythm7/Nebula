@@ -1,5 +1,5 @@
 <proto>
-  source https://www.cpan.org/src/5.0/perl-5.30.0.tar.xz
+  srcurl https://www.cpan.org/src/5.0/perl-5.30.0.tar.xz
 
 <law>
 

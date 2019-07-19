@@ -1,5 +1,5 @@
 <proto>
-  source http://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz
+  srcurl http://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source http://github.com/vim/vim/archive/v8.1.1535/vim-8.1.1535.tar.gz
+  srcurl http://github.com/vim/vim/archive/v8.1.1535/vim-8.1.1535.tar.gz
 
 <law>
 

@@ -1,5 +1,5 @@
 <proto>
-  source https://github.com/mesonbuild/meson/releases/download/0.51.0/meson-0.51.0.tar.gz
+  srcurl https://github.com/mesonbuild/meson/releases/download/0.51.0/meson-0.51.0.tar.gz
 
   python3 setup.py build;
 

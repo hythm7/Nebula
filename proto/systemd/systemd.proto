@@ -1,5 +1,5 @@
 <proto>
-  source https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
+  srcurl https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
   srcdir systemd-241
 
 <law>

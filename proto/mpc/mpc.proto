@@ -1,5 +1,5 @@
 <proto>
-  source https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
+  srcurl https://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz
 
 <law>
 

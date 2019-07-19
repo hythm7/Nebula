@@ -1,5 +1,5 @@
 <proto>
-  source https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-26.tar.xz
+  srcurl https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-26.tar.xz
 srcdir kmod-26
 
 <law>

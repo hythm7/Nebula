@@ -1,5 +1,5 @@
 <proto>
-  source https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.27.tar.xz
+  srcurl https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.27.tar.xz
 
   sed -i '/install.*STALIBNAME/d' libcap/Makefile;
   
