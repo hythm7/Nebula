@@ -1,0 +1,20 @@
+<proto>
+  srcurl &alsa-download-ftp;/plugins/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  alsa-lib
+
+<law>
+  ./configure --sysconfdir=/etc &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,18 @@
+<proto>
+  srcurl https://files.pythonhosted.org/packages/source/P/Pygments/Pygments-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  python3 setup.py install --optimize=1
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

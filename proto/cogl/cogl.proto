@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&[NAME]-minor;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  cairo gdk-pixbuf glu mesa pango wayland gobject-introspection
+
+<law>
+  sed -i 's/^#if COGL/#ifdef COGL/' [NAME]/winsys/[NAME]-winsys-egl.c &&
+
+./configure --prefix=/usr --enable-gles1 --enable-gles2         \
+    --enable-{kms,wayland,xlib}-egl-platform                    \
+    --enable-wayland-egl-server                                 &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

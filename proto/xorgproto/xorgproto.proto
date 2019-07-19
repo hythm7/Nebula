@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://xorg.freedesktop.org/archive/individual/proto/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  util-macros
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=$XORG_PREFIX .. &&
+ninja;
+ninja install &&
+
+install -vdm 755 $XORG_PREFIX/share/doc/[NAME]-[AGE] &&
+install -vm 644 ../[^m]*.txt ../PM_spec $XORG_PREFIX/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 polkit
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  mkdir -p /etc/xdg/autostart &&
+cat > /etc/xdg/autostart/[NAME]-authentication-agent-1.desktop << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

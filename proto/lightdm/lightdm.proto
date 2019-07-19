@@ -1,0 +1,65 @@
+<proto>
+  srcurl https://github.com/CanonicalLtd/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 libgcrypt linux-pam pcre gobject-introspection libxklavier vala
+
+<law>
+  groupadd -g 65 [NAME]       &&
+useradd  -c "Lightdm Daemon" \
+         -d /var/lib/[NAME] \
+         -u 65 -g [NAME]    \
+         -s /bin/false [NAME];
+./configure                          \
+       --prefix=/usr                 \
+       --libexecdir=/usr/lib/[NAME] \
+       --localstatedir=/var          \
+       --sbindir=/usr/bin            \
+       --sysconfdir=/etc             \
+       --disable-static              \
+       --disable-tests               \
+       --with-greeter-user=[NAME]   \
+       --with-greeter-session=[NAME]-gtk-greeter \
+       --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install                                                  &&
+cp tests/src/[NAME]-session /usr/bin                         &&
+sed -i '1 s/sh/bash --login/' /usr/bin/[NAME]-session        &&
+rm -rf /etc/init                                              &&
+install -v -dm755 -o [NAME] -g [NAME] /var/lib/[NAME]      &&
+install -v -dm755 -o [NAME] -g [NAME] /var/lib/[NAME]-data &&
+install -v -dm755 -o [NAME] -g [NAME] /var/cache/[NAME]    &&
+install -v -dm770 -o [NAME] -g [NAME] /var/log/[NAME];
+tar -xf ../[NAME]-gtk-greeter-&[NAME]-gtk-greeter-version;.[TARGZ] &&
+cd [NAME]-gtk-greeter-&[NAME]-gtk-greeter-version; &&
+
+./configure                      \
+   --prefix=/usr                 \
+   --libexecdir=/usr/lib/[NAME] \
+   --sbindir=/usr/bin            \
+   --sysconfdir=/etc             \
+   --with-libxklavier            \
+   --enable-kill-on-sigterm      \
+   --disable-libido              \
+   --disable-libindicator        \
+   --disable-static              \
+   --docdir=/usr/share/doc/[NAME]-gtk-greeter-&[NAME]-gtk-greeter-version; &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+make install-[NAME] &&
+systemctl enable [NAME];
+/etc/rc.d/init.d/[NAME] start;
+init 5;
+cp -v /etc/inittab{,-orig} &&
+sed -i '/initdefault/ s/3/5/' /etc/inittab
+
+<desc>
+  [NAME].
+

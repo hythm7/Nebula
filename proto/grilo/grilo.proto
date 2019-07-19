@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.3/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 libxml2 gobject-introspection gtk3 libsoup totem-pl-parser vala
+
+<law>
+  mkdir build &&
+cd    build    &&
+
+meson --prefix=/usr \
+      --libexecdir=/usr/lib .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

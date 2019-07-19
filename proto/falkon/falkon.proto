@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://download.kde.org/stable/[NAME]/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  extra-cmake-modules qtwebengine
+
+<law>
+  rm -rf po/;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      .. &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/gtkmm/&gnome-minor-24;/gtkmm-[AGE].[TARXZ]
+
+<cluster>
+  atkmm gtk3 pangomm
+
+<law>
+  sed -e '/^libdocdir =/ s/$(book_name)/gtkmm-[AGE]/' \
+    -i docs/Makefile.in;
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

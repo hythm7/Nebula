@@ -1,0 +1,23 @@
+<proto>
+  srcurl &kf5-download-http;/[NAME]-&kf5-version;.[TARXZ]
+
+<cluster>
+  extra-cmake-modules qt5
+
+<law>
+  sed -i '/( oxygen/ s/)/scalable )/' CMakeLists.txt;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev ..;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

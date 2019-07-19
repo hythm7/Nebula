@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  colord-gtk colord gtk3 itstool lcms2 libcanberra libexif exiv2 vte
+
+<law>
+  sed /subdir\(\'man/d -i meson.build;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

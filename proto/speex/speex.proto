@@ -1,0 +1,31 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libogg
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install;
+cd ..                          &&
+tar -xf [NAME]dsp-&[NAME]dsp-version;.[TARGZ] &&
+cd [NAME]dsp-&[NAME]dsp-version;             &&
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]dsp-&[NAME]dsp-version; &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

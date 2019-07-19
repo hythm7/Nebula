@@ -1,0 +1,33 @@
+<proto>
+  srcurl https://invisible-mirror.net/archives/[NAME]/tarballs/[NAME][AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr          \
+            --sysconfdir=/etc/[NAME] \
+            --datadir=/usr/share/doc/[NAME]-[AGE] \
+            --with-zlib            \
+            --with-bzlib           \
+            --with-ssl             \
+            --with-screen=ncursesw \
+            --enable-locale-charset &&
+make;
+make install-full &&
+chgrp -v -R root /usr/share/doc/[NAME]-[AGE]/[NAME]_doc
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  sed -e '/#LOCALE/     a LOCALE_CHARSET:TRUE'     \
+    -i /etc/[NAME]/[NAME].cfg;
+sed -e '/#DEFAULT_ED/ a DEFAULT_EDITOR:vi'       \
+    -i /etc/[NAME]/[NAME].cfg;
+sed -e '/#PERSIST/    a PERSISTENT_COOKIES:TRUE' \
+    -i /etc/[NAME]/[NAME].cfg
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,34 @@
+<proto>
+  srcurl http://www.[NAME].net/downloads/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  groupadd -g 88 [NAME] &&
+useradd -c "Unbound DNS resolver" -d /var/lib/[NAME] -u 88 \
+        -g [NAME] -s /bin/false [NAME];
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  \
+            --with-pidfile=/run/[NAME].pid &&
+make;
+make doc;
+make install &&
+mv -v /usr/sbin/[NAME]-host /usr/bin/;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 doc/html/* /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  echo "nameserver 127.0.0.1" > /etc/resolv.conf;
+sed -i '/request /i\supersede domain-name-servers 127.0.0.1;' \
+       /etc/dhcp/dhclient.conf;
+[NAME]-anchor;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://[NAME].github.io/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DBUILD_SHARED_LIBS=ON \
+      .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

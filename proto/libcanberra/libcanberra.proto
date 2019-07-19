@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://0pointer.de/lennart/projects/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libvorbis alsa-lib gstreamer10 gtk3
+
+<law>
+  ./configure --prefix=/usr --disable-oss &&
+make;
+make docdir=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

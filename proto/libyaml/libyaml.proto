@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://github.com/yaml/[NAME]/archive/&yaml-version;/[NAME]-dist-&yaml-version;.[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./bootstrap                                &&
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://download.librdf.org/source/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  rasqal
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,28 @@
+<proto>
+  srcurl https://files.dyne.org/[NAME]/releases/[NAME]-plugins-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i 's/CV_RGB/cv::Scalar/' src/filter/facebl0r/facebl0r.cpp &&
+
+mkdir -vp build &&
+cd        build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr    \
+      -DCMAKE_BUILD_TYPE=Release     \
+      -Wno-dev ..                    &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

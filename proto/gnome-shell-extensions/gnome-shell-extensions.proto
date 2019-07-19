@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libgtop
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. ;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

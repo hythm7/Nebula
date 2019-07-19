@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://github.com/pygobject/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cairo python2 pygtk nodep
+
+<law>
+  python2 setup.py build &&
+python3 setup.py build;
+python2 setup.py install --optimize=1   &&
+python2 setup.py install_[NAME]_header &&
+python2 setup.py install_pkgconfig      &&
+python3 setup.py install --optimize=1   &&
+python3 setup.py install_[NAME]_header &&
+python3 setup.py install_pkgconfig
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

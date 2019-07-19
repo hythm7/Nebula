@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/libwnck/2.30/libwnck-[AGE].[TARXZ]
+
+<cluster>
+  gtk2 startup-notification
+
+<law>
+  ./configure --prefix=/usr \
+            --disable-static \
+            --program-suffix=-1 &&
+make GETTEXT_PACKAGE=libwnck-1;
+make GETTEXT_PACKAGE=libwnck-1 install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://github.com/thom311/[NAME]/releases/download/[NAME]&[NAME]-dl-version;/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make;
+make install;
+mkdir -vp /usr/share/doc/[NAME]-[AGE] &&
+tar -xf ../[NAME]-doc-[AGE].[TARGZ] --strip-components=1 --no-same-owner \
+    -C  /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

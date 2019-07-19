@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://download.[NAME].org/pub/[NAME]/v2.10/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gegl gexiv2 glib-networking gtk2 harfbuzz libjpeg libmypaint librsvg libtiff libxml2py2 lcms2 mypaint-brushes poppler x-window-system dbus-glib gs gvfs iso-codes libgudev pygtk xdg-utils
+
+<law>
+  ./configure --prefix=/usr --sysconfdir=/etc &&
+make;
+make install;
+ALL_LINGUAS=&quot;ca da de el en en_GB es fi fr it ja ko nl nn pt_BR ro ru zh_CN&quot; \
+./autogen.sh --prefix=/usr;
+make;
+make install &&
+chown -R root:root /usr/share/[NAME]/2.0/help
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

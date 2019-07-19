@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  mkdir build &&
+cd build    &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

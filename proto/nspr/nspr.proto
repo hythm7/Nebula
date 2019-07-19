@@ -1,0 +1,27 @@
+<proto>
+  srcurl [MOZILLA]/[NAME]/releases/v[AGE]/src/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  cd [NAME]                                                     &&
+sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
+sed -i 's#$(LIBRARY) ##'            config/rules.mk         &&
+
+./configure --prefix=/usr \
+            --with-mozilla \
+            --with-pthreads \
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

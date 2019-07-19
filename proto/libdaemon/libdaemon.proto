@@ -1,0 +1,24 @@
+<proto>
+  srcurl http://0pointer.de/lennart/projects/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make -C doc doxygen;
+make docdir=/usr/share/doc/[NAME]-[AGE] install;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/api &&
+install -v -m644 doc/reference/html/* /usr/share/doc/[NAME]-[AGE]/api &&
+install -v -m644 doc/reference/man/man3/* /usr/share/man/man3
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl [XORGHTTP]/driver/xf86-input-synaptics-[AGE].[TARBZ2]
+
+<cluster>
+  libevdev xorg-server
+
+<law>
+  ./configure $XORG_CONFIG &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

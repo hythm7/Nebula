@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://xcb.freedesktop.org/dist/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libXau xcb-proto libXdmcp
+
+<law>
+  sed -i "s/pthread-stubs//" configure &&
+
+./configure $XORG_CONFIG      \
+            --without-doxygen \
+            --docdir='${datadir}'/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

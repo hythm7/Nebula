@@ -1,0 +1,28 @@
+<proto>
+  srcurl https://raw.githubusercontent.com/[NAME]/[NAME]-releases/master/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  curl libevent gtk3 qt5
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+pushd qt        &&
+  qmake qtr.pro &&
+  make          &&
+popd;
+make install;
+make INSTALL_ROOT=/usr -C qt install &&
+
+install -m644 qt/[NAME]-qt.desktop /usr/share/applications/[NAME]-qt.desktop &&
+install -m644 qt/icons/[NAME].png  /usr/share/pixmaps/[NAME]-qt.png
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

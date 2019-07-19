@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://dist.[NAME].org/dist/v[AGE]/[NAME]-v[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sh autogen.sh                              &&
+./configure --prefix=/usr --disable-static &&
+make ;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.10/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  alsa-lib
+
+<law>
+  sed -i "s/sbin\.Right(1) == '\\\\0')/strlen(sbin\.Right(1)) == 0)/" \
+    src/ptclib/podbc.cxx &&
+    
+sed -i '/\/ioctl.h/a#include <sys/uio.h>' src/[NAME]/unix/channel.cxx;
+patch -Np1 -i ../[NAME]-[AGE]-openssl-1.1.0-1.patch &&
+patch -Np1 -i ../[NAME]-[AGE]-bison_fixes-2.patch &&
+
+./configure --prefix=/usr  \
+            --disable-odbc &&
+make;
+make install &&
+chmod -v 755 /usr/lib/libpt.so.[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

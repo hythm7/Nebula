@@ -1,0 +1,26 @@
+<proto>
+  srcurl [GSTREAMER]/gst-plugins-good/gst-plugins-good-[AGE].[TARXZ]
+
+<cluster>
+  gst10-plugins-base cairo flac lame mpg123 mesa gdk-pixbuf libgudev libjpeg libpng libsoup libvpx xorg7-lib
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer [AGE] BLFS" &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

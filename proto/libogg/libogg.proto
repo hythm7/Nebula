@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/ogg/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

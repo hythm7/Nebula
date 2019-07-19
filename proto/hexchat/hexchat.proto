@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://dl.[NAME].net/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 gtk2 lua
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr -Dwith-libproxy=false -Dwith-lua=lua .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

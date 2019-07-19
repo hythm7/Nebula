@@ -1,0 +1,40 @@
+<proto>
+  srcurl [SOURCEFORGE]/nfs/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libtirpc rpcsvc-proto
+
+<law>
+  groupadd -g 99 nogroup &&
+useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup \
+    -s /bin/false -u 99 nobody;
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --sbindir=/sbin        \
+            --disable-nfsv4        \
+            --disable-gss &&
+make;
+make install                      &&
+mv -v /sbin/start-statd /usr/sbin &&
+chmod u+w,go+r /sbin/mount.nfs    &&
+chown nobody.nogroup /var/lib/nfs
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/exports << EOF
+ (rw,subtree_check,anonuid=99,anongid=99)
+EOF;
+make install-nfsv4-server;
+make install-nfs-server;
+cat > /etc/sysconfig/nfs-server << "EOF"
+ 
+EOF;
+:/home  /home nfs   rw,_netdev 0 0
+ :/usr   /usr  nfs   ro,_netdev 0 0;
+make install-nfs-client
+
+<desc>
+  [NAME].
+

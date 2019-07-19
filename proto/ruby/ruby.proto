@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://cache.[NAME]-lang.org/pub/[NAME]/&[NAME]-minor-version;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr   \
+            --enable-shared \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make capi;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

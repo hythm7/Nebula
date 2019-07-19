@@ -1,0 +1,31 @@
+<proto>
+  srcurl [SOURCEFORGE]/tcl/[NAME][AGE]-src.[TARGZ]
+
+<cluster>
+  tcl xorg7-lib
+
+<law>
+  cd unix &&
+./configure --prefix=/usr \
+            --mandir=/usr/share/man \
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) &&
+
+make &&
+
+sed -e "s@^\(TK_SRC_DIR='\).*@\1/usr/include'@" \
+    -e "/TK_B/s@='\(-L\)\?.*unix@='\1/usr/lib@" \
+    -i [NAME]Config.sh;
+make install &&
+make install-private-headers &&
+ln -v -sf wish&[NAME]-ver; /usr/bin/wish &&
+chmod -v 755 /usr/lib/lib[NAME]&[NAME]-ver;.so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,30 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  adwaita-icon-theme [NAME]-data-server gnome-autoar itstool libgdata shared-mime-info webkitgtk bogofilter enchant gnome-desktop highlight libcanberra libgweather libnotify openldap seahorse
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DSYSCONF_INSTALL_DIR=/etc  \
+      -DENABLE_INSTALLED_TESTS=ON \
+      -DENABLE_PST_IMPORT=OFF     \
+      -DENABLE_GTKSPELL=OFF       \
+      -DENABLE_YTNEF=OFF          \
+      -DENABLE_CONTACT_MAPS=OFF   \
+      -G Ninja .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

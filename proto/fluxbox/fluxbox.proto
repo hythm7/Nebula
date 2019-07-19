@@ -1,0 +1,38 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  x-window-system
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  echo start[NAME] > ~/.xinitrc;
+mkdir -pv /usr/share/xsessions &&
+cat > /usr/share/xsessions/[NAME].desktop << "EOF"
+ 
+EOF;
+mkdir -v ~/.[NAME] &&
+cp -v /usr/share/[NAME]/init ~/.[NAME]/init &&
+cp -v /usr/share/[NAME]/keys ~/.[NAME]/keys;
+cd ~/.[NAME] &&
+[NAME]-generate_menu ;
+cp -v /usr/share/[NAME]/menu ~/.[NAME]/menu;
+cp /usr/share/[NAME]/styles/<theme> ~/.[NAME]/theme &&
+
+sed -i 's,\(session.styleFile:\).*,\1 ~/.[NAME]/theme,' ~/.[NAME]/init &&
+
+[ -f ~/.[NAME]/theme ] &&
+echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.[NAME]/theme ||
+[ -d ~/.[NAME]/theme ] &&
+echo "background.pixmap: </path/to/nice/image.ext>" >> ~/.[NAME]/theme/theme.cfg
+
+<desc>
+  [NAME].
+

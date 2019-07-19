@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.7/[NAME]-0.7.0.[TARXZ]
+
+<cluster>
+  libsoup
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-bugfixes-1.patch &&
+autoreconf -fiv &&
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

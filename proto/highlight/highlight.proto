@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://www.andre-simon.de/zip/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  boost lua
+
+<law>
+  sed -i '/GZIP/s/^/#/' makefile;
+make;
+make gui;
+make install;
+make install-gui
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

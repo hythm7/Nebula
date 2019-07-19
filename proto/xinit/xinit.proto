@@ -1,0 +1,23 @@
+<proto>
+  srcurl [XORGHTTP]/app/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg7-lib twm runtime runtime xclock xterm2 runtime
+
+<law>
+  sed -e '/$serverargs $vtarg/ s/serverargs/: #&/' \
+    -i startx.cpp;
+./configure $XORG_CONFIG --with-[NAME]dir=/etc/X11/app-defaults &&
+make;
+make install &&
+ldconfig
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl [SOURCEFORGE]/xine/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  xine-lib shared-mime-info
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make docsdir=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,23 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libjpeg lcms2
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install &&
+
+install -v -m755 -d        /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 doc/*.txt /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

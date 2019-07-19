@@ -1,0 +1,21 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.12/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  goffice010 itstool rarian adwaita-icon-theme runtime oxygen-icons5 runtime runtime gnome-icon-theme runtime x-window-system runtime yelp
+
+<law>
+  sed -i 's/HELP_LINGUAS = cs de es/HELP_LINGUAS = de es/' doc/Makefile.in &&
+./configure --prefix=/usr  &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

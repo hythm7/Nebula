@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  xorg7-lib xcb-util
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install &&
+install -v -m644 -D doc/[NAME].txt \
+    /usr/share/doc/[NAME]-[AGE]/[NAME].txt
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,30 @@
+<proto>
+  srcurl https://ftp.[NAME].org/pub/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr                     \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --enable-unicode-properties       \
+            --enable-[NAME]16                   \
+            --enable-[NAME]32                   \
+            --enable-[NAME]grep-libz            \
+            --enable-[NAME]grep-libbz2          \
+            --enable-[NAME]test-libreadline     \
+            --disable-static                 &&
+make;
+make install                     &&
+mv -v /usr/lib/lib[NAME].so.* /lib &&
+ln -sfv ../../lib/$(readlink /usr/lib/lib[NAME].so) /usr/lib/lib[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

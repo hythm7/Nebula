@@ -1,0 +1,31 @@
+<proto>
+  srcurl http://ftp.debian.org/debian/pool/main/h/heirloom-[NAME]/heirloom-[NAME]_[AGE].orig.[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../heirloom-[NAME]-[AGE]-fixes-1.patch &&
+
+sed 's@<openssl@<openssl-1.0/openssl@' \
+    -i openssl.c fio.c makeconfig      &&
+
+make -j1 LDFLAGS+="-L /usr/lib/openssl-1.0/" \
+     SENDMAIL=/usr/sbin/sendmail;
+make PREFIX=/usr UCBINSTALL=/usr/bin/install install &&
+
+ln -v -sf [NAME] /usr/bin/mail &&
+ln -v -sf [NAME] /usr/bin/nail &&
+
+install -v -m755 -d     /usr/share/doc/heirloom-[NAME]-[AGE] &&
+install -v -m644 README /usr/share/doc/heirloom-[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

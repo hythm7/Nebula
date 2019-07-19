@@ -1,0 +1,31 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  six
+
+<law>
+  ./configure --prefix=/usr \
+            --with-system-readline \
+            --with-python=/usr/bin/python3 &&
+make;
+make -C [NAME]/doc doxy;
+pushd [NAME]/testsuite &&
+make  site.exp      &&
+echo  "set [NAME]_test_timeout 120" >> site.exp &&
+runtest
+popd;
+make -C [NAME] install;
+install -d /usr/share/doc/[NAME]-[AGE] &&
+rm -rf [NAME]/doc/doxy/xml &&
+cp -Rv [NAME]/doc/doxy /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

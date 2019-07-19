@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://www.tortall.net/projects/[NAME]/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i 's#) ytasm.*#)#' Makefile.in &&
+
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

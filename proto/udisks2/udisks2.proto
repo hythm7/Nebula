@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/storaged-project/udisks/releases/download/udisks-[AGE]/udisks-[AGE].[TARBZ2]
+
+<cluster>
+  libatasmart libblockdev libgudev libxslt polkit systemd sysv
+
+<law>
+  ./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

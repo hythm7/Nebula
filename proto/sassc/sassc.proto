@@ -1,0 +1,29 @@
+<proto>
+  srcurl https://github.com/sass/[NAME]/archive/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  autoreconf -fi &&
+
+./configure --prefix=/usr --disable-static &&
+make;
+make install;
+tar -xf ../[NAME]-[AGE].[TARGZ] &&
+cd [NAME]-[AGE] &&
+autoreconf -fi &&
+
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

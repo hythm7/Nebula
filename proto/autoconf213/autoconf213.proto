@@ -1,0 +1,25 @@
+<proto>
+  srcurl [GNUHTTP]/autoconf/autoconf-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../autoconf-[AGE]-consolidated_fixes-1.patch &&
+mv -v autoconf.texi [NAME].texi                      &&
+rm -v autoconf.info                                       &&
+./configure --prefix=/usr --program-suffix=2.13           &&
+make;
+make install                                      &&
+install -v -m644 [NAME].info /usr/share/info &&
+install-info --info-dir=/usr/share/info [NAME].info
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,28 @@
+<proto>
+  srcurl http://www.ece.uvic.ca/~frodo/[NAME]/software/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake libjpeg
+
+<law>
+  mkdir BUILD &&
+cd    BUILD &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr    \
+      -DCMAKE_BUILD_TYPE=Release     \
+      -DCMAKE_SKIP_INSTALL_RPATH=YES \
+      -DJAS_ENABLE_DOC=NO            \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/[NAME]-[AGE] \
+      ..  &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

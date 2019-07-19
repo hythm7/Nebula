@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://github.com/cjlin1/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  make lib;
+install -vm644 linear.h /usr/include &&
+install -vm755 [NAME].so.3 /usr/lib &&
+ln -sfv [NAME].so.3 /usr/lib/[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

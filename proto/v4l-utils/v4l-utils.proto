@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://www.linuxtv.org/downloads/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  llvm alsa-lib glu libjpeg qt5
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

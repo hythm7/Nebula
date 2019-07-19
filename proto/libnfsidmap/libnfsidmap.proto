@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://fedorapeople.org/~steved/[NAME]/[AGE]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make;
+make install                         &&
+mv -v /usr/lib/[NAME].so.* /lib &&
+ln -sfv ../../lib/$(readlink /usr/lib/[NAME].so) /usr/lib/[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

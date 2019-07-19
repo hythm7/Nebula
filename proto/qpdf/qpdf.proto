@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/release-[NAME]-[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libjpeg
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

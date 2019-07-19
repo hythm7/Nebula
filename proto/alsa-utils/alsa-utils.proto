@@ -1,0 +1,25 @@
+<proto>
+  srcurl &alsa-download-ftp;/utils/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  alsa-lib
+
+<law>
+  ./configure --disable-alsaconf \
+            --disable-bat   \
+            --disable-xmlto \
+            --with-curses=ncursesw &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  alsactl -L store;
+usermod -a -G audio ;
+make install-alsa
+
+<desc>
+  [NAME].
+

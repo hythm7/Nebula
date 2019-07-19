@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://[NAME].freedesktop.org/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libxml2
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --disable-documentation &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

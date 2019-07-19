@@ -1,0 +1,36 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  dbus DocBook docbook-xsl libxslt linux-pam runtime polkit
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr                        \
+      --sysconfdir=/etc                    \
+      --localstatedir=/var                 \
+      -Dcgroup-controller=[NAME]          \
+      -Ddbuspolicydir=/etc/dbus-1/system.d \
+      ..  &&
+ninja;
+ninja install                                         &&
+ln -sfv  lib[NAME].pc /usr/lib/pkgconfig/libsystemd.pc &&
+ln -sfvn [NAME] /usr/include/systemd
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+cat >> /etc/pam.d/system-session << "EOF" &&
+ 
+EOF
+cat > /etc/pam.d/[NAME]-user << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

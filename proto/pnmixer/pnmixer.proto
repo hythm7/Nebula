@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/nicklan/[NAME]/releases/download/v[AGE]/[NAME]-v[AGE].[TARGZ]
+
+<cluster>
+  alsa-utils gtk3 libnotify
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..  &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,28 @@
+<proto>
+  srcurl [SOURCEFORGE]/mad/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-fixes-1.patch                &&
+sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
+touch NEWS AUTHORS ChangeLog                                 &&
+autoreconf -fi                                               &&
+
+./configure --prefix=/usr --disable-static &&
+make;
+make install;
+cat > /usr/lib/pkgconfig/mad.pc << "EOF"
+ 
+EOF
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

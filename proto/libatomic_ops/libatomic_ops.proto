@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/ivmai/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr    \
+            --enable-shared  \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

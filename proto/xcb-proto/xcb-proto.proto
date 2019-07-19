@@ -1,0 +1,19 @@
+<proto>
+  srcurl https://xcb.freedesktop.org/dist/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg-env
+
+<law>
+  ./configure $XORG_CONFIG;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

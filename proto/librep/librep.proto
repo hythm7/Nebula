@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://download.tuxfamily.org/[NAME]/[NAME]_[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

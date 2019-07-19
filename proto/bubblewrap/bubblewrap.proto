@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://github.com/projectatomic/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

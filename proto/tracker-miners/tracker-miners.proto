@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.2/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gst10-plugins-base tracker exempi gexiv2 ffmpeg flac icu libexif libgrss libgxps poppler
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

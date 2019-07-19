@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gnome-icon-theme
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

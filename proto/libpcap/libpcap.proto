@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://www.tcpdump.org/release/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-enable_bluetooth-1.patch &&
+
+./configure --prefix=/usr &&
+make;
+sed -i '/INSTALL_DATA.*[NAME].a\|RANLIB.*[NAME].a/ s/^/#/' Makefile;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

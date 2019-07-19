@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.3/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  alsa-lib flac
+
+<law>
+  CXXFLAGS=-std=c++98 \
+./configure --prefix=/usr --disable-static &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

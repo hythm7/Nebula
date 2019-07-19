@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://tecnocode.co.uk/downloads/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libsoup gobject-introspection vala
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

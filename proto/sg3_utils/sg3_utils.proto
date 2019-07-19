@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://sg.danny.cz/sg/p/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

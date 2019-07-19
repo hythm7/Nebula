@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.56/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 libxml2 pcre2 gobject-introspection gnutls
+
+<law>
+  ./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --disable-static       &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://telepathy.freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  telepathy-glib python2 NetworkManager
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

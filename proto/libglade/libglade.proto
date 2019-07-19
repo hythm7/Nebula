@@ -1,0 +1,21 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.6/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libxml2 gtk2
+
+<law>
+  sed -i '/DG_DISABLE_DEPRECATED/d' glade/Makefile.in &&
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

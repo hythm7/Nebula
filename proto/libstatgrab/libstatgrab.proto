@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr   \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

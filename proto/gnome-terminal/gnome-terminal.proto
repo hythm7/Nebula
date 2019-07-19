@@ -1,0 +1,28 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dconf systemd gsettings-desktop-schemas itstool pcre2 vte nautilus
+
+<law>
+  ./configure --prefix=/usr             \
+            --disable-static          \
+            --disable-search-provider \
+            --without-nautilus-extension &&
+make;
+./configure --prefix=/usr       \
+            --disable-static    &&
+make;
+make install;
+make install &&
+rm -v /usr/lib/systemd/user/[NAME]-server.service
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

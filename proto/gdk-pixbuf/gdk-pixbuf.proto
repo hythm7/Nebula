@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.38/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 libjpeg libpng shared-mime-info runtime librsvg libtiff xorg7-lib
+
+<law>
+  mkdir build &&
+cd build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install;
+[NAME]-query-loaders --update-cache
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

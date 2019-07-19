@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://github.com/rockdaboot/[NAME]/releases/download/[NAME]-[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libidn2
+
+<law>
+  sed -i 's/env python/&3/' src/psl-make-dafsa &&
+./configure --prefix=/usr --disable-static       &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

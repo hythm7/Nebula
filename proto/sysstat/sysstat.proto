@@ -1,0 +1,27 @@
+<proto>
+  srcurl http://sebastien.godard.pagesperso-orange.fr/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  sa_lib_dir=/usr/lib/sa    \
+sa_dir=/var/log/sa        \
+conf_dir=/etc/sysconfig   \
+./configure --prefix=/usr \
+            --disable-file-attr &&
+make;
+make install;
+install -v -m644 [NAME].service /lib/systemd/system/[NAME].service;
+sed -i "/^Also=/d" /lib/systemd/system/[NAME].service
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

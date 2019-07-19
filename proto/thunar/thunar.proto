@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://archive.xfce.org/src/xfce/[NAME]/1.8/Thunar-[AGE].[TARBZ2]
+
+<cluster>
+  exo libxfce4ui libgudev libnotify xfce4-panel
+
+<law>
+  ./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/Thunar-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

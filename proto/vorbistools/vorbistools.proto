@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/vorbis/vorbis-tools-[AGE].[TARGZ]
+
+<cluster>
+  libvorbis
+
+<law>
+  patch -Np1 -i ../vorbis-tools-[AGE]-security_fix-1.patch;
+./configure --prefix=/usr \
+            --enable-vcut \
+            --without-curl &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

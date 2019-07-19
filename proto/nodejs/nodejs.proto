@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://[NAME].org/dist/v[AGE]/node-v[AGE].[TARXZ]
+
+<cluster>
+  python2 which c-ares icu libuv nghttp2
+
+<law>
+  ./configure --prefix=/usr                  \
+            --shared-cares                 \
+            --shared-libuv                 \
+            --shared-nghttp2               \
+            --shared-openssl               \
+            --shared-zlib                  \
+            --with-intl=system-icu         &&
+make;
+make install &&
+ln -sf node /usr/share/doc/node-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

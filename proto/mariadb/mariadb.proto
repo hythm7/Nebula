@@ -1,0 +1,59 @@
+<proto>
+  srcurl https://downloads.[NAME].org/interstitial/[NAME]-[AGE]/source/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake libevent
+
+<law>
+  groupadd -g 40 mysql &&
+useradd -c "MySQL Server" -d /srv/mysql -g mysql -s /bin/false -u 40 mysql;
+sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt &&
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_BUILD_TYPE=Release                      \
+      -DCMAKE_INSTALL_PREFIX=/usr                     \
+      -DINSTALL_DOCDIR=share/doc/[NAME]-[AGE]       \
+      -DINSTALL_DOCREADMEDIR=share/doc/[NAME]-[AGE] \
+      -DINSTALL_MANDIR=share/man                      \
+      -DINSTALL_MYSQLSHAREDIR=share/mysql             \
+      -DINSTALL_MYSQLTESTDIR=share/mysql/test         \
+      -DINSTALL_PLUGINDIR=lib/mysql/plugin            \
+      -DINSTALL_SBINDIR=sbin                          \
+      -DINSTALL_SCRIPTDIR=bin                         \
+      -DINSTALL_SQLBENCHDIR=share/mysql/bench         \
+      -DINSTALL_SUPPORTFILESDIR=share/mysql           \
+      -DMYSQL_DATADIR=/srv/mysql                      \
+      -DMYSQL_UNIX_ADDR=/run/mysqld/mysqld.sock       \
+      -DWITH_EXTRA_CHARSETS=complex                   \
+      -DWITH_EMBEDDED_SERVER=ON                       \
+      -DSKIP_TESTS=ON                                 \
+      -DTOKUDB_OK=0                                   \
+      .. &&
+make;
+pushd mysql-test
+./mtr --parallel <N> --mem --force
+popd;
+make install 
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  install -v -dm 755 /etc/mysql &&
+cat > /etc/mysql/my.cnf << "EOF"
+ 
+EOF;
+mysql_install_db --basedir=/usr --datadir=/srv/mysql --user=mysql &&
+chown -R mysql:mysql /srv/mysql;
+install -v -m755 -o mysql -g mysql -d /run/mysqld &&
+mysqld_safe --user=mysql 2>&1 >/dev/null &;
+mysqladmin -u root password;
+mysqladmin -p shutdown;
+make install-mysql;
+make install-mysqld
+
+<desc>
+  [NAME].
+

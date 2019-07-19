@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://gitlab.com/[NAME]/[NAME]/-/archive/[AGE]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./bootstrap &&
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install 
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

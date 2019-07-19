@@ -1,0 +1,36 @@
+<proto>
+  srcurl https://www.python.org/ftp/python/[AGE]/Python-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  python3 -m pip install --force pip;
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes \
+            --enable-unicode=ucs4 &&
+make;
+make install &&
+chmod -v 755 /usr/lib/libpython&[NAME]-majorver;.so.1.0;
+install -v -dm755 /usr/share/doc/python-[AGE] &&
+
+tar --strip-components=1                     \
+    --no-same-owner                          \
+    --directory /usr/share/doc/python-[AGE] \
+    -xvf ../python-[AGE]-docs-html.[TARBZ2] &&
+
+find /usr/share/doc/python-[AGE] -type d -exec chmod 0755 {} \; &&
+find /usr/share/doc/python-[AGE] -type f -exec chmod 0644 {} \;
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  export PYTHONDOCS=/usr/share/doc/python-[AGE]
+
+<desc>
+  [NAME].
+

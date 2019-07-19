@@ -1,0 +1,21 @@
+<proto>
+  srcurl [XORGHTTP]/app/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg-server xorg7-legacy
+
+<law>
+  sed -i -e '/^rcdir =/s,^\(rcdir = \).*,\1/etc/X11/app-defaults,' src/Makefile.in &&
+./configure $XORG_CONFIG &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

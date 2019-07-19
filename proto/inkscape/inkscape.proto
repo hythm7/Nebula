@@ -1,0 +1,30 @@
+<proto>
+  srcurl https://media.[NAME].org/dl/resources/file/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  boost gc gsl gtkmm2 gtkmm3 http://ftp.gnome.org/pub/gnome/sources/gdl/ libxslt poppler popt wget imagemagick6 lcms2 lcms potrace runtime lxml scour runtime
+
+<law>
+  sed -e 's|new Lexer(xref, obj)|obj|g' -i src/extension/internal/pdfinput/pdf-parser.cpp;
+patch -Np1 -i ../[NAME]-[AGE]-use_versioned_ImageMagick6-1.patch;
+patch -Np1 -i ../[NAME]-[AGE]-upstream_fixes-1.patch;
+bash download-gtest.sh;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      ..                          &&
+make;
+make install                      &&
+rm -v /usr/lib/[NAME]/lib*_LIB.a
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

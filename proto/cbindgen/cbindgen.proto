@@ -1,0 +1,19 @@
+<proto>
+  srcurl https://github.com/eqrion/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  rust
+
+<law>
+  cargo build --release;
+install -Dm755 target/release/[NAME] /usr/bin/
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

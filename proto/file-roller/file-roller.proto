@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 itstool cpio desktop-file-utils json-glib libarchive libnotify nautilus
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr -Dpackagekit=false .. &&
+ninja;
+ninja install &&
+chmod -v 0755 /usr/libexec/[NAME]/isoinfo.sh
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

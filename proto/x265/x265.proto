@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://bitbucket.org/multicoreware/[NAME]/downloads/[NAME]_[AGE].[TARGZ]
+
+<cluster>
+  cmake nasm
+
+<law>
+  mkdir bld &&
+cd    bld &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../source &&
+make;
+make install &&
+rm -vf /usr/lib/lib[NAME].a 
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

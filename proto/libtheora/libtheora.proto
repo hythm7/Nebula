@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/theora/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libogg libvorbis
+
+<law>
+  sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c &&
+./configure --prefix=/usr --disable-static &&
+make;
+make install;
+cd examples/.libs &&
+for E in *; do
+  install -v -m755 $E /usr/bin/theora_${E}
+done
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

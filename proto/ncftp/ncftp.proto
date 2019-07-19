@@ -1,0 +1,25 @@
+<proto>
+  srcurl ftp://ftp.[NAME].com/[NAME]/[NAME]-[AGE]-src.[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --sysconfdir=/etc &&
+make -C lib[NAME] shared &&
+make;
+make -C lib[NAME] soinstall &&
+make install;
+./configure --prefix=/usr --sysconfdir=/etc &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

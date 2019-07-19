@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://downloads.sourceforge.net/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  python3 setup.py build;
+python3 setup.py install --optimize=1 &&
+
+for f in /usr/bin/rst*.py; do
+  ln -svf $(basename $f) /usr/bin/$(basename $f .py)
+done
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

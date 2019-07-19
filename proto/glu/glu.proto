@@ -1,0 +1,20 @@
+<proto>
+  srcurl ftp://ftp.freedesktop.org/pub/mesa/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  mesa
+
+<law>
+  ./configure --prefix=$XORG_PREFIX --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

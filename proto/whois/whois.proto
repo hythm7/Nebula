@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://github.com/rfc1036/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  make;
+make prefix=/usr install-[NAME]
+make prefix=/usr install-mkpasswd
+make prefix=/usr install-pos
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

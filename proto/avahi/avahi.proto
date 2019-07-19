@@ -1,0 +1,49 @@
+<proto>
+  srcurl https://github.com/lathiat/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  glib2 gobject-introspection gtk2 gtk3 libdaemon libglade
+
+<law>
+  groupadd -fg 84 [NAME] &&
+useradd -c "Avahi Daemon Owner" -d /var/run/[NAME]-daemon -u 84 \
+        -g [NAME] -s /bin/false [NAME];
+groupadd -fg 86 netdev;
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     \
+            --disable-mono       \
+            --disable-monodoc    \
+            --disable-python     \
+            --disable-qt3        \
+            --disable-qt4        \
+            --enable-core-docs   \
+            --with-distro=none   \
+            --with-systemdsystemunitdir=no &&
+make;
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     \
+            --disable-mono       \
+            --disable-monodoc    \
+            --disable-python     \
+            --disable-qt3        \
+            --disable-qt4        \
+            --enable-core-docs   \
+            --with-distro=none   \
+            --with-systemdsystemunitdir=/lib/systemd/system &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+systemctl enable [NAME]-daemon
+
+<desc>
+  [NAME].
+

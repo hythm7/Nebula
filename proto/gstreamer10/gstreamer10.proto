@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GSTREAMER]/gstreamer/gstreamer-[AGE].[TARXZ]
+
+<cluster>
+  glib2 gobject-introspection
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dgst_debug=false   \
+       -Dgtk_doc=disabled  \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer [AGE] BLFS" &&
+ninja;
+rm -rf /usr/bin/gst-* /usr/{lib,libexec}/gstreamer-1.0;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

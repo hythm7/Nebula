@@ -1,0 +1,35 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  which
+
+<law>
+  sed -i '/ top.do_check ==/s/top.do_check/*&/' modules/filter/tex.cpp &&
+sed -i '/word ==/s/word/*&/'                  prog/check_funs.cpp;
+./configure --prefix=/usr &&
+make;
+make install &&
+ln -svfn [NAME]-0.60 /usr/lib/[NAME] &&
+
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/[NAME]{,-dev}.html &&
+
+install -v -m644 manual/[NAME].html/* \
+    /usr/share/doc/[NAME]-[AGE]/[NAME].html &&
+
+install -v -m644 manual/[NAME]-dev.html/* \
+    /usr/share/doc/[NAME]-[AGE]/[NAME]-dev.html;
+install -v -m 755 scripts/ispell /usr/bin/;
+install -v -m 755 scripts/spell /usr/bin/
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  ./configure &&
+make;
+make install
+
+<desc>
+  [NAME].
+

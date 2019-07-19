@@ -1,0 +1,28 @@
+<proto>
+  srcurl https://www.python.org/ftp/python/[AGE]/Python-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  CXX="/usr/bin/g++"              \
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes &&
+make;
+make install &&
+chmod -v 755 /usr/lib/libpython&[NAME]-majorver;m.so &&
+chmod -v 755 /usr/lib/lib[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  ln -svfn python-[AGE] /usr/share/doc/python-3;
+export PYTHONDOCS=/usr/share/doc/python-3/html
+
+<desc>
+  [NAME].
+

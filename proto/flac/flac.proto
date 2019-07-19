@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr \
+            --disable-thorough-tests &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

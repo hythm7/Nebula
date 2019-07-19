@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://www.mirrorservice.org/sites/[NAME].itap.purdue.edu/pub/tools/unix/[NAME]/[NAME]_[AGE].[TARBZ2]
+
+<cluster>
+  libtirpc
+
+<law>
+  tar -xf [NAME]_[AGE]_src.tar  &&
+cd [NAME]_[AGE]_src           &&
+./Configure -n linux       &&
+make CFGL="-L./lib -ltirpc";
+install -v -m0755 -o root -g root [NAME] /usr/bin &&
+install -v [NAME].8 /usr/share/man/man8
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

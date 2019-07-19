@@ -1,0 +1,26 @@
+<proto>
+  srcurl http://xmlsoft.org/sources/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --with-history   \
+            --with-python=/usr/bin/python3 &&
+make;
+tar xf ../xmlts&testsuite-version;.[TARGZ];
+/etc/init.d/httpd stop;
+systemctl stop httpd.service;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,24 @@
+<proto>
+  srcurl http://www.hboehm.info/[NAME]/[NAME]_source/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libatomic_ops
+
+<law>
+  ./configure --prefix=/usr      \
+            --enable-cplusplus \
+            --disable-static   \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install &&
+install -v -m644 doc/[NAME].man /usr/share/man/man3/[NAME]_malloc.3
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

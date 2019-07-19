@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.44/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gdk-pixbuf libcroco cairo pango rust gobject-introspection gtk3 vala
+
+<law>
+  ./configure --prefix=/usr    \
+            --enable-vala    \
+            --disable-static &&
+make;
+make install;
+gdk-pixbuf-query-loaders --update-cache
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.17/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  liboauth libsoup gnome-online-accounts gtk3 json-glib uhttpmock vala gcr git gobject-introspection
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

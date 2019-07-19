@@ -1,0 +1,40 @@
+<proto>
+  srcurl [KERNEL]/linux/bluetooth/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus glib2 libical
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-obexd_without_systemd-1.patch;
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --enable-library      \
+            --disable-systemd     &&
+make;
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --enable-library      &&
+make;
+make check;
+make install &&
+ln -svf ../libexec/bluetooth/bluetoothd /usr/sbin;
+install -v -dm755 /etc/bluetooth &&
+install -v -m644 src/main.conf /etc/bluetooth/main.conf;
+install -v -dm755 /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 doc/*.txt /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/bluetooth/rfcomm.conf << "EOF";
+cat > /etc/bluetooth/uart.conf << "EOF";
+systemctl enable bluetooth;
+systemctl enable --global obex;
+make install-bluetooth
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,35 @@
+<proto>
+  srcurl http://www.[NAME]hq.hu/MPlayer/releases/MPlayer-[AGE].[TARXZ]
+
+<cluster>
+  yasm gtk2 libvdpau-va-gl
+
+<law>
+  ./configure --prefix=/usr            \
+            --confdir=/etc/[NAME]   \
+            --enable-dynamic-plugins \
+            --enable-menu            \
+            --enable-gui             &&
+make;
+make doc;
+make install  &&
+ln -svf ../icons/hicolor/48x48/apps/[NAME].png \
+        /usr/share/pixmaps/[NAME].png;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    DOCS/HTML/en/* \
+                    /usr/share/doc/[NAME]-[AGE];
+install -v -m644 etc/codecs.conf /etc/[NAME];
+install -v -m644 etc/*.conf /etc/[NAME];
+tar -xvf  ../&[NAME]-skin;.[TARBZ2] \
+    -C    /usr/share/[NAME]/skins &&
+ln  -sfvn Clearlooks /usr/share/[NAME]/skins/default
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,33 @@
+<proto>
+  srcurl [SOURCEFORGE]/xine/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  x-window-system ffmpeg alsa pulseaudio http://jackaudio.org/ libdvdnav
+
+<law>
+  sed -e 's|wand/magick_wand.h|MagickWand/MagickWand.h|' \
+    -i src/video_dec/image.c &&
+
+sed -e 's/\(xcb-shape >= 1.0\)/xcb \1/' \
+    -i m4/video_out.m4 &&
+
+./configure --prefix=/usr          \
+            --disable-vcd          \
+            --with-external-dvdnav \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+doxygen doc/Doxyfile;
+make install;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/api &&
+install -v -m644    doc/api/* \
+                    /usr/share/doc/[NAME]-[AGE]/api
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

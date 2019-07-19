@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://people.freedesktop.org/~aplattner/vdpau/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg7-lib
+
+<law>
+  ./configure $XORG_CONFIG \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

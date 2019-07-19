@@ -1,0 +1,32 @@
+<proto>
+  srcurl ftp://ftp.[NAME].org/distrib/source/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  groupadd -g 46 [NAME]                             &&
+useradd -c [NAME] -d /srv/ftp -g [NAME] \
+        -s /usr/bin/[NAME]shell -u 46 [NAME]     &&
+
+install -v -d -m775 -o [NAME] -g [NAME] /srv/ftp &&
+ln -v -s /bin/false /usr/bin/[NAME]shell          &&
+echo /usr/bin/[NAME]shell >> /etc/shells;
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var/run &&
+make;
+make install                                   &&
+install -d -m755 /usr/share/doc/[NAME]-[AGE] &&
+cp -Rv doc/*     /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/[NAME].conf << "EOF"
+ 
+EOF;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

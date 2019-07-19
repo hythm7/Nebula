@@ -1,0 +1,31 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]2/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install                         &&
+install -v -m755 -d /etc/acpi/events &&
+cp -r samples /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/acpi/events/lid << "EOF"
+ 
+EOF
+
+cat > /etc/acpi/lid.sh << "EOF"
+ 
+EOF
+chmod +x /etc/acpi/lid.sh;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

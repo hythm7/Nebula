@@ -1,0 +1,25 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  procmail
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-disable_sslv3-1.patch &&
+./configure --prefix=/usr --with-ssl --enable-fallback=procmail &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > ~/.[NAME]rc << "EOF"
+ 
+EOF
+
+chmod -v 0600 ~/.[NAME]rc
+
+<desc>
+  [NAME].
+

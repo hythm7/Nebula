@@ -1,0 +1,21 @@
+<proto>
+  srcurl http://anduin.linuxfromscratch.org/BLFS/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+sed -i '/^LN_S/s/s/sfvn/' */Makefile;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

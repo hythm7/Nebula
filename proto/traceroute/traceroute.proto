@@ -1,0 +1,23 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  make;
+make prefix=/usr install                                 &&
+mv /usr/bin/[NAME] /bin                              &&
+ln -sv -f [NAME] /bin/[NAME]6                    &&
+ln -sv -f [NAME].8 /usr/share/man/man8/[NAME]6.8 &&
+rm -fv /usr/share/man/man1/[NAME].1
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

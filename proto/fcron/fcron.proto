@@ -1,0 +1,50 @@
+<proto>
+  srcurl http://[NAME].free.fr/archives/[NAME]-[AGE].src.[TARGZ]
+
+<cluster>
+  
+
+<law>
+  cat >> /etc/syslog.conf << "EOF"
+ 
+EOF;
+/etc/rc.d/init.d/sysklogd reload;
+groupadd -g 22 [NAME] &&
+useradd -d /dev/null -c "Fcron User" -g [NAME] -s /bin/false -u 22 [NAME];
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --localstatedir=/var   \
+            --without-sendmail     \
+            --with-boot-install=no \
+            --with-systemdsystemunitdir=no &&
+make;
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --localstatedir=/var   \
+            --without-sendmail     \
+            --with-boot-install=no &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /usr/bin/run-parts << "EOF" &&
+ 
+EOF
+chmod -v 755 /usr/bin/run-parts;
+install -vdm754 /etc/cron.{hourly,daily,weekly,monthly};
+cat > /var/spool/[NAME]/systab.orig << "EOF"
+ 
+EOF;
+make install-[NAME];
+systemctl enable [NAME];
+/etc/rc.d/init.d/[NAME] start &&
+[NAME]tab -z -u systab;
+systemctl start [NAME] &&
+[NAME]tab -z -u systab
+
+<desc>
+  [NAME].
+

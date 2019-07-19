@@ -1,0 +1,33 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.32/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus glib2 gtk3 libxml2 libxslt vala
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc -Dbash_completion=false .. &&
+ninja;
+ninja install;
+cd ..              &&
+tar -xf ../[NAME]-editor-&[NAME]-editor-version;.[TARXZ] &&
+cd [NAME]-editor-&[NAME]-editor-version;                &&
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

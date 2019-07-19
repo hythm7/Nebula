@@ -1,0 +1,31 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.32/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus glib2 xorg7-lib
+
+<law>
+  sed -i 's/subdir:/install_dir:/' atspi/meson.build;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr     \
+      --sysconfdir=/etc \
+      -Dsystemd_user_dir=no .. &&
+ninja;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc  .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

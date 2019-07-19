@@ -1,0 +1,30 @@
+<proto>
+  srcurl [GNOMEHTTP]/glib/2.60/glib-[AGE].[TARXZ]
+
+<cluster>
+  libxslt pcre
+
+<law>
+  patch -Np1 -i ../glib-[AGE]-skip_warnings-1.patch;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr      \
+      -Dman=true         \
+      -Dselinux=disabled \
+      ..                 &&
+ninja;
+ninja install &&
+
+mkdir -p /usr/share/doc/glib-[AGE] &&
+cp -r ../docs/reference/{NEWS,gio,glib,gobject} /usr/share/doc/glib-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

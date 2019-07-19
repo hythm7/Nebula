@@ -1,0 +1,81 @@
+<proto>
+  srcurl http://www.[NAME].org/ftp/[NAME].[AGE].[TARGZ]
+
+<cluster>
+  openldap cyrus-sasl
+
+<law>
+  groupadd -g 26 smmsp                               &&
+useradd -c "Sendmail Daemon" -g smmsp -d /dev/null \
+        -s /bin/false -u 26 smmsp                  &&
+chmod -v 1777 /var/mail                            &&
+install -v -m700 -d /var/spool/mqueue;
+cat >> devtools/Site/site.config.m4 << "EOF"
+ 
+EOF;
+patch -Np1 -i ../[NAME].[AGE]-openssl-1.patch &&
+
+cat >> devtools/Site/site.config.m4 << "EOF"
+ 
+EOF
+
+sed -i 's|/usr/man/man|/usr/share/man/man|' \
+    devtools/OS/Linux           &&
+
+cd [NAME]                     &&
+sh Build                        &&
+cd ../cf/cf                     &&
+cp generic-linux.mc [NAME].mc &&
+sh Build [NAME].cf;
+install -v -d -m755 /etc/mail &&
+sh Build install-cf &&
+
+cd ../..            &&
+sh Build install    &&
+
+install -v -m644 cf/cf/{submit,[NAME]}.mc /etc/mail &&
+cp -v -R cf/* /etc/mail                               &&
+
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/{cf,[NAME]} &&
+
+install -v -m644 CACerts FAQ KNOWNBUGS LICENSE PGPKEYS README RELEASE_NOTES \
+        /usr/share/doc/[NAME]-[AGE] &&
+
+install -v -m644 [NAME]/{README,SECURITY,TRACEFLAGS,TUNING} \
+        /usr/share/doc/[NAME]-[AGE]/[NAME] &&
+
+install -v -m644 cf/README /usr/share/doc/[NAME]-[AGE]/cf &&
+
+for manpage in [NAME] editmap mailstats makemap praliases smrsh
+do
+    install -v -m644 $manpage/$manpage.8 /usr/share/man/man8
+done &&
+
+install -v -m644 [NAME]/aliases.5    /usr/share/man/man5 &&
+install -v -m644 [NAME]/mailq.1      /usr/share/man/man1 &&
+install -v -m644 [NAME]/newaliases.1 /usr/share/man/man1 &&
+install -v -m644 vacation/vacation.1   /usr/share/man/man1;
+cd doc/op                                       &&
+sed -i 's/groff/GROFF_NO_SGR=1 groff/' Makefile &&
+make op.txt op.pdf;
+install -v -d -m755 /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 op.ps op.txt op.pdf /usr/share/doc/[NAME]-[AGE] &&
+cd ../..
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  echo $(hostname) > /etc/mail/local-host-names
+cat > /etc/mail/aliases << "EOF"
+ 
+
+EOF
+newaliases;
+cd /etc/mail &&
+m4 m4/cf.m4 [NAME].mc > [NAME].cf;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

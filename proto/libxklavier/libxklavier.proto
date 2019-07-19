@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://people.freedesktop.org/~svu/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  glib2 iso-codes libxml2 xorg7-lib gobject-introspection
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

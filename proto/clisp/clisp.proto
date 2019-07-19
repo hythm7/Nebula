@@ -1,0 +1,30 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/latest/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libsigsegv
+
+<law>
+  sed -i -e '/socket/d' -e '/"streams"/d' tests/tests.lisp;
+patch -Np1 -i ../[NAME]-[AGE]-readline7_fixes-1.patch;
+mkdir build &&
+cd    build &&
+
+../configure --srcdir=../                       \
+             --prefix=/usr                      \
+             --docdir=/usr/share/doc/[NAME]-[AGE] \
+             --with-libsigsegv-prefix=/usr &&
+
+ulimit -s 16384 &&
+make -j1;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

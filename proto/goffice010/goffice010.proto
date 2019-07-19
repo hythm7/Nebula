@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/goffice/0.10/goffice-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 libgsf librsvg libxslt which
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

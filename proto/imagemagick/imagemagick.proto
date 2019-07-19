@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://www.[NAME].org/download/releases/ImageMagick-[AGE]-&[NAME]-patch-version;.[TARXZ]
+
+<cluster>
+  xorg7-lib
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-hdri     \
+            --with-modules    \
+            --with-perl       \
+            --disable-static  &&
+make;
+make DOCUMENTATION_PATH=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

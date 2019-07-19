@@ -1,0 +1,39 @@
+<proto>
+  srcurl https://[NAME].org/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  cairo cmake gst10-plugins-base gst10-plugins-bad gtk2 gtk3 icu libgudev libsecret libsoup libwebp mesa openjpeg2 ruby sqlite which enchant geoclue2 gobject-introspection hicolor-icon-theme libnotify
+
+<law>
+  mkdir -vp build &&
+cd        build &&
+
+CFLAGS=-Wno-expansion-to-defined  \
+CXXFLAGS=-Wno-expansion-to-defined \
+cmake -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=ON       \
+      -DPORT=GTK                  \
+      -DLIB_INSTALL_DIR=/usr/lib  \
+      -DUSE_LIBHYPHEN=OFF         \
+      -DENABLE_MINIBROWSER=ON     \
+      -DUSE_WOFF2=OFF             \
+      -Wno-dev -G Ninja .. &&
+ninja;
+ninja install &&
+
+install -vdm755 /usr/share/gtk-doc/html/webkit{2,dom}gtk-4.0 &&
+install -vm644  ../Documentation/webkit2gtk-4.0/html/*   \
+                /usr/share/gtk-doc/html/webkit2gtk-4.0       &&
+install -vm644  ../Documentation/webkitdomgtk-4.0/html/* \
+                /usr/share/gtk-doc/html/webkitdomgtk-4.0
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

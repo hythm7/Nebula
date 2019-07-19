@@ -1,0 +1,26 @@
+<proto>
+  srcurl http://downloads.webmproject.org/releases/webp/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libjpeg libpng libtiff
+
+<law>
+  ./configure --prefix=/usr           \
+            --enable-[NAME]mux     \
+            --enable-[NAME]demux   \
+            --enable-[NAME]decoder \
+            --enable-[NAME]extras  \
+            --enable-swap-16bit-csp \
+            --disable-static        &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

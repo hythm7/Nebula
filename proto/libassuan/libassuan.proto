@@ -1,0 +1,36 @@
+<proto>
+  srcurl [GNUPGHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libgpg-error
+
+<law>
+  ./configure --prefix=/usr &&
+make                      &&
+
+make -C doc html                                                       &&
+makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi &&
+makeinfo --plaintext       -o doc/assuan.txt           doc/assuan.texi
+;
+make -C doc pdf ps;
+make install &&
+
+install -v -dm755   /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644 doc/assuan.html/* \
+                    /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644 doc/assuan_nochunks.html \
+                    /usr/share/doc/[NAME]-[AGE]      &&
+install -v -m644 doc/assuan.{txt,texi} \
+                    /usr/share/doc/[NAME]-[AGE];
+install -v -m644  doc/assuan.{pdf,ps,dvi} \
+                  /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

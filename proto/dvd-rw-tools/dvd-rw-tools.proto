@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i '/stat.h/a #include <sys/sysmacros.h>' growisofs.c &&
+sed -i '/stdlib/a #include <limits.h>' transport.hxx &&
+make all rpl8 btcflash;
+make prefix=/usr install &&
+install -v -m644 -D index.html \
+    /usr/share/doc/dvd+rw-tools-[AGE]/index.html
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

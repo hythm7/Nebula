@@ -1,0 +1,22 @@
+<proto>
+  srcurl [SOURCEFORGE]/lcms/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i '/AX_APPEND/s/^/#/' configure.ac &&
+autoreconf;
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

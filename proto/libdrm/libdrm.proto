@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://dri.freedesktop.org/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg7-lib
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=$XORG_PREFIX -Dudev=true &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

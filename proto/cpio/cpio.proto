@@ -1,0 +1,35 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr \
+            --bindir=/bin \
+            --enable-mt   \
+            --with-rmt=/usr/libexec/rmt &&
+make &&
+makeinfo --html            -o doc/html      doc/[NAME].texi &&
+makeinfo --html --no-split -o doc/[NAME].html doc/[NAME].texi &&
+makeinfo --plaintext       -o doc/[NAME].txt  doc/[NAME].texi;
+make -C doc pdf &&
+make -C doc ps;
+make install &&
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644    doc/html/* \
+                    /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644    doc/[NAME].{html,txt} \
+                    /usr/share/doc/[NAME]-[AGE];
+install -v -m644 doc/[NAME].{pdf,ps,dvi} \
+                 /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

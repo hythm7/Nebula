@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  clutter-gst clutter-gtk gnome-desktop gnome-video-effects gst10-plugins-bad gst10-plugins-good v4l-utils itstool libcanberra libgudev gobject-introspection vala
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-gst_debug_disabled-1.patch &&
+
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

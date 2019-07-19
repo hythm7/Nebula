@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://archive.xfce.org/src/apps/[NAME]/0.5/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  exo libburn libisofs libxfce4ui
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

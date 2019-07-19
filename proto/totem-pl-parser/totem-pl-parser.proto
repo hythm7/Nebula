@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-26;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libsoup gobject-introspection libarchive libgcrypt
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix /usr --default-library shared .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

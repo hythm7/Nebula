@@ -1,0 +1,24 @@
+<proto>
+  srcurl http://download.osgeo.org/[NAME]/tiff-[AGE].[TARGZ]
+
+<cluster>
+  cmake
+
+<law>
+  mkdir -p [NAME]-build &&
+cd       [NAME]-build &&
+
+cmake -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/[NAME]-[AGE] \
+      -DCMAKE_INSTALL_PREFIX=/usr -G Ninja .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

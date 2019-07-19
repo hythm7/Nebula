@@ -1,15 +1,33 @@
 <proto>
-  srcurl https://roy.marples.name/downloads/dhcpcd/dhcpcd-7.2.3.tar.xz
+  srcurl https://roy.marples.name/downloads/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
 
 <law>
-
-  ./configure --libexecdir=/lib/dhcpcd \
-            --dbdir=/var/lib/dhcpcd;
-
-  make -j [NPROC];
+  ./configure --libexecdir=/lib/[NAME] \
+            --dbdir=/var/lib/[NAME]  &&
+make;
+make install
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-service-[NAME];
+cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
+ 
+EOF;
+cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
+ 
+EOF;
+cat > /etc/resolv.conf.head << "EOF"
+ 
+EOF;
+make install-[NAME];
+systemctl start [NAME]@;
+systemctl enable [NAME]@
 
 <desc>
-  dhcpcd.
+  [NAME].
+

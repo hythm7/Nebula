@@ -1,0 +1,25 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  accountsservice clutter-gtk colord-gtk gnome-online-accounts gnome-settings-daemon grilo gsound libgtop libpwquality mitkrb shared-mime-info cheese cups samba gnome-bluetooth ibus ModemManager network-manager-applet
+
+<law>
+  sed -i '/ln -s/s/s /sf /' panels/user-accounts/meson.build &&
+
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

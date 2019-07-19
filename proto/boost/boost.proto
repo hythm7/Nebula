@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://dl.bintray.com/[NAME]org/release/[AGE]/source/[NAME]_&[NAME]-dl-version;.[TARBZ2]
+
+<cluster>
+  which
+
+<law>
+  ./bootstrap.sh --prefix=/usr &&
+./b2 stage threading=multi link=shared;
+./b2 install threading=multi link=shared                 &&
+ln -svf detail/sha1.hpp /usr/include/[NAME]/uuid/sha1.hpp
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

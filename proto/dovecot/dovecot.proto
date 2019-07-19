@@ -1,0 +1,50 @@
+<proto>
+  srcurl https://www.[NAME].org/releases/&[NAME]-major;.&[NAME]-minor;/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libtirpc
+
+<law>
+  groupadd -g 42 [NAME] &&
+useradd -c "Dovecot unprivileged user" -d /dev/null -u 42 \
+        -g [NAME] -s /bin/false [NAME] &&
+groupadd -g 43 dovenull &&
+useradd -c "Dovecot login user" -d /dev/null -u 43 \
+        -g dovenull -s /bin/false dovenull;
+sed -e "s;#include <unistd.h>;&\n#include <crypt.h>;" \
+    -i src/auth/mycrypt.c;
+CFLAGS+=" -I/usr/include/tirpc" \
+LDFLAGS+=" -ltirpc" \
+./configure --prefix=/usr                          \
+            --sysconfdir=/etc                      \
+            --localstatedir=/var                   \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --disable-static &&
+make;
+CFLAGS+=" -I/usr/include/tirpc" \
+LDFLAGS+=" -ltirpc" \
+./configure --prefix=/usr                          \
+            --sysconfdir=/etc                      \
+            --localstatedir=/var                   \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --disable-static                       \
+            --with-systemdsystemunitdir=/lib/systemd/system &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cp -rv /usr/share/doc/[NAME]-[AGE]/example-config/* /etc/[NAME];
+sed -i '/^\!include / s/^/#/' /etc/[NAME]/[NAME].conf &&
+chmod -v 1777 /var/mail &&
+cat > /etc/[NAME]/local.conf << "EOF"
+ 
+EOF;
+make install-[NAME];
+systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

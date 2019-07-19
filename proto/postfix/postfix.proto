@@ -1,0 +1,41 @@
+<proto>
+  srcurl ftp://ftp.porcupine.org/mirrors/[NAME]-release/official/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  db cyrus-sasl libnsl
+
+<law>
+  groupadd -g 32 [NAME] &&
+groupadd -g 33 postdrop &&
+useradd -c "Postfix Daemon User" -d /var/spool/[NAME] -g [NAME] \
+        -s /bin/false -u 32 [NAME] &&
+chown -v [NAME]:[NAME] /var/mail;
+sed -i 's/.\x08//g' README_FILES/*;
+sed -i -e 's/\$RELEASE_MAJOR/3/' \
+       -e '/Linux..3/s/34/345/' makedefs;
+make CCARGS="-DUSE_TLS -I/usr/include/openssl/                     \
+             -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl" \
+     AUXLIBS="-lssl -lcrypto -lsasl2"                              \
+     makefiles &&
+make;
+sh [NAME]-install -non-interactive \
+   daemon_directory=/usr/lib/[NAME] \
+   manpage_directory=/usr/share/man \
+   html_directory=/usr/share/doc/[NAME]-[AGE]/html \
+   readme_directory=/usr/share/doc/[NAME]-[AGE]/readme
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/aliases << "EOF"
+ 
+EOF;
+/usr/sbin/[NAME] upgrade-configuration;
+/usr/sbin/[NAME] check &&
+/usr/sbin/[NAME] start;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

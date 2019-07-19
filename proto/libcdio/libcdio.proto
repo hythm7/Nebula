@@ -1,0 +1,26 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install;
+tar -xf ../&[NAME]-paranoia;.[TARBZ2] &&
+cd &[NAME]-paranoia; &&
+
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

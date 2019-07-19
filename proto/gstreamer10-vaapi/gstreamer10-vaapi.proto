@@ -1,0 +1,26 @@
+<proto>
+  srcurl [GSTREAMER]/gstreamer-vaapi/gstreamer-vaapi-&gstreamer-vaapi-version;.[TARXZ]
+
+<cluster>
+  gstreamer10 gst10-plugins-base gst10-plugins-bad libva
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer &gstreamer-vaapi-version; BLFS" &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

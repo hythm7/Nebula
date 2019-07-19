@@ -1,0 +1,27 @@
+<proto>
+  srcurl http://download.kde.org/stable/[NAME]/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  make-ca cmake qt5 which
+
+<law>
+  sed -i 's@cert.pem@certs/ca-bundle.crt@' CMakeLists.txt;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=$QT5DIR            \
+      -DCMAKE_BUILD_TYPE=Release                \
+      -DQCA_MAN_INSTALL_DIR:PATH=/usr/share/man \
+      .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

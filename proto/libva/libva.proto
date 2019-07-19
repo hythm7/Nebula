@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/intel/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libdrm mesa
+
+<law>
+  ./configure $XORG_CONFIG &&
+make;
+make install;
+./configure $XORG_CONFIG &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

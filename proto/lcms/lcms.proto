@@ -1,0 +1,25 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-cve_2013_4276-1.patch &&
+
+./configure --prefix=/usr --disable-static       &&
+make;
+make install &&
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    README.1ST doc/* \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

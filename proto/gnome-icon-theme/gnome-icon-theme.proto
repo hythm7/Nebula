@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/3.12/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 gtk2 hicolor-icon-theme icon-naming-utils
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

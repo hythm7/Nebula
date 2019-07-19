@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://www.imagemagick.org/download/releases/ImageMagick-[AGE]-&[NAME]-patch-version;.[TARXZ]
+
+<cluster>
+  xorg7-lib
+
+<law>
+  patch -Np1 -i ../ImageMagick-[AGE]-&[NAME]-patch-version;-libs_only-1.patch &&
+autoreconf -fi                                          &&
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-hdri     \
+            --with-modules    \
+            --disable-static  &&
+make;
+make DOCUMENTATION_PATH=/usr/share/doc/imagemagick-[AGE] install-libs-only
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

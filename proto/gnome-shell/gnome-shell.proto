@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  evolution-data-server gjs gnome-control-center libcroco mutter sassc startup-notification sysv systemd gnome-bluetooth gst10-plugins-base network-manager-applet
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install;
+rm -v /usr/lib/systemd/user/[NAME]*
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

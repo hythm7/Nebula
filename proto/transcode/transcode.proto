@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://bitbucket.org/france/[NAME]-tcforge/downloads/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  ffmpeg alsa-lib lame libdvdread libmpeg2 xorg7-lib
+
+<law>
+  sed -i 's|doc/[NAME]|&-$(PACKAGE_VERSION)|' \
+       $(find . -name Makefile.in -exec grep -l 'docsdir =' {} \;) &&
+
+patch -Np1 -i ../[NAME]-[AGE]-ffmpeg4-1.patch                   &&
+./configure --prefix=/usr \
+            --enable-alsa \
+            --enable-libmpeg2 &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

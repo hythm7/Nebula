@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/release/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 graphite2 first texlive nodep nodep libreoffice icu freetype2 first nodep [NAME] nodep freetype2
+
+<law>
+  ./configure --prefix=/usr --with-gobject --with-graphite2 &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

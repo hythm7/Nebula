@@ -1,0 +1,22 @@
+<proto>
+  srcurl [SOURCEFORGE]/faac/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+./frontend/faad -o sample.wav ../sample.aac;
+aplay sample.wav;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

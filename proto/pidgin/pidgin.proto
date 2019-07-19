@@ -1,0 +1,33 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gtk2 libgcrypt gstreamer10 gnutls nss
+
+<law>
+  ./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --with-gstreamer=1.0 \
+            --disable-avahi      \
+            --disable-gtkspell   \
+            --disable-meanwhile  \
+            --disable-idn        \
+            --disable-nm         \
+            --disable-vv         \
+            --disable-tcl        &&
+make;
+make install &&
+mkdir -pv /usr/share/doc/[NAME]-[AGE] &&
+cp -v README doc/gtkrc-2.0 /usr/share/doc/[NAME]-[AGE];
+mkdir -pv /usr/share/doc/[NAME]-[AGE]/api &&
+cp -v doc/html/* /usr/share/doc/[NAME]-[AGE]/api
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

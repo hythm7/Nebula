@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gsettings-desktop-schemas gtk3 iso-codes itstool libseccomp libxml2 xkeyboard-config bubblewrap gobject-introspection
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+mkdir build &&
+cd build &&
+
+meson --prefix=/usr                 \
+      -Dgnome_distributor="BLFS" .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

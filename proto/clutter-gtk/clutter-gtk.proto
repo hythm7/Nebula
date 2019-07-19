@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.8/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  clutter gtk3 gobject-introspection
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

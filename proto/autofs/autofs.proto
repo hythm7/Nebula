@@ -1,0 +1,36 @@
+<proto>
+  srcurl [KERNEL]/linux/daemons/[NAME]/v5/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libtirpc rpcsvc-proto
+
+<law>
+  ./configure --prefix=/         \
+            --with-libtirpc    \
+            --without-openldap \
+            --mandir=/usr/share/man &&
+make;
+./configure --prefix=/         \
+            --with-libtirpc    \
+            --with-systemd     \
+            --without-openldap \
+            --mandir=/usr/share/man &&
+
+make;
+make install;
+make install_samples
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  mv /etc/auto.master /etc/auto.master.bak &&
+cat > /etc/auto.master << "EOF"
+ 
+EOF;
+make install-[NAME];
+systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

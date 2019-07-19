@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.7/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3
+
+<law>
+  mkdir build &&
+cd build &&
+
+meson --prefix=/usr -Dgtk_doc=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

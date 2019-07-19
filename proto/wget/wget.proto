@@ -1,19 +1,22 @@
 <proto>
-  srcurl https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  make-ca runtime
 
 <law>
-
-
-  ./configure                 \
-    --prefix=/usr             \
-    --sysconfdir=/etc         \
-    --with-ssl=openssl        \
-    --with-libssl-prefix=/usr;
-
-  make -j [NPROC];
+  ./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-ssl=openssl &&
+make;
+make install
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  wget.
+  [NAME].
+

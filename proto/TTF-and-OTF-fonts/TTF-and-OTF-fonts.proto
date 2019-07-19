@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.[TARGZ]
+
+<cluster>
+  
+
+<law>
+  
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  install -v -d -m755 /usr/share/fonts/dejavu &&
+install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu &&
+fc-cache -v /usr/share/fonts/dejavu
+
+<desc>
+  [NAME].
+

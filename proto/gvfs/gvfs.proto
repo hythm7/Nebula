@@ -1,0 +1,53 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.40/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus glib2 libusb libsecret libsoup gcr gtk3 libcdio libgdata libgudev sysv systemd udisks2
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-fix_security_vulnerabilities-1.patch;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr     \
+      --sysconfdir=/etc \
+      -Dfuse=false      \
+      -Dgphoto2=false   \
+      -Dafc=false       \
+      -Dbluray=false    \
+      -Dnfs=false       \
+      -Dmtp=false       \
+      -Dsmb=false       \
+      -Dtmpfilesdir=no  \
+      -Ddnssd=false     \
+      -Dgoa=false       \
+      -Dgoogle=false    \
+      -Dsystemduserunitdir=no .. &&
+ninja;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr     \
+      --sysconfdir=/etc \
+      -Dfuse=false      \
+      -Dgphoto2=false   \
+      -Dafc=false       \
+      -Dbluray=false    \
+      -Dnfs=false       \
+      -Dmtp=false       \
+      -Dsmb=false       \
+      -Ddnssd=false     \
+      -Dgoa=false       \
+      -Dgoogle=false    .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

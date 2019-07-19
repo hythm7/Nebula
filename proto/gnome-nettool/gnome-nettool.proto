@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/3.8/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 itstool libgtop
+
+<law>
+  sed -i 's/%s ping/%s/' src/ping.h &&
+sed -i '27 s/%s6/%s /' src/ping.h &&
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

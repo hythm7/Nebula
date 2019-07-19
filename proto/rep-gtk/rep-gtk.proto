@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://download.tuxfamily.org/librep/[NAME]/[NAME]_[AGE].[TARXZ]
+
+<cluster>
+  gtk2 librep
+
+<law>
+  ./autogen.sh --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/[AGE]/[NAME]-dist-[AGE].[TARXZ]
+
+<cluster>
+  freetype2 glib2 libxml2 cairo gtk2 harfbuzz pango desktop-file-utils shared-mime-info xorg7-lib
+
+<law>
+  ./configure --prefix=/usr     \
+            --enable-gtk2-use \
+            --disable-static  \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

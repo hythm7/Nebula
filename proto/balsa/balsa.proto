@@ -1,0 +1,24 @@
+<proto>
+  srcurl http://pawsa.fedorapeople.org/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  aspell enchant gmime libesmtp rarian pcre
+
+<law>
+  ./configure --prefix=/usr            \
+            --sysconfdir=/etc        \
+            --localstatedir=/var/lib \
+            --without-html-widget    \
+            --without-libnotify      &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

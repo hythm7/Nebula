@@ -1,0 +1,26 @@
+<proto>
+  srcurl http://downloads.[NAME].org/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake qt5
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-upstream_fixes-1.patch;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

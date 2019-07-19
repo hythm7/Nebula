@@ -1,0 +1,42 @@
+<proto>
+  srcurl http://www.[NAME].org/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr    \
+            --enable-shared  \
+            --enable-threads \
+            --enable-sse2    \
+            --enable-avx     &&
+make;
+make install;
+make clean &&
+
+./configure --prefix=/usr    \
+            --enable-shared  \
+            --enable-threads \
+            --enable-sse2    \
+            --enable-avx     \
+            --enable-float   &&
+make;
+make install;
+make clean &&
+
+./configure --prefix=/usr    \
+            --enable-shared  \
+            --enable-threads \
+            --enable-long-double &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

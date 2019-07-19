@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://people.freedesktop.org/~hughsient/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libusb gtk-doc gobject-introspection usbutils vala
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr -Ddocs=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

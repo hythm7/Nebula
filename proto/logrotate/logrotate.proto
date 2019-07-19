@@ -1,0 +1,46 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  popt fcron runtime
+
+<law>
+  ./configure --prefix=/usr        &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/[NAME].conf << EOF
+ 
+EOF
+
+chmod -v 0644 /etc/[NAME].conf;
+ mkdir -p /etc/[NAME].d;
+cat > /etc/[NAME].d/sys.log << EOF
+ 
+EOF
+
+chmod -v 0644 /etc/[NAME].d/sys.log;
+cat > /etc/[NAME].d/example.log << EOF
+ 
+EOF
+
+chmod -v 0644 /etc/[NAME].d/example.log;
+cat > /etc/cron.daily/[NAME].sh << "EOF" &&
+ 
+EOF
+chmod 754 /etc/cron.daily/[NAME].sh;
+cat > /lib/systemd/system/[NAME].service << "EOF" &&
+ 
+EOF
+cat > /lib/systemd/system/logroate.timer << "EOF" &&
+ 
+EOF
+systemctl enable [NAME].timer
+
+<desc>
+  [NAME].
+

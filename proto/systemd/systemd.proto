@@ -1,49 +1,50 @@
 <proto>
-  srcurl https://github.com/systemd/systemd/archive/v241/systemd-241.tar.gz
-  srcdir systemd-241
+  srcurl http://anduin.linuxfromscratch.org/LFS/[NAME]-[AGE]-&[NAME]-stable;.[TARXZ]
+
+<cluster>
+  linux-pam polkit runtime
 
 <law>
-
-  tar xvf [PROTO]/systemd-man-pages-241.tar.xz;
-
-  sed '177,$ d' -i src/resolve/meson.build;
   sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in;
+mkdir build &&
+cd    build &&
 
-  mkdir -p build;
-  cd       build;
+CFLAGS+="-Wno-format-overflow" \
+meson --prefix=/usr         \
+      --sysconfdir=/etc     \
+      --localstatedir=/var  \
+      -Dblkid=true          \
+      -Dbuildtype=release   \
+      -Ddefault-dnssec=no   \
+      -Dfirstboot=false     \
+      -Dinstall-tests=false \
+      -Dldconfig=false      \
+      -Drootprefix=         \
+      -Drootlibdir=/lib     \
+      -Dsplit-usr=true      \
+      -Dsysusers=false      \
+      -Drpmmacrosdir=no     \
+      -Db_lto=false         \
+      ..                    &&
 
-  PKG_CONFIG_PATH="/usr/lib/pkgconfig:/tools/lib/pkgconfig" \
-  LANG=en_US.UTF-8                   \
-  meson --prefix=/usr                \
-        --sysconfdir=/etc            \
-        --localstatedir=/var         \
-        -Dblkid=true                 \
-        -Dbuildtype=release          \
-        -Ddefault-dnssec=no          \
-        -Dfirstboot=false            \
-        -Dinstall-tests=false        \
-        -Dkill-path=/bin/kill        \
-        -Dkmod-path=/bin/kmod        \
-        -Dldconfig=false             \
-        -Dmount-path=/bin/mount      \
-        -Drootprefix=                \
-        -Drootlibdir=/lib            \
-        -Dsplit-usr=true             \
-        -Dsulogin-path=/sbin/sulogin \
-        -Dsysusers=false             \
-        -Dumount-path=/bin/umount    \
-        -Db_lto=false                \
-        ..;
-
-  LANG=en_US.UTF-8 NINJAJOBS=4 ninja;
+ninja;
+systemctl start rescue.target;
+ninja install
 
 <install>
+  make DESTDIR=[XYZ] install
 
-  cd build;
-  LANG=en_US.UTF-8 DESTDIR=[XYZ] ninja install;
-  rm -rfv [XYZ]/usr/lib/rpm;
-  rm -f [XYZ]/usr/bin/xsltproc;
-  rm -f [XYZ]/usr/lib/tmpfiles.d/systemd-nologin.conf;
+<config>
+  cat >> /etc/pam.d/system-session << "EOF"
+ 
+EOF
+
+cat > /etc/pam.d/[NAME]-user << "EOF"
+ 
+EOF;
+systemctl daemon-reload
+systemctl start multi-user.target
 
 <desc>
-  systemd.
+  [NAME].
+

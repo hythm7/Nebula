@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/PipeWire/[NAME]/archive/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  ffmpeg gstreamer10 gst10-plugins-base libva sbc sdl2
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

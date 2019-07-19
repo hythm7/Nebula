@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.40/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 xorg7-lib gobject-introspection
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

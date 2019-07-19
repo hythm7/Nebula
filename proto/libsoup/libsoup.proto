@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.66/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib-networking libpsl libxml2 sqlite gobject-introspection vala
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr -Dvapi=true -Dgssapi=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

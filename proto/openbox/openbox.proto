@@ -1,0 +1,37 @@
+<proto>
+  srcurl http://[NAME].org/dist/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  x-window-system pango
+
+<law>
+  export LIBRARY_PATH=$XORG_PREFIX/lib;
+2to3-&python3-majorver; -w data/autostart/[NAME]-xdg-autostart &&
+sed 's/python/python3/' -i data/autostart/[NAME]-xdg-autostart;
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cp -rf /etc/xdg/[NAME] ~/.config;
+ls -d /usr/share/themes/*/[NAME]-3 | sed 's#.*es/##;s#/o.*##';
+echo [NAME] > ~/.xinitrc;
+cat > ~/.xinitrc << "EOF"
+ 
+EOF;
+cat > ~/.xinitrc << "EOF"
+ 
+EOF;
+cat > ~/.xinitrc << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

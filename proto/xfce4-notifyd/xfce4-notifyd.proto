@@ -1,0 +1,21 @@
+<proto>
+  srcurl http://archive.xfce.org/src/apps/[NAME]/0.4/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libnotify libxfce4ui xfce4-panel
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install;
+notify-send -i info Information "Hi ${USER}, This is a Test"
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

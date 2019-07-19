@@ -1,0 +1,31 @@
+<proto>
+  srcurl https://dbus.freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  dbus glib2 python2
+
+<law>
+  mkdir python2 &&
+pushd python2 &&
+PYTHON=/usr/bin/python2     \
+../configure --prefix=/usr --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make &&
+popd;
+mkdir python3 &&
+pushd python3 &&
+PYTHON=/usr/bin/python3    \
+../configure --prefix=/usr --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make &&
+popd;
+make -C python2 install;
+make -C python3 install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

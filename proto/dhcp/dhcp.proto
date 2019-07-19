@@ -1,0 +1,55 @@
+<proto>
+  srcurl ftp://ftp.isc.org/isc/[NAME]/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ( export CFLAGS="$CFLAGS -Wall -fno-strict-aliasing                 \
+        -D_PATH_DHCLIENT_SCRIPT='\"/sbin/dhclient-script\"'         \
+        -D_PATH_DHCPD_CONF='\"/etc/[NAME]/[NAME]d.conf\"'               \
+        -D_PATH_DHCLIENT_CONF='\"/etc/[NAME]/dhclient.conf\"'"        &&
+
+./configure --prefix=/usr                                           \
+            --sysconfdir=/etc/[NAME]                                  \
+            --localstatedir=/var                                    \
+            --with-srv-lease-file=/var/lib/[NAME]d/[NAME]d.leases       \
+            --with-srv6-lease-file=/var/lib/[NAME]d/[NAME]d6.leases     \
+            --with-cli-lease-file=/var/lib/dhclient/dhclient.leases \
+            --with-cli6-lease-file=/var/lib/dhclient/dhclient6.leases
+) &&
+make -j1;
+make -C client install         &&
+mv -v /usr/sbin/dhclient /sbin &&
+install -v -m755 client/scripts/linux /sbin/dhclient-script;
+make -C server install;
+make install                   &&
+mv -v /usr/sbin/dhclient /sbin &&
+install -v -m755 client/scripts/linux /sbin/dhclient-script
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  install -vdm755 /etc/[NAME] &&
+cat > /etc/[NAME]/dhclient.conf << "EOF"
+ 
+EOF;
+install -v -dm 755 /var/lib/dhclient;
+make install-dhclient;
+dhclient ;
+systemctl start dhclient@;
+make install-service-dhclient;
+cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
+ 
+EOF;
+systemctl enable dhclient@;
+cat > /etc/[NAME]/[NAME]d.conf << "EOF"
+ 
+EOF;
+install -v -dm 755 /var/lib/[NAME]d;
+make install-[NAME]d
+
+<desc>
+  [NAME].
+

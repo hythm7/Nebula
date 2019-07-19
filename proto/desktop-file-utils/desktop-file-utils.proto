@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  install -vdm755 /usr/share/applications &&
+update-desktop-database /usr/share/applications
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://gitlab.freedesktop.org/[NAME]/[NAME]/uploads/c438511024b9bc5a904f8775cfc8e4c4/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus-glib libgudev libusb polkit
+
+<law>
+  ./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --enable-deprecated  \
+            --disable-static     &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

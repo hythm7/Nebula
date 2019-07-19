@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://github.com/Jehan/[NAME]/archive/v[AGE]/[NAME]-v[AGE].[TARGZ]
+
+<cluster>
+  runtime libmypaint
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-automake_1.16-1.patch &&
+./autogen.sh                                                 &&
+./configure --prefix=/usr                                    &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

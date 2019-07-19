@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://archive.apache.org/dist/apr/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  apr
+
+<law>
+  ./configure --prefix=/usr       \
+            --with-apr=/usr     \
+            --with-gdbm=/usr    \
+            --with-openssl=/usr \
+            --with-crypto &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

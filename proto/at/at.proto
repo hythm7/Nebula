@@ -1,0 +1,35 @@
+<proto>
+  srcurl http://ftp.debian.org/debian/pool/main/a/[NAME]/[NAME]_[AGE].orig.[TARGZ]
+
+<cluster>
+  server-mail
+
+<law>
+  groupadd -g 17 [NAME]d                                                  &&
+useradd -d /dev/null -c "[NAME]d daemon" -g [NAME]d -s /bin/false -u 17 [NAME]d &&
+mkdir -p /var/spool/cron;
+sed -i '/docdir/s/=.*/= @docdir@/' Makefile.in;
+autoreconf;
+./configure --with-daemon_username=[NAME]d        \
+            --with-daemon_groupname=[NAME]d       \
+            SENDMAIL=/usr/sbin/sendmail       &&
+
+make -j1;
+./configure --with-daemon_username=[NAME]d        \
+            --with-daemon_groupname=[NAME]d       \
+            SENDMAIL=/usr/sbin/sendmail       \
+            --with-systemdsystemunitdir=/lib/systemd/system &&
+make -j1;
+make install docdir=/usr/share/doc/[NAME]-[AGE] \
+             [NAME]docdir=/usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME]d;
+systemctl enable [NAME]d
+
+<desc>
+  [NAME].
+

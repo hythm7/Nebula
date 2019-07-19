@@ -1,0 +1,31 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus-glib sysv gnome-desktop json-glib mesa systemd upower
+
+<law>
+  sed 's@/bin/sh@/bin/sh -l@' -i [NAME]/[NAME].in;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr           \
+      -Dsystemd_journal=false \
+      .. &&
+ninja;
+mkdir build &&
+cd    build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

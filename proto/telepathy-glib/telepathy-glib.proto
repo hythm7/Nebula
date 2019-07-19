@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://telepathy.freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  dbus-glib libxslt gobject-introspection vala
+
+<law>
+  ./configure --prefix=/usr          \
+            --enable-vala-bindings \
+            --disable-static       &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

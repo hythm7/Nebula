@@ -1,0 +1,33 @@
+<proto>
+  srcurl https://www.samba.org/ftp/[NAME]/src/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  popt
+
+<law>
+  groupadd -g 48 [NAME]d &&
+useradd -c "[NAME]d Daemon" -d /home/[NAME] -g [NAME]d \
+    -s /bin/false -u 48 [NAME]d;
+./configure --prefix=/usr --without-included-zlib &&
+make;
+doxygen;
+make install;
+install -v -m755 -d          /usr/share/doc/[NAME]-[AGE]/api &&
+install -v -m644 dox/html/*  /usr/share/doc/[NAME]-[AGE]/api
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/[NAME]d.conf << "EOF"
+ 
+EOF;
+make install-[NAME]d;
+systemctl stop [NAME]d &&
+systemctl disable [NAME]d &&
+systemctl enable [NAME]d.socket &&
+systemctl start [NAME]d.socket
+
+<desc>
+  [NAME].
+

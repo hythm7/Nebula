@@ -1,0 +1,39 @@
+<proto>
+  srcurl https://[NAME].freedesktop.org/archive/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  xorg7-lib libdrm Mako libva libvdpau llvm http://www.[NAME]3d.org/systems.html nodep wayland-protocols plasma5-build nodep nodep gtk3
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-add_xdemos-1.patch;
+GALLIUM_DRV="i915,nouveau,r600,radeonsi,svga,swrast,virgl"
+DRI_DRIVERS="i965,nouveau";
+mkdir build &&
+cd    build &&
+
+meson --prefix=$XORG_PREFIX          \
+      -Dbuildtype=release            \
+      -Ddri-drivers=$DRI_DRIVERS     \
+      -Dgallium-drivers=$GALLIUM_DRV \
+      -Dgallium-nine=false           \
+      -Dglx=dri                      \
+      -Dos[NAME]=gallium               \
+      -Dvalgrind=false               \
+      ..                             &&
+
+unset GALLIUM_DRV DRI_DRIVERS &&
+
+ninja;
+ninja install;
+install -v -dm755 /usr/share/doc/[NAME]-[AGE] &&
+cp -rfv ../docs/* /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

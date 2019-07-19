@@ -1,0 +1,24 @@
+<proto>
+  srcurl &[NAME]-source;/release-[AGE]-stable/[NAME]-[AGE]-stable.[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+doxygen Doxyfile;
+make install;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/api &&
+cp      -v -R       doxygen/html/* \
+                    /usr/share/doc/[NAME]-[AGE]/api
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

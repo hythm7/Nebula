@@ -1,0 +1,30 @@
+<proto>
+  srcurl https://github.com/AbiWord/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  glib2 aspell
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install                                   &&
+rm -rf /usr/include/[NAME]                    &&
+ln -sfv [NAME]-2       /usr/include/[NAME]   &&
+ln -sfv [NAME]-2       /usr/bin/[NAME]       &&
+ln -sfv lib[NAME]-2.so /usr/lib/lib[NAME].so &&
+ln -sfv [NAME]-2.pc    /usr/lib/pkgconfig/[NAME].pc
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /tmp/test-[NAME].txt << "EOF"
+ 
+EOF
+
+[NAME] -d en_GB -l /tmp/test-[NAME].txt &&
+[NAME] -d en_GB -a /tmp/test-[NAME].txt
+
+<desc>
+  [NAME].
+

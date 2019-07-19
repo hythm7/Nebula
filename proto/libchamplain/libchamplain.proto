@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.12/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  clutter clutter-gtk gtk3 libsoup sqlite gobject-introspection vala
+
+<law>
+  cd build &&
+
+meson --prefix=/usr .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

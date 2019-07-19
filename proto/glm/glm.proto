@@ -1,0 +1,24 @@
+<proto>
+  srcurl https://github.com/g-truc/[NAME]/archive/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake
+
+<law>
+  mkdir build &&
+cd build    &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr   \
+      -DCMAKE_INSTALL_LIBDIR=lib .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

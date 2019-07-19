@@ -1,0 +1,22 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  gtkmm2 parted
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-doc    \
+            --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,21 @@
+<proto>
+  srcurl http://[NAME].org/dist/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libpcap pcre liblinear
+
+<law>
+  ./configure --prefix=/usr --with-liblua=included &&
+make;
+sed -i 's/lib./lib/' ze[NAME]/test/run_tests.py;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

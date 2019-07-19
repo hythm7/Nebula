@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://people.freedesktop.org/~rdieter/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  xmlto lynx Links &w3m-url;
+
+<law>
+  ./configure --prefix=/usr --mandir=/usr/share/man &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/i-rinat/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake ffmpeg libvdpau libva
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  echo "export VDPAU_DRIVER=va_gl" >> /etc/profile.d/xorg.sh
+
+<desc>
+  [NAME].
+

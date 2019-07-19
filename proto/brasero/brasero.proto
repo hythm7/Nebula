@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/3.12/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gst10-plugins-base itstool libcanberra libnotify gobject-introspection libburn libisoburn libisofs nautilus totem-pl-parser
+
+<law>
+  ./configure --prefix=/usr                \
+            --enable-compile-warnings=no \
+            --enable-cxx-warnings=no     &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

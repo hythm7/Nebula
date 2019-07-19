@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/12.0/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  desktop-file-utils gtk3 itstool unzip wget gobject-introspection vala
+
+<law>
+  LIBS="-ldl"               \
+./configure --prefix=/usr \
+            --enable-vala \
+            --with-unicode-data=download &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,98 @@
+<proto>
+  srcurl &[NAME]-dl;/[NAME]-&[NAME]-dlversion;.[TARXZ]
+
+<cluster>
+  perl-archive-zip unzip wget which zip apache-ant apr boost clucene cups curl dbus-glib libjpeg glm glu gpgme graphite2 gst10-plugins-base gtk3 gtk2 harfbuzz icu libatomic_ops lcms2 librsvg libxml2 libxslt mesa neon nss openldap poppler postgresql redland serf unixodbc
+
+<law>
+  tar -xf [NAME]-&[NAME]-dlversion;.[TARXZ] --no-overwrite-dir &&
+cd [NAME]-&[NAME]-dlversion;;
+install -dm755 external/tarballs &&
+ln -sv ../../../[NAME]-dictionaries-&[NAME]-dlversion;.[TARXZ] external/tarballs/ &&
+ln -sv ../../../[NAME]-help-&[NAME]-dlversion;.[TARXZ]         external/tarballs/;
+ln -sv ../../../[NAME]-translations-&[NAME]-dlversion;.[TARXZ] external/tarballs/;
+export LO_PREFIX=;
+sed -e "/gzip -f/d"   \
+    -e "s|.1.gz|.1|g" \
+    -i bin/distro-install-desktop-integration &&
+
+sed -e "/distro-install-file-lists/d" -i Makefile.in &&
+
+ 
+./autogen.sh --prefix=$LO_PREFIX         \
+             --sysconfdir=/etc           \
+             --with-vendor=BLFS          \
+             --with-lang='fr en-GB'      \
+             --with-help                 \
+             --with-myspell-dicts        \
+             --without-junit             \
+             --without-system-dicts      \
+             --disable-dconf             \
+             --disable-odk               \
+             --enable-release-build=yes  \
+             --enable-python=system      \
+             --with-system-apr           \
+             --with-system-boost         \
+             --with-system-cairo         \
+             --with-system-clucene       \
+             --with-system-curl          \
+             --with-system-expat         \
+             --with-system-glm           \
+             --with-system-gpgmepp       \
+             --with-system-graphite      \
+             --with-system-harfbuzz      \
+             --with-system-icu           \
+             --with-system-jpeg          \
+             --with-system-lcms2         \
+             --with-system-libatomic_ops \
+             --with-system-libpng        \
+             --with-system-libxml        \
+             --with-system-neon          \
+             --with-system-nss           \
+             --with-system-odbc          \
+             --with-system-openldap      \
+             --with-system-openssl       \
+             --with-system-poppler       \
+             --with-system-postgresql    \
+             --with-system-redland       \
+             --with-system-serf          \
+             --with-system-zlib;
+make build-nocheck;
+make distro-pack-install;
+if [ "$LO_PREFIX" != "/usr" ]; then
+
+  # This symlink is necessary for the desktop menu entries
+  ln -svf $LO_PREFIX/lib/[NAME]/program/soffice /usr/bin/[NAME] &&
+
+  # Set up a generic location independent of version number
+  ln -sfv [NAME]-&[NAME]-dlversion; /opt/[NAME] 
+
+  # Icons
+  mkdir -vp /usr/share/pixmaps
+  for i in $LO_PREFIX/share/icons/hicolor/32x32/apps/*; do
+    ln -svf $i /usr/share/pixmaps
+  done &&
+
+  # Desktop menu entries
+  for i in $LO_PREFIX/lib/[NAME]/share/xdg/*; do
+    ln -svf $i /usr/share/applications/[NAME]-$(basename $i)
+  done &&
+
+  # Man pages
+  for i in $LO_PREFIX/share/man/man1/*; do
+    ln -svf $i /usr/share/man/man1/
+  done
+
+  unset i
+fi;
+update-desktop-database
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

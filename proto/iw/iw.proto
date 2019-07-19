@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://www.kernel.org/pub/software/network/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libnl
+
+<law>
+  sed -i "/INSTALL.*gz/s/.gz//" Makefile &&
+make;
+make SBINDIR=/sbin install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,25 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.1/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gtk2
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-upstream_fixes-1.patch &&
+autoreconf -fi &&
+
+./configure --prefix=/usr  \
+            --disable-dbus \
+            --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

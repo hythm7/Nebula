@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libxml2
+
+<law>
+  ./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-lib-only \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://[NAME].finalrewind.org/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libpng imlib2 giflib curl
+
+<law>
+  sed -i "s:doc/[NAME]:&-[AGE]:" config.mk &&
+make PREFIX=/usr;
+make PREFIX=/usr install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

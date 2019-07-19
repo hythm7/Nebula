@@ -1,0 +1,21 @@
+<proto>
+  srcurl http://archive.xfce.org/src/archive/[NAME]/3.2/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gtk2 gtk3
+
+<law>
+  sed -i 's/\xd6/\xc3\x96/' gtk-3.0/xfce_style_types.h &&
+./configure --prefix=/usr --enable-gtk3              &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

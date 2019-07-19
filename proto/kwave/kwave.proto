@@ -1,0 +1,26 @@
+<proto>
+  srcurl &kf5apps-download-http;/[NAME]-&kf5apps-version;.[TARXZ]
+
+<cluster>
+  audiofile fftw id3lib kf5-frameworks alsa-lib flac libogg pulseaudio
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX \
+      -DCMAKE_BUILD_TYPE=Release         \
+      -DBUILD_TESTING=OFF                \
+      -Wno-dev .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

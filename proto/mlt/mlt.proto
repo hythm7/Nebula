@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://github.com/[NAME]framework/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr            \
+            --enable-gpl             \
+            --enable-gpl3            \
+            --enable-opengl          \
+            --disable-gtk2           \
+            --qt-libdir=$QT5DIR/lib  \
+            --qt-includedir=$QT5DIR/include &&
+make;
+./src/melt/melt <filename>.mp4;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

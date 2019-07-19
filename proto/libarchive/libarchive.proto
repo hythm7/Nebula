@@ -1,18 +1,20 @@
 <proto>
-  srcurl https://github.com/libarchive/libarchive/releases/download/v3.4.0/libarchive-3.4.0.tar.gz
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
 
 <law>
-
-  ./configure        \
-    --prefix=/usr  \
-    --without-xml2   \
-    --without-nettle \
-    --disable-static;
-
-  make -j [NPROC];
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  libarchive.
+  [NAME].
+

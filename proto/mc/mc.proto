@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://ftp.midnight-commander.org/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 pcre slang
+
+<law>
+  ./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --enable-charset &&
+make;
+make install &&
+cp -v doc/keybind-migration.txt /usr/share/[NAME]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-20;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk3 libcanberra gtk3
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static  &&
+make;
+make install;
+pgrep -l notification-da &&
+notify-send -i info Information "Hi ${USER}, This is a Test"
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

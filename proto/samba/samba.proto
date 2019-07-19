@@ -1,0 +1,69 @@
+<proto>
+  srcurl https://www.[NAME].org/ftp/[NAME]/stable/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  jansson libtirpc lmdb python2 rpcsvc-proto fuse3 gpgme libxslt perl-parse-yapp pycrypto openldap
+
+<law>
+  echo "^[NAME]4.rpc.echo.*on.*ncacn_np.*with.*object.*nt4_dc" >> selftest/knownfail;
+CFLAGS="-I/usr/include/tirpc"          \
+LDFLAGS="-ltirpc"                      \
+./configure                            \
+    --prefix=/usr                      \
+    --sysconfdir=/etc                  \
+    --localstatedir=/var               \
+    --with-piddir=/run/[NAME]           \
+    --with-pammodulesdir=/lib/security \
+    --enable-fhs                       \
+    --without-ad-dc                    \
+    --without-systemd                  \
+    --enable-selftest                  &&
+make;
+CFLAGS="-I/usr/include/tirpc"          \
+LDFLAGS="-ltirpc"                      \
+./configure                            \
+    --prefix=/usr                      \
+    --sysconfdir=/etc                  \
+    --localstatedir=/var               \
+    --with-piddir=/run/[NAME]           \
+    --with-pammodulesdir=/lib/security \
+    --enable-fhs                       \
+    --without-ad-dc                    \
+    --enable-selftest                  &&
+make;
+make install &&
+
+mv -v /usr/lib/libnss_win{s,bind}.so*   /lib                       &&
+ln -v -sf ../../lib/libnss_winbind.so.2 /usr/lib/libnss_winbind.so &&
+ln -v -sf ../../lib/libnss_wins.so.2    /usr/lib/libnss_wins.so    &&
+
+install -v -m644    examples/smb.conf.default /etc/[NAME] &&
+
+mkdir -pv /etc/openldap/schema                        &&
+
+install -v -m644    examples/LDAP/README              \
+                    /etc/openldap/schema/README.LDAP  &&
+
+install -v -m644    examples/LDAP/[NAME]*              \
+                    /etc/openldap/schema              &&
+
+install -v -m755    examples/LDAP/{get*,ol*} \
+                    /etc/openldap/schema
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  ln -v -sf /usr/bin/smbspool /usr/lib/cups/backend/smb;
+make install-[NAME];
+make install-winbindd;
+make install-[NAME];
+make install-winbindd;
+systemctl stop smbd &&
+systemctl disable smbd &&
+systemctl enable smbd.socket &&
+systemctl start smbd.socket
+
+<desc>
+  [NAME].
+

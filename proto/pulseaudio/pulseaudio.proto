@@ -1,0 +1,39 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libsndfile alsa-lib dbus sysv glib2 libcap-pam speex xorg7-lib
+
+<law>
+  sed -i "s:asoundlib.h:alsa/asoundlib.h:" src/modules/alsa/*.{c,h} &&
+sed -i "s:use-case.h:alsa/use-case.h:" configure.ac &&
+sed -i "s:use-case.h:alsa/use-case.h:" src/modules/alsa/alsa-ucm.h;
+NOCONFIGURE=1 ./bootstrap.sh     &&
+./configure --prefix=/usr                \
+            --sysconfdir=/etc            \
+            --localstatedir=/var         \
+            --disable-bluez4             \
+            --disable-bluez5             \
+            --disable-rpath              \
+            --with-systemduserunitdir=no &&
+make;
+NOCONFIGURE=1 ./bootstrap.sh     &&
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-bluez4     \
+            --disable-bluez5     \
+            --disable-rpath      &&
+make;
+make install;
+rm -fv /etc/dbus-1/system.d/[NAME]-system.conf
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  sed -i '/load-module module-console-kit/s/^/#/' /etc/pulse/default.pa
+
+<desc>
+  [NAME].
+

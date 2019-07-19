@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  colord fontconfig geoclue2 geocode-glib gnome-desktop lcms2 libcanberra libgweather libnotify librsvg libwacom pulseaudio sysv systemd upower xorg-wacom-driver alsa cups NetworkManager nss wayland
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

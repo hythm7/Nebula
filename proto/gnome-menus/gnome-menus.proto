@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/3.32/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 gobject-introspection
+
+<law>
+  gsettings reset-recursively org.gnome.desktop.app-folders;
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

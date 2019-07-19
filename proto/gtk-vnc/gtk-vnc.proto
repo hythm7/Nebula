@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.9/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gnutls gtk3 libgcrypt gobject-introspection python2 vala
+
+<law>
+  ./configure --prefix=/usr  \
+            --with-gtk=3.0 \
+            --enable-vala  \
+            --without-sasl &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

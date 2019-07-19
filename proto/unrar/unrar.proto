@@ -1,0 +1,19 @@
+<proto>
+  srcurl http://www.rarlab.com/rar/[NAME]src-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  make -f makefile;
+install -v -m755 [NAME] /usr/bin
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

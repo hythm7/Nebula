@@ -1,0 +1,90 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.18/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  dbus-glib libndp curl dhcpcd dhcp gobject-introspection iptables jansson newt nss polkit pygobject3 sysv systemd upower vala wpa_supplicant
+
+<law>
+  sed -e '/Qt[CDN]/s/Qt/Qt5/g'       \
+    -e 's/-qt4/-qt5/'              \
+    -e 's/moc_location/host_bins/' \
+    -i examples/C/qt/meson.build;
+sed '/initrd/d' -i src/meson.build;
+grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/';
+mkdir build &&
+cd    build &&
+
+CXXFLAGS+="-O2 -fPIC"            \
+meson --prefix /usr              \
+      --sysconfdir /etc          \
+      --localstatedir /var       \
+      -Djson_validation=false    \
+      -Dlibaudit=no              \
+      -Dlibnm_glib=true          \
+      -Dlibpsl=false             \
+      -Dnmtui=true               \
+      -Dovs=false                \
+      -Dppp=false                \
+      -Dselinux=false            \
+      -Dudev_dir=/lib/udev       \
+      -Dsession_tracking=elogind \
+      -Dmodem_manager=false      \
+      -Dsystemdsystemunitdir=no  \
+      -Dsystemd_journal=false    \
+      -Dqt=false                 \
+      .. &&
+ninja;
+mkdir build &&
+cd    build    &&
+
+CXXFLAGS+="-O2 -fPIC"            \
+meson --prefix /usr              \
+      --sysconfdir /etc          \
+      --localstatedir /var       \
+      -Djson_validation=false    \
+      -Dlibaudit=no              \
+      -Dlibnm_glib=true          \
+      -Dlibpsl=false             \
+      -Dnmtui=true               \
+      -Dovs=false                \
+      -Dppp=false                \
+      -Dselinux=false            \
+      -Dqt=false                 \
+      -Dudev_dir=/lib/udev       \
+      -Dsession_tracking=systemd \
+      -Dmodem_manager=false      \
+      -Dsystemdsystemunitdir=/lib/systemd/system \
+      .. &&
+ninja;
+ninja install &&
+mv -v /usr/share/doc/[NAME]{,-[AGE]}
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/[NAME]/[NAME].conf << "EOF"
+ 
+EOF;
+cat > /etc/[NAME]/conf.d/polkit.conf << "EOF"
+ 
+EOF;
+cat > /etc/[NAME]/conf.d/dhcp.conf << "EOF"
+ 
+EOF;
+cat > /etc/[NAME]/conf.d/no-dns-update.conf << "EOF"
+ 
+EOF;
+groupadd -fg 86 netdev &&
+/usr/sbin/usermod -a -G netdev  
+
+cat > /usr/share/polkit-1/rules.d/org.freedesktop.[NAME].rules << "EOF"
+ 
+EOF;
+make install-networkmanager;
+systemctl enable [NAME];
+systemctl enable [NAME]-wait-online
+
+<desc>
+  [NAME].
+

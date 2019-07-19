@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNUPGHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  sed -i 's/namespace/pkg_&/' src/Makefile.{am,in} src/mkstrtable.awk;
+./configure --prefix=/usr &&
+make;
+make install &&
+install -v -m644 -D README /usr/share/doc/[NAME]-[AGE]/README
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

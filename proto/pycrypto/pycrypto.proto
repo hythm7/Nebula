@@ -1,0 +1,21 @@
+<proto>
+  srcurl &pymodules-dl;/p/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  python2
+
+<law>
+  python2 setup.py build &&
+python3 setup.py build;
+python2 setup.py install --optimize=1 &&
+python3 setup.py install --optimize=1
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

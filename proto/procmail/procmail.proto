@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://www.ring.gr.jp/archives/net/mail/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  server-mail
+
+<law>
+  sed -i 's/getline/get_line/' src/*.[ch]                   &&
+patch -Np1 -i ../[NAME]-[AGE]-consolidated_fixes-1.patch &&
+
+make LOCKINGTEST=/tmp MANDIR=/usr/share/man install       &&
+make install-suid
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

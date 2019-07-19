@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://dbus.freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  dbus glib2
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

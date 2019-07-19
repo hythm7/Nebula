@@ -1,0 +1,25 @@
+<proto>
+  srcurl http://www.[NAME].org/data/LibRaw-[AGE].[TARGZ]
+
+<cluster>
+  libjpeg jasper lcms2
+
+<law>
+  ./configure --prefix=/usr    \
+            --enable-jpeg    \
+            --enable-jasper  \
+            --enable-lcms    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

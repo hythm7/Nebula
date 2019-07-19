@@ -1,0 +1,30 @@
+<proto>
+  srcurl http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-&JS60-version;.[TARBZ2]
+
+<cluster>
+  autoconf213 icu nspr python2 xorg7-lib zip
+
+<law>
+  patch -Np1 -i ../[NAME]-&JS60-version;-security_fix-1.patch;
+mkdir mozjs-build &&
+cd    mozjs-build &&
+
+../js/src/configure --prefix=/usr       \
+                    --with-intl-api     \
+                    --with-system-zlib  \
+                    --with-system-nspr  \
+                    --with-system-icu   \
+                    --disable-jemalloc  \
+                    --enable-readline   &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

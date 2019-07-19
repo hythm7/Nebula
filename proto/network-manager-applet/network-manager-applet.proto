@@ -1,0 +1,28 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.8/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gcr gtk3 iso-codes libsecret libnotify NetworkManager gobject-introspection ModemManager
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr     \
+      --sysconfdir=/etc \
+      -Dselinux=false   \
+      -Dteam=false      \
+      -Dmobile_broadband_provider_info=false \
+      -Dgtk_doc=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

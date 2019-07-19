@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://archive.xfce.org/src/xfce/[NAME]/0.8/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  exo libgudev libxfce4ui libnotify startup-notification
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://people.freedesktop.org/~dbn/[NAME]/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/ --mandir=/usr/share/man &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

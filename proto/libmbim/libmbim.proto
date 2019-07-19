@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libgudev
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,18 +1,25 @@
 <proto>
-  srcurl https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
-  srcdir expect5.45.4
+  srcurl [SOURCEFORGE]/[NAME]/[NAME][AGE].[TARGZ]
+
+<cluster>
+  tcl
 
 <law>
-
-  ./configure \
-    --prefix=/tools                   \
-    --with-tcl=/tools/lib             \
-    --with-tclinclude=/tools/include;
-
-  make -j [NPROC];
+  ./configure --prefix=/usr           \
+            --with-tcl=/usr/lib     \
+            --enable-shared         \
+            --mandir=/usr/share/man \
+            --with-tclinclude=/usr/include &&
+make;
+make install &&
+ln -svf [NAME][AGE]/lib[NAME][AGE].so /usr/lib
 
 <install>
-  make DESTDIR=[XYZ] SCRIPTS="" install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  Expect is a tool for automating interactive applications such as telnet, ftp, passwd, fsck, rlogin, tip, etc. Expect really makes this stuff trivial. Expect is also useful for testing these same applications.
+  [NAME].
+

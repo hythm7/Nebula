@@ -1,0 +1,41 @@
+<proto>
+  srcurl &sources-anduin-http;/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  sed -i -e 's:<[NAME].h>:"headers/[NAME].h":' src/prog/{display-buttons,display-coords,get-versions}.c &&
+patch -Np1 -i ../[NAME]-[AGE]-glibc_2.26-1.patch &&
+./autogen.sh                                &&
+./configure --prefix=/usr --sysconfdir=/etc &&
+make;
+make install                                          &&
+
+install-info --dir-file=/usr/share/info/dir           \
+             /usr/share/info/[NAME].info                 &&
+
+ln -sfv lib[NAME].so.2.1.0 /usr/lib/lib[NAME].so            &&
+install -v -m644 conf/[NAME]-root.conf /etc              &&
+
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE]/support &&
+install -v -m644    doc/support/*                     \
+                    /usr/share/doc/[NAME]-[AGE]/support &&
+install -v -m644    doc/{FAQ,HACK_GPM,README*}        \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+cat > /etc/sysconfig/mouse << "EOF"
+ 
+EOF;
+install -v -dm755 /etc/systemd/system/[NAME].service.d &&
+cat > /etc/systemd/system/[NAME].service.d/99-user.conf << EOF
+ EOF
+
+<desc>
+  [NAME].
+

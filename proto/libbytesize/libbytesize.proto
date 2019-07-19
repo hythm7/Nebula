@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://github.com/storaged-project/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  pcre2
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

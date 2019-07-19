@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://xmlsoft.org/sources/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libxml2 DocBook docbook-xsl
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-security_fix-1.patch;
+sed -i s/3000/5000/ [NAME]/transform.c doc/xsltproc.{1,xml} &&
+./configure --prefix=/usr --disable-static                   &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

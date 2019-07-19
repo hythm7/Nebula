@@ -1,0 +1,21 @@
+<proto>
+  srcurl &anduin-download;/OpenJDK-&openjdk-version;+&openjdk-build;-i686-bin.[TARXZ]
+
+<cluster>
+  alsa-lib runtime runtime cups runtime giflib xorg7-lib runtime
+
+<law>
+  install -vdm755 /opt/OpenJDK-&openjdk-version;+&openjdk-build;-bin &&
+mv -v * /opt/OpenJDK-&openjdk-version;+&openjdk-build;-bin         &&
+chown -R root:root /opt/OpenJDK-&openjdk-version;+&openjdk-build;-bin;
+ln -sfn OpenJDK-&openjdk-version;+&openjdk-build;-bin /opt/jdk
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

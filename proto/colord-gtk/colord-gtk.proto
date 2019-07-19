@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/colord/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  colord gtk3 gobject-introspection vala
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr  \
+      -Dgtk2=true    \
+      -Dvapi=true    \
+      -Ddocs=false   \
+      -Dman=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

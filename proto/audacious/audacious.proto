@@ -1,0 +1,28 @@
+<proto>
+  srcurl https://distfiles.[NAME]-media-player.org/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gtk2 qt5 libxml2 xorg-env x-window-system runtime mpg123
+
+<law>
+  TPUT=/bin/true ./configure --prefix=/usr \
+                           --with-buildstamp="BLFS" &&
+make;
+make install;
+TPUT=/bin/true ./configure --prefix=/usr --disable-wavpack &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cp -v /usr/share/applications/[NAME]{,-qt}.desktop &&
+
+sed -e '/^Name/ s/$/ Qt/' \
+    -e '/Exec=/ s/[NAME]/& --qt/' \
+    -i /usr/share/applications/[NAME]-qt.desktop
+
+<desc>
+  [NAME].
+

@@ -1,16 +1,46 @@
 <proto>
-  srcurl https://www.kernel.org/pub/software/scm/git/git-2.22.0.tar.xz
+  srcurl &[NAME]-root;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  curl
 
 <law>
+  ./configure --prefix=/usr --with-[NAME]config=/etc/[NAME]config &&
+make;
+make html;
+make man;
+make install;
+make install-man;
+make htmldir=/usr/share/doc/[NAME]-[AGE] install-html;
+tar -xf ../[NAME]-manpages-[AGE].[TARXZ] \
+    -C /usr/share/man --no-same-owner --no-overwrite-dir;
+mkdir -vp   /usr/share/doc/[NAME]-[AGE] &&
+tar   -xf   ../[NAME]-htmldocs-[AGE].[TARXZ] \
+      -C    /usr/share/doc/[NAME]-[AGE] --no-same-owner --no-overwrite-dir &&
 
-  ./configure                       \
-    --prefix=/usr                 \
-    --with-gitconfig=/etc/gitconfig ;
+find        /usr/share/doc/[NAME]-[AGE] -type d -exec chmod 755 {} \; &&
+find        /usr/share/doc/[NAME]-[AGE] -type f -exec chmod 644 {} \;;
+mkdir -vp /usr/share/doc/[NAME]-[AGE]/man-pages/{html,text}         &&
+mv        /usr/share/doc/[NAME]-[AGE]/{[NAME]*.txt,man-pages/text}     &&
+mv        /usr/share/doc/[NAME]-[AGE]/{[NAME]*.,index.,man-pages/}html &&
 
-  make -j [NPROC];
+mkdir -vp /usr/share/doc/[NAME]-[AGE]/technical/{html,text}         &&
+mv        /usr/share/doc/[NAME]-[AGE]/technical/{*.txt,text}        &&
+mv        /usr/share/doc/[NAME]-[AGE]/technical/{*.,}html           &&
+
+mkdir -vp /usr/share/doc/[NAME]-[AGE]/howto/{html,text}             &&
+mv        /usr/share/doc/[NAME]-[AGE]/howto/{*.txt,text}            &&
+mv        /usr/share/doc/[NAME]-[AGE]/howto/{*.,}html               &&
+
+sed -i '/^<a href=/s|howto/|&html/|' /usr/share/doc/[NAME]-[AGE]/howto-index.html &&
+sed -i '/^\* link:/s|howto/|&html/|' /usr/share/doc/[NAME]-[AGE]/howto-index.txt
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  git.
+  [NAME].
+

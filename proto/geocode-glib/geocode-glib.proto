@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-26;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  json-glib libsoup gobject-introspection
+
+<law>
+  mkdir build                                   &&
+cd    build                                   &&
+meson --prefix /usr -Denable-gtk-doc=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

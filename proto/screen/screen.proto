@@ -1,0 +1,28 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr                     \
+            --infodir=/usr/share/info         \
+            --mandir=/usr/share/man           \
+            --with-socket-dir=/run/[NAME]     \
+            --with-pty-group=5                \
+            --with-sys-[NAME]rc=/etc/[NAME]rc &&
+
+sed -i -e "s%/usr/local/etc/[NAME]rc%/etc/[NAME]rc%" {etc,doc}/* &&
+make;
+make install &&
+install -m 644 etc/etc[NAME]rc /etc/[NAME]rc
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

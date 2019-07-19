@@ -1,0 +1,47 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  db gcr libical libsecret nss sqlite gnome-online-accounts gobject-introspection gtk3 icu libcanberra libgdata libgweather vala
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr   \
+      -DSYSCONF_INSTALL_DIR=/etc    \
+      -DENABLE_VALA_BINDINGS=ON     \
+      -DENABLE_INSTALLED_TESTS=ON   \
+      -DENABLE_GOOGLE=ON            \
+      -DWITH_OPENLDAP=OFF           \
+      -DWITH_KRB5=OFF               \
+      -DENABLE_INTROSPECTION=ON     \
+      -DENABLE_GTK_DOC=OFF          \
+      -DWITH_SYSTEMDSYSTEMUNITDIR=  \
+      .. &&
+make;
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr   \
+      -DSYSCONF_INSTALL_DIR=/etc    \
+      -DENABLE_VALA_BINDINGS=ON     \
+      -DENABLE_INSTALLED_TESTS=ON   \
+      -DENABLE_GOOGLE=ON            \
+      -DWITH_OPENLDAP=OFF           \
+      -DWITH_KRB5=OFF               \
+      -DENABLE_INTROSPECTION=ON     \
+      -DENABLE_GTK_DOC=OFF          \
+      .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

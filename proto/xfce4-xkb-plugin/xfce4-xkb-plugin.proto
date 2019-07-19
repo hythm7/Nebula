@@ -1,0 +1,26 @@
+<proto>
+  srcurl http://archive.xfce.org/src/panel-plugins/[NAME]/0.7/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  librsvg libxklavier xfce4-panel
+
+<law>
+  sed -e 's|xfce4/panel-plugins|xfce4/panel/plugins|' \
+    -i panel-plugin/{Makefile.in,xkb-plugin.desktop.in.in} &&
+
+./configure --prefix=/usr         \
+            --libexecdir=/usr/lib \
+            --disable-debug       &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

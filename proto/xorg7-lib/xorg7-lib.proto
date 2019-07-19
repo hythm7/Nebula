@@ -1,0 +1,51 @@
+<proto>
+  srcurl 
+
+<cluster>
+  fontconfig libxcb elogind
+
+<law>
+  grep -A9 summary *make_check.log;
+bash -e;
+for package in $(grep -v '^#' ../lib-&xorg-version;.md5 | awk '{print $2}')
+do
+  packagedir=${package%.[TARBZ2]}
+  tar -xf $package
+  pushd $packagedir
+  case $packagedir in
+    libICE* )
+      ./configure $XORG_CONFIG ICE_LIBS=-lpthread
+    ;;
+
+    libXfont2-[0-9]* )
+      ./configure $XORG_CONFIG --disable-devel-docs
+    ;;
+
+    libXt-[0-9]* )
+      ./configure $XORG_CONFIG \
+                  --with-appdefaultdir=/etc/X11/app-defaults
+    ;;
+
+    * )
+      ./configure $XORG_CONFIG
+    ;;
+  esac
+  make
+  #make check 2>&1 | tee ../$packagedir-make_check.log
+  as_root make install
+  popd
+  rm -rf $packagedir
+  as_root /sbin/ldconfig
+done;
+exit
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  ln -sv $XORG_PREFIX/lib/X11 /usr/lib/X11 &&
+ln -sv $XORG_PREFIX/include/X11 /usr/include/X11
+
+<desc>
+  [NAME].
+

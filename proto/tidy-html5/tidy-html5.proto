@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://github.com/htacg/[NAME]/archive/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake libxslt
+
+<law>
+  cd build/cmake &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DBUILD_TAB2SPACE=ON        \
+      ../..    &&
+
+make;
+make install &&
+install -v -m755 tab2space /usr/bin
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

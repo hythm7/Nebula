@@ -1,0 +1,23 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  gzip -cd ../[NAME]-&apng-version;-apng.patch.gz | patch -p1;
+./configure --prefix=/usr --disable-static &&
+make;
+make install &&
+mkdir -v /usr/share/doc/[NAME]-[AGE] &&
+cp -v README [NAME]-manual.txt /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

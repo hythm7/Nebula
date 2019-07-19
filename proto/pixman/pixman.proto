@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://www.cairographics.org/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  mkdir build &&
+cd build &&
+
+meson --prefix=/usr &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

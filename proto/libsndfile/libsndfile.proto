@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://www.mega-nerd.com/[NAME]/files/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  flac libogg libvorbis
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

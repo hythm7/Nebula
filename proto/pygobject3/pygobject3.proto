@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GNOMEHTTP]/pygobject/&gnome-minor-32;/pygobject-[AGE].[TARXZ]
+
+<cluster>
+  gobject-introspection pycairo python2 pycairo
+
+<law>
+  mkdir python2                        &&
+pushd python2                        &&
+meson --prefix=/usr -Dpython=python2 &&
+ninja                                &&
+popd;
+mkdir python3                        &&
+pushd python3                        &&
+meson --prefix=/usr -Dpython=python3 &&
+ninja                                &&
+popd;
+ninja -C python2 install;
+ninja -C python3 install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

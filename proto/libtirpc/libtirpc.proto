@@ -1,0 +1,25 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr                                   \
+            --sysconfdir=/etc                               \
+            --disable-static                                \
+            --disable-gssapi                                &&
+make;
+make install &&
+mv -v /usr/lib/[NAME].so.* /lib &&
+ln -sfv ../../lib/[NAME].so.3.0.0 /usr/lib/[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

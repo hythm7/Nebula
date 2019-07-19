@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://archive.xfce.org/src/apps/[NAME]/0.8/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libexif libxfce4ui
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNUPGHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libassuan libgpg-error
+
+<law>
+  ./configure --prefix=/usr --enable-[NAME]-tty &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

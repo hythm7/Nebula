@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://s3.amazonaws.com/[NAME]_releases/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

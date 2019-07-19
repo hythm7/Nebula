@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://github.com/metabrainz/libmusicbrainz/releases/download/release-[AGE]/libmusicbrainz-[AGE].[TARGZ]
+
+<cluster>
+  cmake libxml2 neon
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr .. &&
+make;
+doxygen ../Doxyfile;
+make install;
+rm -rf /usr/share/doc/libmusicbrainz-[AGE] &&
+cp -vr docs/ /usr/share/doc/libmusicbrainz-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

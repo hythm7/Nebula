@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://sourceware.org/ftp/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  sed -i 's|/doc/[NAME]||' docs/Makefile.in &&
+
+./configure --prefix=/usr \
+            --datadir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+prereq:;
+prereq: false;
+sed -e 's@prereq:.*@prereq: false@' \
+    -i {helgrind,drd}/tests/pth_cond_destroy_busy.vgtest;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl &alsa-download-ftp;/oss-lib/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  alsa-lib
+
+<law>
+  ./configure --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

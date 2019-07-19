@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://telepathy.freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  python2 sqlite telepathy-glib gobject-introspection
+
+<law>
+  sed 's@/apps/@/org/freedesktop/@' \
+    -i data/org.freedesktop.Telepathy.Logger.gschema.xml.in;
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

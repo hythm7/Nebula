@@ -1,0 +1,23 @@
+<proto>
+  srcurl [SOURCEFORGE]/enlightenment/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  xorg7-lib
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install &&
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    doc/{*.gif,index.html} \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

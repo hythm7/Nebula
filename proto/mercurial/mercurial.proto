@@ -1,0 +1,35 @@
+<proto>
+  srcurl https://www.[NAME]-scm.org/release/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  python2
+
+<law>
+  make build;
+sed -i '/runrst/s/N)/N)3/' doc/Makefile &&
+2to3-3.7 -w doc/hgmanpage.py            &&
+make doc;
+rm -rf tests/tmp &&
+TESTFLAGS="-j  --tmpdir tmp --blacklist blacklists/fsmonitor --blacklist blacklists/linux-vfat" make check;
+pushd tests  &&
+  rm -rf tmp &&
+  ./run-tests.py --tmpdir tmp test-gpg.t
+popd;
+make PREFIX=/usr install-bin;
+make PREFIX=/usr install-doc;
+cat >> ~/.hgrc << "EOF"
+ 
+EOF
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  install -v -d -m755 /etc/[NAME] &&
+cat > /etc/[NAME]/hgrc << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

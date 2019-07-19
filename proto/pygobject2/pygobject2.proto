@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/pygobject/2.28/pygobject-[AGE].[TARXZ]
+
+<cluster>
+  glib2 pycairo python2
+
+<law>
+  ./configure --prefix=/usr --disable-introspection &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

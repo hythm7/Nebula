@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://download.gimp.org/pub/[NAME]/0.4/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  babl json-glib libjpeg
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install &&
+install -v -m644 docs/*.{css,html} /usr/share/gtk-doc/html/[NAME] &&
+install -v -m644 docs/images/*.{png,ico,svg} /usr/share/gtk-doc/html/[NAME]/images
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

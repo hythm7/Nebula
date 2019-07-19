@@ -1,0 +1,30 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cmake mesa glu
+
+<law>
+  mkdir build &&
+cd    build &&
+
+CMAKE_LIBRARY_PATH=$XORG_PREFIX/lib     \
+CMAKE_INCLUDE_PATH=$XORG_PREFIX/include \
+cmake -DCMAKE_INSTALL_PREFIX=/usr       \
+      -DCMAKE_BUILD_TYPE=Release        \
+      -DFREEGLUT_BUILD_DEMOS=OFF        \
+      -DFREEGLUT_BUILD_STATIC_LIBS=OFF  \
+      .. &&
+
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

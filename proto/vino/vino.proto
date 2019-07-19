@@ -1,0 +1,24 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-22;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libnotify gnutls libgcrypt libsecret NetworkManager telepathy-glib
+
+<law>
+  ./configure --prefix=/usr --sysconfdir=/etc &&
+make;
+./configure --prefix=/usr                \
+            --sysconfdir=/etc            \
+            --with-systemduserunitdir=no &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

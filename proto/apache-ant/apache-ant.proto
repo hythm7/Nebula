@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://archive.apache.org/dist/ant/source/[NAME]-[AGE]-src.[TARXZ]
+
+<cluster>
+  java-bin openjdk glib2
+
+<law>
+  sed -i 's/--add-modules java.activation/-html4/' build.xml;
+./bootstrap.sh;
+bootstrap/bin/ant -f fetch.xml -Ddest=optional;
+./build.sh -Ddist.dir=$PWD/ant-[AGE] dist;
+cp -rv ant-[AGE] /opt/            &&
+chown -R root:root /opt/ant-[AGE] &&
+ln -sfv ant-[AGE] /opt/ant
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/profile.d/ant.sh << EOF
+ 
+EOF
+
+<desc>
+  [NAME].
+

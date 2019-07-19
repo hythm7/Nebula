@@ -1,0 +1,29 @@
+<proto>
+  srcurl http://www.[NAME].org/builds/[NAME]-[AGE]-Source.[TARGZ]
+
+<cluster>
+  cmake curl
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr  \
+      -DCMAKE_BUILD_TYPE=Release   \
+      -DEXIV2_ENABLE_VIDEO=yes     \
+      -DEXIV2_ENABLE_WEBREADY=yes  \
+      -DEXIV2_ENABLE_CURL=yes      \
+      -DEXIV2_BUILD_SAMPLES=no     \
+      -G "Unix Makefiles" .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

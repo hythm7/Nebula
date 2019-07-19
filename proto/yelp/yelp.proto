@@ -1,0 +1,21 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gsettings-desktop-schemas webkitgtk [NAME]-xsl desktop-file-utils
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install;
+update-desktop-database
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,21 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-22;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk-vnc itstool libsecret telepathy-glib vala vte
+
+<law>
+  ./configure --prefix=/usr \
+            --enable-compile-warnings=minimum &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

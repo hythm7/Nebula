@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://github.com/LMDB/[NAME]/archive/LMDB_[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  cd libraries/lib[NAME] &&
+make                 &&
+sed -i 's| lib[NAME].a||' Makefile;
+make prefix=/usr install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

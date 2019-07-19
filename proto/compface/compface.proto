@@ -1,0 +1,21 @@
+<proto>
+  srcurl &sources-anduin-http;/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --mandir=/usr/share/man &&
+make;
+make install &&
+install -m755 -v xbm2xface.pl /usr/bin
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

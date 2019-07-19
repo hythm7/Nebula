@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://sourceforge.net/projects/[NAME]/files/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  xmlto
+
+<law>
+  make;
+make PREFIX=/usr install &&
+rm -vf /usr/lib/libgif.a &&
+
+find doc \( -name Makefile\* -o -name \*.1 \
+         -o -name \*.xml \) -exec rm -v {} \; &&
+
+install -v -dm755 /usr/share/doc/[NAME]-[AGE] &&
+cp -v -R doc/* /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

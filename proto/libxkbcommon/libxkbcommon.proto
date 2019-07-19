@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://xkbcommon.org/download/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  xkeyboard-config libxcb wayland
+
+<law>
+  ./configure $XORG_CONFIG     \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

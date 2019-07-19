@@ -1,0 +1,27 @@
+<proto>
+  srcurl http://[NAME].sourceforge.net/files/a52dec-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr \
+            --mandir=/usr/share/man \
+            --enable-shared \
+            --disable-static \
+            CFLAGS="-g -O2 $([ $(uname -m) = x86_64 ] && echo -fPIC)" &&
+make;
+make install &&
+cp [NAME]/a52_internal.h /usr/include/a52dec &&
+install -v -m644 -D doc/[NAME].txt \
+    /usr/share/doc/[NAME]-[AGE]/[NAME].txt
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

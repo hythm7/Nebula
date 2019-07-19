@@ -1,0 +1,34 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libgudev sysv gobject-introspection libmbim libqmi polkit vala
+
+<law>
+  ./configure --prefix=/usr                 \
+            --sysconfdir=/etc             \
+            --localstatedir=/var          \
+            --disable-static              \
+            --enable-more-warnings=no     \
+            --with-systemd-journal=no     \
+            --with-systemd-suspend-resume &&
+make;
+./configure --prefix=/usr                 \
+            --sysconfdir=/etc             \
+            --localstatedir=/var          \
+            --enable-more-warnings=no     \
+            --with-systemd-journal        \
+            --with-systemd-suspend-resume \
+            --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

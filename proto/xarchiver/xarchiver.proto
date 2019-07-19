@@ -1,0 +1,27 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  gtk2 gtk3
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-fixes-1.patch &&
+
+./autogen.sh --prefix=/usr               \
+             --libexecdir=/usr/lib/xfce4 \
+             --disable-gtk3              \
+             --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make DOCDIR=/usr/share/doc/[NAME]-[AGE] install;
+update-desktop-database &&
+gtk-update-icon-cache -t -f --include-image-data /usr/share/icons/hicolor
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

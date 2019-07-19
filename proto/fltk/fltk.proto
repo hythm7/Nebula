@@ -1,0 +1,26 @@
+<proto>
+  srcurl http://[NAME].org/pub/[NAME]/1.3.5/[NAME]-[AGE]-source.[TARGZ]
+
+<cluster>
+  xorg7-lib hicolor-icon-theme libjpeg libpng
+
+<law>
+  sed -i -e '/cat./d' documentation/Makefile       &&
+
+./configure --prefix=/usr    \
+            --enable-shared  &&
+make;
+make -C documentation html;
+make docdir=/usr/share/doc/[NAME]-[AGE] install;
+make -C test          docdir=/usr/share/doc/[NAME]-[AGE] install-linux &&
+make -C documentation docdir=/usr/share/doc/[NAME]-[AGE] install-linux
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

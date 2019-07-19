@@ -1,0 +1,20 @@
+<proto>
+  srcurl [KERNEL]/linux/bluetooth/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr --disable-static --disable-tester &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

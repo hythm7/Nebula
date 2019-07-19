@@ -1,0 +1,21 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]_[AGE]_src_all.[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  make all3;
+make DEST_HOME=/usr \
+     DEST_MAN=/usr/share/man \
+     DEST_SHARE_DOC=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

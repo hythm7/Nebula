@@ -1,0 +1,30 @@
+<proto>
+  srcurl http://downloads.[NAME].org/downloads/[NAME]core-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  cd build/generic &&
+sed -i 's/^LN_S=@LN_S@/& -f -v/' platform.inc.in &&
+./configure --prefix=/usr &&
+make;
+sed -i '/libdir.*STATIC_LIB/ s/^/#/' Makefile &&
+make install &&
+
+chmod -v 755 /usr/lib/lib[NAME]core.so.4.3 &&
+ 
+install -v -m755 -d /usr/share/doc/[NAME]core-[AGE]/examples &&
+install -v -m644 ../../doc/* /usr/share/doc/[NAME]core-[AGE] &&
+install -v -m644 ../../examples/* \
+    /usr/share/doc/[NAME]core-[AGE]/examples
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

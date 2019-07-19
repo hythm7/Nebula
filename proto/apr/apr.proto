@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://archive.apache.org/dist/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --with-installbuilddir=/usr/share/[NAME]-1/build &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

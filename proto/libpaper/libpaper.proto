@@ -1,0 +1,32 @@
+<proto>
+  srcurl http://ftp.debian.org/debian/pool/main/libp/[NAME]/[NAME]_[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  autoreconf -fi                &&
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static &&
+make;
+make install &&
+mkdir -vp /etc/[NAME].d &&
+
+cat > /usr/bin/run-parts << "EOF"
+ 
+EOF
+
+chmod -v 755 /usr/bin/run-parts
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/papersize << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,25 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  llvm
+
+<law>
+  ./configure --prefix=/usr                        \
+            --disable-static                     \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --enable-a4                          \
+            --enable-metric                      \
+            --with-lib[NAME]                    &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

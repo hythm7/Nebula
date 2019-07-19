@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://links.twibright.com/download/links-&links-version;.[TARBZ2]
+
+<cluster>
+  libevent
+
+<law>
+  ./configure --prefix=/usr --mandir=/usr/share/man &&
+make;
+make install &&
+install -v -d -m755 /usr/share/doc/links-&links-version; &&
+install -v -m644 doc/links_cal/* KEYS BRAILLE_HOWTO \
+    /usr/share/doc/links-&links-version;
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

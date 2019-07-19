@@ -1,0 +1,39 @@
+<proto>
+  srcurl http://ftp.[NAME].org/pub/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  groupadd -g 34 mail;
+chgrp -v mail /var/mail;
+cp -v doc/manual.txt{,.shipped} &&
+./configure --prefix=/usr                           \
+            --sysconfdir=/etc                       \
+            --with-docdir=/usr/share/doc/[NAME]-[AGE] \
+            --with-ssl                              \
+            --enable-external-dotlock               \
+            --enable-pop                            \
+            --enable-imap                           \
+            --enable-hcache                         \
+            --enable-sidebar                        &&
+make;
+make -C doc manual.pdf;
+make install &&
+test -s doc/manual.txt ||
+  install -v -m644 doc/manual.txt.shipped \
+  /usr/share/doc/[NAME]-[AGE]/manual.txt;
+install -v -m644 doc/manual.pdf \
+    /usr/share/doc/[NAME]-[AGE];
+chown root:mail /usr/bin/[NAME]_dotlock &&
+chmod -v 2755 /usr/bin/[NAME]_dotlock
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat /usr/share/doc/[NAME]-[AGE]/samples/gpg.rc >> ~/.[NAME]rc
+
+<desc>
+  [NAME].
+

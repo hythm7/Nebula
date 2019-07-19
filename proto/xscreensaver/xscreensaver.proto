@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://www.jwz.org/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libglade xorg7-app glu
+
+<law>
+  sed -i '/^\/\//d' hacks/fontglide.c;
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/pam.d/[NAME] << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

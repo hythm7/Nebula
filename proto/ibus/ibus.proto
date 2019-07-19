@@ -1,0 +1,28 @@
+<proto>
+  srcurl https://github.com/[NAME]/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  dconf iso-codes vala gobject-introspection gtk2 libnotify
+
+<law>
+  mkdir -p               /usr/share/unicode/ucd &&
+unzip -u ../UCD.zip -d /usr/share/unicode/ucd;
+sed -i 's@/desktop/[NAME]@/org/freedesktop/[NAME]@g' \
+    data/dconf/org.freedesktop.[NAME].gschema.xml;
+./configure --prefix=/usr             \
+            --sysconfdir=/etc         \
+            --disable-unicode-dict    \
+            --disable-emoji-dict      &&
+rm -f tools/main.c                    &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

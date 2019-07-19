@@ -1,0 +1,37 @@
+<proto>
+  srcurl 
+
+<cluster>
+  libpng mesa xbitmaps xcb-util
+
+<law>
+  bash -e;
+for package in $(grep -v '^#' ../app-&xorg-version;.md5 | awk '{print $2}')
+do
+  packagedir=${package%.[TARBZ2]}
+  tar -xf $package
+  pushd $packagedir
+     case $packagedir in
+       luit-[0-9]* )
+         sed -i -e "/D_XOPEN/s/5/6/" configure
+       ;;
+     esac
+
+     ./configure $XORG_CONFIG
+     make
+     as_root make install
+  popd
+  rm -rf $packagedir
+done;
+exit;
+as_root rm -f $XORG_PREFIX/bin/xkeystone
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

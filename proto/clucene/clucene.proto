@@ -1,0 +1,26 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-core-[AGE].[TARGZ]
+
+<cluster>
+  cmake boost
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-contribs_lib-1.patch &&
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DBUILD_CONTRIBS_LIB=ON .. &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

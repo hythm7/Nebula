@@ -1,0 +1,32 @@
+<proto>
+  srcurl https://www.freedesktop.org/software/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libevdev mtdev
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=$XORG_PREFIX \
+      -Dudev-dir=/lib/udev  \
+      -Ddebug-gui=false     \
+      -Dtests=false         \
+      -Ddocumentation=false \
+      -Dlibwacom=false      \
+      ..                    &&
+ninja;
+ninja install;
+install -v -dm755      /usr/share/doc/[NAME]-[AGE]/{html,api} &&
+cp -rv Documentation/* /usr/share/doc/[NAME]-[AGE]/html &&
+cp -rv api/*           /usr/share/doc/[NAME]-[AGE]/api
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

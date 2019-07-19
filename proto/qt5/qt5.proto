@@ -1,0 +1,94 @@
+<proto>
+  srcurl &[NAME]-url;/qt-everywhere-src-[AGE].[TARXZ]
+
+<cluster>
+  xorg7-lib alsa-lib make-ca cups glib2 gst10-plugins-base harfbuzz icu jasper libjpeg libmng libpng libtiff libwebp libxkbcommon mesa mtdev pcre2 sqlite wayland xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm
+
+<law>
+              -archdatadir    /usr/lib/[NAME]                \
+            -bindir         /usr/bin                    \
+            -plugindir      /usr/lib/[NAME]/plugins        \
+            -importdir      /usr/lib/[NAME]/imports        \
+            -headerdir      /usr/include/[NAME]            \
+            -datadir        /usr/share/[NAME]              \
+            -docdir         /usr/share/doc/[NAME]          \
+            -translationdir /usr/share/[NAME]/translations \
+            -examplesdir    /usr/share/doc/[NAME]/examples;
+patch -Np1 -i ../qt-[AGE]-upstream_fixes-1.patch &&;
+sed -i 's/python /python3 /' qtdeclarative/qtdeclarative.pro \
+                             qtdeclarative/src/3rdparty/masm/masm.pri &&
+
+./configure -prefix $QT5PREFIX                        \
+            -sysconfdir /etc/xdg                      \
+            -confirm-license                          \
+            -opensource                               \
+            -dbus-linked                              \
+            -openssl-linked                           \
+            -system-harfbuzz                          \
+            -system-sqlite                            \
+            -nomake examples                          \
+            -no-rpath                                 \
+            -skip qtwebengine                         &&
+make;
+make install;
+find $QT5PREFIX/ -name \*.prl \
+   -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;;
+QT5BINDIR=$QT5PREFIX/bin
+
+install -v -dm755 /usr/share/pixmaps/                  &&
+
+install -v -Dm644 qttools/src/assistant/assistant/images/assistant-128.png \
+                  /usr/share/pixmaps/assistant-[NAME].png &&
+
+install -v -Dm644 qttools/src/designer/src/designer/images/designer.png \
+                  /usr/share/pixmaps/designer-[NAME].png  &&
+
+install -v -Dm644 qttools/src/linguist/linguist/images/icons/linguist-128-32.png \
+                  /usr/share/pixmaps/linguist-[NAME].png  &&
+
+install -v -Dm644 qttools/src/qdbus/qdbusviewer/images/qdbusviewer-128.png \
+                  /usr/share/pixmaps/qdbusviewer-[NAME].png &&
+
+install -dm755 /usr/share/applications &&
+
+cat > /usr/share/applications/assistant-[NAME].desktop << EOF
+ 
+EOF
+
+cat > /usr/share/applications/designer-[NAME].desktop << EOF
+ 
+EOF
+
+cat > /usr/share/applications/linguist-[NAME].desktop << EOF
+ 
+EOF
+
+cat > /usr/share/applications/qdbusviewer-[NAME].desktop << EOF
+ 
+EOF;
+for file in moc uic rcc qmake lconvert lrelease lupdate; do
+  ln -sfrvn $QT5BINDIR/$file /usr/bin/$file-[NAME]
+done
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/profile.d/[NAME].sh << "EOF"
+ 
+EOF;
+cat > /etc/sudoers.d/qt << "EOF"
+ 
+EOF;
+cat >> /etc/ld.so.conf << EOF
+ 
+EOF
+
+ldconfig;
+cat > /etc/profile.d/[NAME].sh << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

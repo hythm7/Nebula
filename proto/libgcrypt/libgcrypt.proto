@@ -1,0 +1,38 @@
+<proto>
+  srcurl [GNUPGHTTP]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libgpg-error
+
+<law>
+  ./configure --prefix=/usr &&
+make                      &&
+
+make -C doc html                                                       &&
+makeinfo --html --no-split -o doc/gcrypt_nochunks.html doc/gcrypt.texi &&
+makeinfo --plaintext       -o doc/gcrypt.txt           doc/gcrypt.texi;
+make -C doc pdf ps;
+make install &&
+install -v -dm755   /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    README doc/{README.apichanges,fips*,[NAME]*} \
+                    /usr/share/doc/[NAME]-[AGE] &&
+
+install -v -dm755   /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644 doc/gcrypt.html/* \
+                    /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644 doc/gcrypt_nochunks.html \
+                    /usr/share/doc/[NAME]-[AGE]      &&
+install -v -m644 doc/gcrypt.{txt,texi} \
+                    /usr/share/doc/[NAME]-[AGE];
+install -v -m644 doc/gcrypt.{pdf,ps,dvi} \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

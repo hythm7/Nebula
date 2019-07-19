@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.2/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gnome-online-accounts rest gobject-introspection
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make lib[NAME]docdir=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

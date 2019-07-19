@@ -1,0 +1,55 @@
+<proto>
+  srcurl jdk-[AGE]+&[NAME]-build;.[TARBZ2]
+
+<cluster>
+  java ojdk-conf alsa-lib cpio cups unzip which xorg7-lib zip make-ca giflib lcms2 libjpeg libpng wget
+
+<law>
+  tar -xf ../jtreg-&jtreg-version;.[TARGZ];
+unset JAVA_HOME                             &&
+bash configure --enable-unlimited-crypto    \
+               --disable-warnings-as-errors \
+               --with-stdc++lib=dynamic     \
+               --with-giflib=system         \
+               --with-jtreg=$PWD/jtreg      \
+               --with-lcms=system           \
+               --with-libjpeg=system        \
+               --with-libpng=system         \
+               --with-zlib=system           \
+               --with-version-build="&[NAME]-build;"    \
+               --with-version-pre=""        \
+               --with-version-opt=""        \
+               --with-cacerts-file=/etc/pki/tls/java/cacerts &&
+make images;
+export JT_JAVA=$(echo $PWD/build/*/jdk) &&
+jtreg/bin/jtreg -jdk:$JT_JAVA -automatic -ignore:quiet -v1 \
+    test/jdk:tier1 test/langtools:tier1 &&
+unset JT_JAVA;
+install -vdm755 /opt/jdk-[AGE]+&[NAME]-build;             &&
+cp -Rv build/*/images/jdk/* /opt/jdk-[AGE]+&[NAME]-build; &&
+chown -R root:root /opt/jdk-[AGE]+&[NAME]-build;          &&
+for s in 16 24 32 48; do
+  install -vDm644 src/java.desktop/unix/classes/sun/awt/X11/java-icon${s}.png \
+                  /usr/share/icons/hicolor/${s}x${s}/apps/java.png
+done;
+ln -v -nsf jdk-[AGE]+&[NAME]-build; /opt/jdk;
+mkdir -pv /usr/share/applications &&
+
+cat > /usr/share/applications/[NAME]-java.desktop << "EOF" &&
+ 
+EOF
+cat > /usr/share/applications/[NAME]-jconsole.desktop << "EOF"
+ 
+EOF
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  ln -sfv /etc/pki/tls/java/cacerts /opt/jdk/lib/security/cacerts;
+cd /opt/jdk
+bin/keytool -list -cacerts
+
+<desc>
+  [NAME].
+

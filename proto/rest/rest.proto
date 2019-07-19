@@ -1,0 +1,21 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/0.8/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  make-ca libsoup gobject-introspection
+
+<law>
+  ./configure --prefix=/usr \
+    --with-ca-certificates=/etc/pki/tls/certs/ca-bundle.crt &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

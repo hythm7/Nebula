@@ -1,18 +1,49 @@
 <proto>
-  srcurl https://downloads.sourceforge.net/tcl/tcl8.6.9-src.tar.gz
-  srcdir tcl8.6.9
+  srcurl [SOURCEFORGE]/[NAME]/[NAME][AGE]-src.[TARGZ]
+
+<cluster>
+  
 
 <law>
-  cd unix;
+  tar -xf ../[NAME][AGE]-html.[TARGZ] --strip-components=1;
+export SRCDIR=`pwd` &&
 
-  ./configure \
-  --prefix=/tools;
+cd unix &&
 
-  make -j [NPROC];
+./configure --prefix=/usr           \
+            --mandir=/usr/share/man \
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) &&
+make &&
+
+sed -e "s#$SRCDIR/unix#/usr/lib#" \
+    -e "s#$SRCDIR#/usr/include#"  \
+    -i [NAME]Config.sh               &&
+
+sed -e "s#$SRCDIR/unix/pkgs/tdbc&tdbc-ver;#/usr/lib/tdbc&tdbc-ver;#" \
+    -e "s#$SRCDIR/pkgs/tdbc&tdbc-ver;/generic#/usr/include#"    \
+    -e "s#$SRCDIR/pkgs/tdbc&tdbc-ver;/library#/usr/lib/[NAME]8.6#" \
+    -e "s#$SRCDIR/pkgs/tdbc&tdbc-ver;#/usr/include#"            \
+    -i pkgs/tdbc&tdbc-ver;/tdbcConfig.sh                        &&
+
+sed -e "s#$SRCDIR/unix/pkgs/i[NAME]&i[NAME]-ver;#/usr/lib/i[NAME]&i[NAME]-ver;#" \
+    -e "s#$SRCDIR/pkgs/i[NAME]&i[NAME]-ver;/generic#/usr/include#"    \
+    -e "s#$SRCDIR/pkgs/i[NAME]&i[NAME]-ver;#/usr/include#"            \
+    -i pkgs/i[NAME]&i[NAME]-ver;/i[NAME]Config.sh                        &&
+
+unset SRCDIR;
+make install &&
+make install-private-headers &&
+ln -v -sf [NAME]sh&[NAME]-ver; /usr/bin/[NAME]sh &&
+chmod -v 755 /usr/lib/lib[NAME]&[NAME]-ver;.so;
+mkdir -v -p /usr/share/doc/[NAME]-[AGE] &&
+cp -v -r  ../html/* /usr/share/doc/[NAME]-[AGE]
 
 <install>
-  cd unix;
-  make DESTDIR=[XYZ] install install-private-headers;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  Tool Command Language;
+  [NAME].
+

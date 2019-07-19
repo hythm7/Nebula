@@ -1,0 +1,24 @@
+<proto>
+  srcurl http://www.[NAME].us/pub/[NAME]/releasebuilds/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  tar -xf ../[NAME]-[AGE]-xdoc.[TARXZ] --strip-components=1;
+./configure --prefix=/usr &&
+make;
+make install;
+install -m755 -d         /usr/share/doc/[NAME]-[AGE]/html  &&
+cp -v doc/html/*.html    /usr/share/doc/[NAME]-[AGE]/html  &&
+cp -v doc/*.{txt,ps,pdf} /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

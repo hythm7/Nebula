@@ -1,0 +1,25 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.26/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  atk cogl json-glib gobject-introspection gtk3 libgudev libinput libxkbcommon wayland
+
+<law>
+  ./configure --prefix=/usr               \
+            --sysconfdir=/etc           \
+            --enable-egl-backend        \
+            --enable-evdev-input        \
+            --enable-wayland-backend    \
+            --enable-wayland-compositor &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

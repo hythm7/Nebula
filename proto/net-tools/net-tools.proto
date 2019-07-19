@@ -1,0 +1,23 @@
+<proto>
+  srcurl &sources-anduin-http;/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  patch -Np1 -i ../[NAME]-[AGE]-remove_dups-1.patch &&
+sed -i '/#include <netinet\/ip.h>/d'  iptunnel.c &&
+
+yes "" | make config &&
+make;
+make update
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

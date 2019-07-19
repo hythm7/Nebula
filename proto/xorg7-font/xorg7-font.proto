@@ -1,0 +1,33 @@
+<proto>
+  srcurl 
+
+<cluster>
+  xcursor-themes
+
+<law>
+  bash -e;
+for package in $(grep -v '^#' ../font-&xorg-version;.md5 | awk '{print $2}')
+do
+  packagedir=${package%.[TARBZ2]}
+  tar -xf $package
+  pushd $packagedir
+    ./configure $XORG_CONFIG
+    make
+    as_root make install
+  popd
+  as_root rm -rf $packagedir
+done;
+exit;
+install -v -d -m755 /usr/share/fonts                               &&
+ln -svfn $XORG_PREFIX/share/fonts/X11/OTF /usr/share/fonts/X11-OTF &&
+ln -svfn $XORG_PREFIX/share/fonts/X11/TTF /usr/share/fonts/X11-TTF
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

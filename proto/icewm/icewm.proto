@@ -1,0 +1,40 @@
+<proto>
+  srcurl https://github.com/ice-wm/[NAME]/releases/download/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  x-window-system gdk-pixbuf
+
+<law>
+  sed -i "s/nullptr/NULL/" src/{wmconfig.cc,[NAME]hint.cc} &&
+
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DCFGDIR=/etc               \
+      -DCMAKE_EXE_LINKER_FLAGS='-lXrandr -lXinerama' \
+      -DDOCDIR=/usr/share/doc/[NAME]-[AGE]  \
+      ..
+make;
+make install         &&
+rm /usr/share/xsessions/[NAME].desktop
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  echo [NAME]-session > ~/.xinitrc;
+mkdir -v ~/.[NAME]                                       &&
+cp -v /usr/share/[NAME]/keys ~/.[NAME]/keys               &&
+cp -v /usr/share/[NAME]/menu ~/.[NAME]/menu               &&
+cp -v /usr/share/[NAME]/preferences ~/.[NAME]/preferences &&
+cp -v /usr/share/[NAME]/toolbar ~/.[NAME]/toolbar         &&
+cp -v /usr/share/[NAME]/winoptions ~/.[NAME]/winoptions;
+[NAME]-menu-fdo >~/.[NAME]/menu;
+cat > ~/.[NAME]/startup << "EOF"
+
+
+<desc>
+  [NAME].
+

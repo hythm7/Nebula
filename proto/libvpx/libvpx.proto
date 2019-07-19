@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://github.com/webmproject/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  yasm nasm which
+
+<law>
+  sed -i 's/cp -p/cp/' build/make/Makefile &&
+
+mkdir [NAME]-build            &&
+cd    [NAME]-build            &&
+
+../configure --prefix=/usr    \
+             --enable-shared  \
+             --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GNOMEHTTP]/gtk+/&gnome-minor-24;/gtk+-[AGE].[TARXZ]
+
+<cluster>
+  at-spi2-atk fribidi gdk-pixbuf libepoxy pango adwaita-icon-theme hicolor-icon-theme iso-codes libxkbcommon sassc wayland wayland-protocols
+
+<law>
+  cd build &&
+meson --prefix=/usr     \
+      -Dcolord=yes      \
+      -Dgtk_doc=false   \
+      -Dman=true        \
+      -Dbroadway_backend=true .. &&
+ninja;
+ninja install;
+gtk-query-immodules-3.0 --update-cache
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  mkdir -vp ~/.config/gtk-3.0
+cat > ~/.config/gtk-3.0/settings.ini << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

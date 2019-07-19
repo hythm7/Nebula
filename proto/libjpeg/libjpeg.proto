@@ -1,0 +1,29 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]-turbo/[NAME]-turbo-&[NAME]-turbo-version;.[TARGZ]
+
+<cluster>
+  cmake nasm yasm
+
+<law>
+  mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=RELEASE  \
+      -DENABLE_STATIC=FALSE       \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/[NAME]-turbo-&[NAME]-turbo-version; \
+      -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib  \
+      .. &&
+make;
+rm -f /usr/lib/[NAME].so*;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

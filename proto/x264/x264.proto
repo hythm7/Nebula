@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://download.videolan.org/[NAME]/snapshots/[NAME]-snapshot-[AGE]-stable.[TARBZ2] 
+
+<cluster>
+  nasm
+
+<law>
+  ./configure --prefix=/usr \
+            --enable-shared \
+            --disable-cli &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://wayland.freedesktop.org/releases/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  wayland
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

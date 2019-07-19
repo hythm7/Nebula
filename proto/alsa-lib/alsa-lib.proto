@@ -1,0 +1,26 @@
+<proto>
+  srcurl &alsa-download-ftp;/lib/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure &&
+make;
+make doc;
+make install;
+install -v -d -m755 /usr/share/doc/[NAME]-[AGE]/html/search &&
+install -v -m644 doc/doxygen/html/*.* \
+                /usr/share/doc/[NAME]-[AGE]/html &&
+install -v -m644 doc/doxygen/html/search/* \
+                /usr/share/doc/[NAME]-[AGE]/html/search
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

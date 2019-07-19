@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/1.42/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  fontconfig freetype2 harfbuzz fribidi glib2 cairo gobject-introspection xorg7-lib
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

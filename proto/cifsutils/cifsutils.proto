@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://www.samba.org/ftp/linux-cifs/cifs-utils/cifs-utils-[AGE].[TARBZ2]
+
+<cluster>
+  talloc
+
+<law>
+  ./configure --prefix=/usr \
+            --disable-pam \
+            --disable-systemd &&
+make;
+./configure --prefix=/usr \
+            --disable-pam &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

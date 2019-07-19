@@ -1,0 +1,29 @@
+<proto>
+  srcurl [XORGHTTP]/driver/xf86-video-intel-[AGE].[TARBZ2]
+
+<cluster>
+  xcb-util xorg-server
+
+<law>
+  sed -i "s/#define force_inline inline __attribute__((always_inline))/#define force_inline inline/" src/sna/compiler.h;
+./autogen.sh $XORG_CONFIG     \
+            --enable-kms-only \
+            --enable-uxa      \
+            --mandir=/usr/share/man &&
+make;
+make install &&
+      
+mv -v /usr/share/man/man4/intel-virtual-output.4 \
+      /usr/share/man/man1/intel-virtual-output.1 &&
+      
+sed -i '/\.TH/s/4/1/' /usr/share/man/man1/intel-virtual-output.1
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

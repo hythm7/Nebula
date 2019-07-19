@@ -1,0 +1,19 @@
+<proto>
+  srcurl [XORGHTTP]/data/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  util-macros
+
+<law>
+  ./configure $XORG_CONFIG;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

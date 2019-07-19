@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://download.tuxfamily.org/[NAME]/[NAME]_[AGE].[TARXZ]
+
+<cluster>
+  rep-gtk which
+
+<law>
+  ./configure --prefix=/usr --with-pango  &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> ~/.xinitrc << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

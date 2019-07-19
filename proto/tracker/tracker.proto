@@ -1,0 +1,23 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.2/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  json-glib libseccomp libsoup vala gobject-introspection icu NetworkManager sqlite upower
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

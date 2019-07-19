@@ -1,0 +1,32 @@
+<proto>
+  srcurl &sources-anduin-http;/b[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i 's/\(__atomic_compare_exchange\)/\1_[NAME]/' src/[NAME]inc/atomic.h;
+cd build_unix                        &&
+../dist/configure --prefix=/usr      \
+                  --enable-compat185 \
+                  --enable-[NAME]m       \
+                  --disable-static   \
+                  --enable-cxx       &&
+make;
+make docdir=/usr/share/doc/[NAME]-[AGE] install &&
+
+chown -v -R root:root                        \
+      /usr/bin/[NAME]_*                          \
+      /usr/include/[NAME]{,_185,_cxx}.h          \
+      /usr/lib/lib[NAME]*.{so,la}                \
+      /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://archive.xfce.org/src/xfce/[NAME]/0.2/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  glib2
+
+<law>
+  ./configure --prefix=/usr --sysconfdir=/etc &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

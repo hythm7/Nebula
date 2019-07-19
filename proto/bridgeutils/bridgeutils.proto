@@ -1,0 +1,24 @@
+<proto>
+  srcurl [KERNEL]/linux/utils/net/bridge-utils/bridge-utils-[AGE].[TARXZ]
+
+<cluster>
+  
+
+<law>
+  autoconf                  &&
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-service-bridge;
+cat > /etc/sysconfig/ifconfig.br0 << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

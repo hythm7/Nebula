@@ -1,15 +1,30 @@
 <proto>
-  srcurl http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.22.tar.bz2
+  srcurl http://dist.schmorp.de/[NAME]/Attic/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  x-window-system
 
 <law>
-
-  ./configure    \
-    --prefix=/usr --enable-everything;
-
-  make -j [NPROC];
+  ./configure --prefix=/usr --enable-everything &&
+make;
+make install
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/X11/app-defaults/URxvt << "EOF"
+ 
+EOF;
+xrdb -query;
+xrdb -merge ~/.Xresources;
+;
+cat > /usr/share/applications/urxvt.desktop << "EOF" &&
+ 
+EOF
+
+update-desktop-database -q
 
 <desc>
-  rxvt-unicode.
+  [NAME].
+

@@ -1,0 +1,25 @@
+<proto>
+  srcurl https://github.com/storaged-project/[NAME]/releases/download/[AGE]-1/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  gobject-introspection libbytesize libyaml parted volume_key
+
+<law>
+  ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-python3    \
+            --without-gtk-doc \
+            --without-nvdimm  \
+            --without-dm      &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

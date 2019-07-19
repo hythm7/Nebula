@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://gitlab.freedesktop.org/xdg/[NAME]/uploads/80c7f1afbcad2769f38aeb9ba6317a51/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 libxml2
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

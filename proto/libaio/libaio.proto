@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://ftp.de.debian.org/debian/pool/main/liba/[NAME]/[NAME]_[AGE].orig.[TARXZ]
+
+<cluster>
+  
+
+<law>
+  sed -i '/install.*[NAME].a/s/^/#/' src/Makefile;
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

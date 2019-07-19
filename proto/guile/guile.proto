@@ -1,0 +1,40 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gc libunistring
+
+<law>
+  ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make      &&
+make html &&
+
+makeinfo --plaintext -o doc/r5rs/r5rs.txt doc/r5rs/r5rs.texi &&
+makeinfo --plaintext -o doc/ref/[NAME].txt doc/ref/[NAME].texi;
+make install      &&
+make install-html &&
+
+mv /usr/lib/lib[NAME]-*-gdb.scm /usr/share/gdb/auto-load/usr/lib &&
+mv /usr/share/doc/[NAME]-[AGE]/{[NAME].html,ref} &&
+mv /usr/share/doc/[NAME]-[AGE]/r5rs{.html,}     &&
+
+find examples -name "Makefile*" -delete         &&
+cp -vR examples   /usr/share/doc/[NAME]-[AGE]   &&
+
+for DIRNAME in r5rs ref; do
+  install -v -m644  doc/${DIRNAME}/*.txt \
+                    /usr/share/doc/[NAME]-[AGE]/${DIRNAME}
+done &&
+unset DIRNAME
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

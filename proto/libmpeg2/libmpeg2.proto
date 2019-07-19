@@ -1,0 +1,28 @@
+<proto>
+  srcurl http://[NAME].sourceforge.net/files/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i 's/static const/static/' [NAME]/idct_mmx.c &&
+
+./configure --prefix=/usr    \
+            --enable-shared  \
+            --disable-static &&
+make;
+make install &&
+
+install -v -m755 -d /usr/share/doc/mpeg2dec-[AGE] &&
+install -v -m644 README doc/[NAME].txt \
+                    /usr/share/doc/mpeg2dec-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,35 @@
+<proto>
+  srcurl [MOZILLA]/[NAME]/releases/[AGE]/source/[NAME]-[AGE].source.[TARXZ]
+
+<cluster>
+  autoconf213 gtk2 gtk3 unzip yasm zip icu libevent libvpx nspr nss pulseaudio sqlite
+
+<law>
+  cat > mozconfig << "EOF"
+ 
+EOF;
+grep -rl -- '-Werror=format' |
+    xargs sed -i 's/error=format/no-&/';
+CC=gcc CXX=g++ make -f client.mk;
+make  -f client.mk install INSTALL_SDK= &&
+chown -R 0:0 /usr/lib/[NAME]-[AGE]    &&
+
+cp -v $(find -name [NAME].1 | head -n1) /usr/share/man/man1;
+make -C obj* install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  mkdir -pv /usr/share/{applications,pixmaps}              &&
+
+cat > /usr/share/applications/[NAME].desktop << "EOF"
+ 
+EOF
+
+ln -sfv /usr/lib/[NAME]-[AGE]/chrome/icons/default/[NAME].png \
+        /usr/share/pixmaps
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/ao/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install &&
+install -v -m644 README /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

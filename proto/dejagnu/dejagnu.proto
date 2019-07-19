@@ -1,14 +1,24 @@
 <proto>
-  srcurl http://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.2.tar.gz
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  expect
 
 <law>
-
-  ./configure --prefix=/tools;
-
-  make -j [NPROC];
+  ./configure --prefix=/usr &&
+makeinfo --html --no-split -o doc/[NAME].html doc/[NAME].texi &&
+makeinfo --plaintext       -o doc/[NAME].txt  doc/[NAME].texi;
+make install &&
+install -v -dm755   /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    doc/[NAME].{html,txt} \
+                    /usr/share/doc/[NAME]-[AGE]
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  DejaGnu is a framework for testing other programs.
+  [NAME].
+

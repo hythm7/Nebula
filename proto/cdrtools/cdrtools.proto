@@ -1,0 +1,24 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  export GMAKE_NOWARN=true &&
+make -j1 INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root;
+export GMAKE_NOWARN=true &&
+make INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root install &&
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 README* ABOUT doc/*.ps \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

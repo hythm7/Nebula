@@ -1,27 +1,33 @@
 <proto>
-  srcurl https://sqlite.org/2019/sqlite-autoconf-3280000.tar.gz
-  srcdir sqlite-autoconf-3280000
+  srcurl https://[NAME].org/2019/[NAME]-autoconf-&[NAME]-dl-version;.[TARGZ]
+
+<cluster>
+  
 
 <law>
-
-  autoreconf -f -i;
-
-  ./configure --prefix=/usr           \
-    --disable-static                  \
-    --enable-fts5                     \
-    CFLAGS="-g -O2                    \
-    -DSQLITE_ENABLE_FTS3=1            \
-    -DSQLITE_ENABLE_FTS4=1            \
-    -DSQLITE_ENABLE_COLUMN_METADATA=1 \
-    -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
-    -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
-    -DSQLITE_SECURE_DELETE=1          \
-    -DSQLITE_ENABLE_FTS3_TOKENIZER=1";
-
-  make -j [NPROC];
+  unzip -q ../[NAME]-doc-&[NAME]-doc-version;.zip;
+./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-fts5     \
+            CFLAGS="-g -O2                    \
+            -DSQLITE_ENABLE_FTS3=1            \
+            -DSQLITE_ENABLE_FTS4=1            \
+            -DSQLITE_ENABLE_COLUMN_METADATA=1 \
+            -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+            -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+            -DSQLITE_SECURE_DELETE=1          \
+            -DSQLITE_ENABLE_FTS3_TOKENIZER=1" &&
+make;
+make install;
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+cp -v -R [NAME]-doc-&[NAME]-doc-version;/* /usr/share/doc/[NAME]-[AGE]
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
+
+<config>
+  
 
 <desc>
-  sqlite.
+  [NAME].
+

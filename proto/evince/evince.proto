@@ -1,0 +1,30 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  adwaita-icon-theme gsettings-desktop-schemas gtk3 itstool libxml2 openjpeg2 gnome-keyring gobject-introspection libsecret nautilus poppler
+
+<law>
+  ./configure --prefix=/usr                 \
+            --enable-introspection        \
+            --without-gspell              \
+            --disable-static              \
+            --with-systemduserunitdir=no  &&
+make;
+./configure --prefix=/usr           \
+            --enable-introspection  \
+            --without-gspell        \
+            --disable-static        &&
+make;
+make install;
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

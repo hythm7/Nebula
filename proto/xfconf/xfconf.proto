@@ -1,0 +1,20 @@
+<proto>
+  srcurl http://archive.xfce.org/src/xfce/[NAME]/&xfce4-version;/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  dbus-glib libxfce4util
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

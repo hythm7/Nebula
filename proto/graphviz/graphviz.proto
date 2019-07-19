@@ -1,0 +1,27 @@
+<proto>
+  srcurl http://[NAME].gitlab.io/pub/[NAME]/stable/SOURCES/[NAME].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -e '/ruby/s/1\.9/2.6/' -i configure.ac;
+patch -p1 -i ../[NAME]-[AGE]-qt5-1.patch;
+sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac &&
+
+autoreconf                &&
+./configure --prefix=/usr &&
+make;
+make install;
+ln -v -s /usr/share/[NAME]/doc \
+         /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

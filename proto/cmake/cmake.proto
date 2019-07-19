@@ -1,0 +1,27 @@
+<proto>
+  srcurl https://[NAME].org/files/v&[NAME]-major-version;/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libuv curl libarchive
+
+<law>
+  sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.[NAME] &&
+
+./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --mandir=/share/man  \
+            --no-system-jsoncpp  \
+            --no-system-librhash \
+            --docdir=/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

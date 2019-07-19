@@ -1,0 +1,26 @@
+<proto>
+  srcurl [GNUHTTP]/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  sed -i 's#$(LOBJS): Makefile#$(LOBJS): [NAME]_p.h Makefile#' Makefile.in &&
+./configure --prefix=/usr           \
+            --disable-static        \
+            --mandir=/usr/share/man &&
+make;
+make install &&
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    README PORTING SUPPORT TESTS \
+                    /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

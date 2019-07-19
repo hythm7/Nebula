@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://github.com/thkukuk/[NAME]/archive/v[AGE]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  rpcsvc-proto libtirpc
+
+<law>
+  autoreconf -fi                &&
+./configure --sysconfdir=/etc &&
+make;
+make install                  &&
+mv /usr/lib/[NAME].so.2* /lib &&
+ln -sfv ../../lib/[NAME].so.2.0.0 /usr/lib/[NAME].so
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

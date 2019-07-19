@@ -1,0 +1,44 @@
+<proto>
+  srcurl https://www.[NAME].org/download/src/all-versions/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  glib2 libgcrypt qt5 libpcap
+
+<law>
+  groupadd -g 62 [NAME];
+mkdir build &&
+cd    build &&
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/[NAME]-[AGE] \
+      -G Ninja \
+      .. &&
+ninja;
+ninja install &&
+
+install -v -m755 -d /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644    ../README.linux ../doc/README.* ../doc/{*.pod,randpkt.txt} \
+                    /usr/share/doc/[NAME]-[AGE] &&
+
+pushd /usr/share/doc/[NAME]-[AGE] &&
+   for FILENAME in ../../[NAME]/*.html; do
+      ln -s -v -f $FILENAME .
+   done &&
+popd
+unset FILENAME;
+install -v -m644   \
+                 /usr/share/doc/[NAME]-[AGE];
+chown -v root:[NAME] /usr/bin/{tshark,dumpcap} &&
+chmod -v 6550 /usr/bin/{tshark,dumpcap};
+usermod -a -G [NAME] 
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

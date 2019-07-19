@@ -1,0 +1,20 @@
+<proto>
+  srcurl https://github.com/kupferlauncher/keybinder/releases/download/v[AGE]/keybinder-[AGE].[TARGZ]
+
+<cluster>
+  gtk2 gobject-introspection pygtk
+
+<law>
+  ./configure --prefix=/usr --disable-lua &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

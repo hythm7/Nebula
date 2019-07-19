@@ -1,0 +1,23 @@
+<proto>
+  srcurl http://archive.xfce.org/src/xfce/[NAME]/&xfce4-version;/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  libwnck2 libxfce4ui which xorg7-app desktop-file-utils shared-mime-info polkit-gnome
+
+<law>
+  ./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-legacy-sm &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  update-desktop-database &&
+update-mime-database /usr/share/mime
+
+<desc>
+  [NAME].
+

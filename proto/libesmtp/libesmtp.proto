@@ -1,0 +1,22 @@
+<proto>
+  srcurl http://brianstafford.info/[NAME]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  sed 's@SSL_library_init@SSL_new@g' -i configure.ac &&
+autoreconf -fi;
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

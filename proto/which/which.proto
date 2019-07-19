@@ -1,0 +1,25 @@
+<proto>
+  srcurl http://www.xs4all.nl/~carlo17/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr &&
+make;
+make install;
+cat > /usr/bin/[NAME] << "EOF"
+ 
+EOF
+chmod -v 755 /usr/bin/[NAME]
+chown -v root:root /usr/bin/[NAME]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

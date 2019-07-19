@@ -1,0 +1,45 @@
+<proto>
+  srcurl https://security.appspot.com/downloads/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libnsl
+
+<law>
+  install -v -d -m 0755 &[NAME]-empty; &&
+install -v -d -m 0755 /home/ftp               &&
+groupadd -g 47 [NAME]                         &&
+groupadd -g 45 ftp                            &&
+
+useradd -c "[NAME] User"  -d /dev/null -g [NAME] -s /bin/false -u 47 [NAME] &&
+useradd -c anonymous_user -d /home/ftp -g ftp    -s /bin/false -u 45 ftp;
+make;
+install -v -m 755 [NAME]        /usr/sbin/[NAME]    &&
+install -v -m 644 [NAME].8      /usr/share/man/man8 &&
+install -v -m 644 [NAME].conf.5 /usr/share/man/man5 &&
+install -v -m 644 [NAME].conf   /etc
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/[NAME].conf << "EOF"
+ 
+EOF;
+cat >> /etc/[NAME].conf << "EOF"
+ 
+EOF;
+cat >> /etc/[NAME].conf << "EOF"
+ 
+EOF;
+cat > /etc/pam.d/[NAME] << "EOF" &&
+ 
+EOF
+
+cat >> /etc/[NAME].conf << "EOF"
+ 
+EOF;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

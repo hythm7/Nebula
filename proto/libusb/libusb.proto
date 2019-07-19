@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://github.com//[NAME]/[NAME]/releases/download/v[AGE]/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  sed -i "s/^PROJECT_LOGO/#&/" doc/doxygen.cfg.in &&
+
+./configure --prefix=/usr --disable-static &&
+make -j1;
+make -C doc docs;
+make install;
+install -v -d -m755 /usr/share/doc/[NAME]-[AGE]/apidocs &&
+install -v -m644    doc/html/* \
+                    /usr/share/doc/[NAME]-[AGE]/apidocs
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,26 @@
+<proto>
+  srcurl [GSTREAMER]/gst-plugins-ugly/gst-plugins-ugly-[AGE].[TARXZ]
+
+<cluster>
+  gst10-plugins-base liba52 libdvdread x264
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer &gst10-plugins-good-version; BLFS" &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

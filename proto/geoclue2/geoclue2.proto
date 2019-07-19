@@ -1,0 +1,23 @@
+<proto>
+  srcurl https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/[AGE]/geoclue-[AGE].[TARBZ2]
+
+<cluster>
+  json-glib libsoup ModemManager vala avahi
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr --sysconfdir=/etc -Dgtk-doc=false .. &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

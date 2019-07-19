@@ -1,0 +1,29 @@
+<proto>
+  srcurl [SOURCEFORGE]/pcre/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  
+
+<law>
+  ./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --enable-unicode                    \
+            --enable-jit                        \
+            --enable-[NAME]-16                   \
+            --enable-[NAME]-32                   \
+            --enable-[NAME]grep-libz             \
+            --enable-[NAME]grep-libbz2           \
+            --enable-[NAME]test-libreadline      \
+            --disable-static                    &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

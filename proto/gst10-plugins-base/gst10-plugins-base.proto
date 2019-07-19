@@ -1,0 +1,27 @@
+<proto>
+  srcurl [GSTREAMER]/gst-plugins-base/gst-plugins-base-[AGE].[TARXZ]
+
+<cluster>
+  gstreamer10 alsa-lib cdparanoia gobject-introspection iso-codes libogg libtheora libvorbis xorg7-lib
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson  --prefix=/usr       \
+       -Dbuildtype=release \
+       -Dgtk_doc=disabled  \
+       -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ \
+       -Dpackage-name="GStreamer [AGE] BLFS" &&
+ninja;
+ninja install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

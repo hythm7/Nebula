@@ -1,0 +1,29 @@
+<proto>
+  srcurl [XORGHTTP]/xserver/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  pixman xorg7-font runtime xkeyboard-config sysv libepoxy sysv wayland sysv wayland-protocols systemd
+
+<law>
+  ./configure $XORG_CONFIG            \
+            --enable-glamor         \
+            --enable-suid-wrapper   \
+            --with-xkb-output=/var/lib/xkb &&
+make;
+make install &&
+mkdir -pv /etc/X11/xorg.conf.d &&
+cat >> /etc/sysconfig/createfiles << "EOF"
+ 
+EOF;
+make install &&
+mkdir -pv /etc/X11/xorg.conf.d
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

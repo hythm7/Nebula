@@ -1,0 +1,30 @@
+<proto>
+  srcurl https://download.qt.io/archive/qt/&[NAME]-major;/[AGE]/submodules/[NAME]-everywhere-src-[AGE].[TARXZ]
+
+<cluster>
+  nss python2 qt5 alsa-lib pulseaudio ffmpeg icu libwebp libxslt opus
+
+<law>
+  find -type f -name "*.pr[io]" |
+  xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include |';
+if [ -e ${QT5DIR}/lib/libQtWebEngineCore.so ]; then
+  mv -v ${QT5DIR}/lib/libQtWebEngineCore.so{,.old}
+fi;
+mkdir build &&
+cd    build &&
+
+qmake .. -- -system-ffmpeg -webengine-icu &&
+make;
+make install;
+find $QT5DIR/ -name \*.prl \
+   -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

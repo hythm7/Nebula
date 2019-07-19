@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://www.cairographics.org/releases/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  cairo libsigc
+
+<law>
+  sed -e '/^libdocdir =/ s/$(book_name)/[NAME]-[AGE]/' \
+    -i docs/Makefile.in;
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

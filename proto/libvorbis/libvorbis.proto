@@ -1,0 +1,21 @@
+<proto>
+  srcurl https://downloads.xiph.org/releases/vorbis/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libogg
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install &&
+install -v -m644 doc/Vorbis* /usr/share/doc/[NAME]-[AGE]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,47 @@
+<proto>
+  srcurl [SOURCEFORGE]/[NAME]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  gtk2 iso-codes runtime librsvg lxsession polkit-gnome
+
+<law>
+  cat > pam/[NAME] << "EOF"
+ 
+EOF
+
+sed -i 's:sysconfig/i18n:profile.d/i18n.sh:g' data/[NAME].in &&
+sed -i 's:/etc/xprofile:/etc/profile:g' data/Xsession &&
+sed -e 's/^bg/#&/'        \
+    -e '/reset=1/ s/# //' \
+    -e 's/logou$/logout/' \
+    -e "/arg=/a arg=$XORG_PREFIX/bin/X" \
+    -i data/[NAME].conf.in;
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-pam        \
+            --with-systemdsystemunitdir=no &&
+make;
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-pam        \
+            --with-systemdsystemunitdir=/lib/systemd/system &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME];
+systemctl enable [NAME];
+/etc/rc.d/init.d/[NAME] start;
+init 5;
+cp -v /etc/inittab{,-orig} &&
+sed -i '/initdefault/ s/3/5/' /etc/inittab;
+cat >> /etc/elogind/logind.conf << "EOF"
+ 
+EOF
+
+<desc>
+  [NAME].
+

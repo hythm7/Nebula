@@ -1,0 +1,43 @@
+<proto>
+  srcurl http://ftp.[NAME].org/pub/[NAME]/[NAME]4/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  libnsl pcre
+
+<law>
+  groupadd -g 31 [NAME] &&
+useradd -d /dev/null -c "Exim Daemon" -g [NAME] -s /bin/false -u 31 [NAME];
+sed -e 's,^BIN_DIR.*$,BIN_DIRECTORY=/usr/sbin,'    \
+    -e 's,^CONF.*$,CONFIGURE_FILE=/etc/[NAME].conf,' \
+    -e 's,^EXIM_USER.*$,EXIM_USER=[NAME],'           \
+    -e '/SUPPORT_TLS/s,^#,,'                       \
+    -e '/USE_OPENSSL/s,^#,,'                       \
+    -e '515 d'                                     \
+    -e 's,^EXIM_MONITOR,#EXIM_MONITOR,' src/EDITME > Local/Makefile &&
+
+printf "USE_GDBM = yes\nDBMLIB = -lgdbm\n" >> Local/Makefile &&
+make;
+make install                                    &&
+install -v -m644 doc/[NAME].8 /usr/share/man/man8 &&
+
+install -v -d -m755    /usr/share/doc/[NAME]-[AGE] &&
+install -v -m644 doc/* /usr/share/doc/[NAME]-[AGE] &&
+
+ln -sfv [NAME] /usr/sbin/sendmail                 &&
+install -v -d -m750 -o [NAME] -g [NAME] /var/spool/[NAME]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  chmod -v a+wt /var/mail;
+cat >> /etc/aliases << "EOF"
+ 
+EOF
+[NAME] -v -bi &&
+/usr/sbin/[NAME] -bd -q15m;
+make install-[NAME]
+
+<desc>
+  [NAME].
+

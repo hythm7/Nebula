@@ -1,28 +1,65 @@
 <proto>
-  srcurl https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz
+  srcurl https://[NAME].freedesktop.org/releases/[NAME]/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  systemd xorg7-lib sysv
 
 <law>
-
-  ./configure --prefix=/usr              \
-    --sysconfdir=/etc                    \
-    --localstatedir=/var                 \
-    --disable-static                     \
-    --disable-doxygen-docs               \
-    --disable-xml-docs                   \
-    --docdir=/usr/share/doc/dbus-1.12.16 \
-    --with-console-auth-dir=/run/console;
-
-
-  make -j [NPROC];
+  ./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --enable-user-session                \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --disable-static                     \
+            --with-systemduserunitdir=no         \
+            --with-systemdsystemunitdir=no       \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --with-console-auth-dir=/run/console \
+            --with-system-pid-file=/run/[NAME]/pid \
+            --with-system-socket=/run/[NAME]/system_bus_socket &&
+make;
+./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --enable-user-session                \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --disable-static                     \
+            --docdir=/usr/share/doc/[NAME]-[AGE] \
+            --with-console-auth-dir=/run/console \
+            --with-system-pid-file=/run/[NAME]/pid \
+            --with-system-socket=/run/[NAME]/system_bus_socket &&
+make;
+systemctl start rescue.target;
+make install;
+mv -v /usr/lib/lib[NAME]-1.so.* /lib &&
+ln -sfv ../../lib/$(readlink /usr/lib/lib[NAME]-1.so) /usr/lib/lib[NAME]-1.so;
+chown -v root:messagebus /usr/libexec/[NAME]-daemon-launch-helper &&
+chmod -v      4750       /usr/libexec/[NAME]-daemon-launch-helper;
+[NAME]-uuidgen --ensure;
+ln -sv /var/lib/[NAME]/machine-id /etc;
+systemctl daemon-reload
+systemctl start multi-user.target;
+make distclean                     &&
+./configure --enable-tests         \
+            --enable-asserts       \
+            --disable-doxygen-docs \
+            --disable-xml-docs     &&
+make                               &&
+make check
 
 <install>
-  make DESTDIR=[XYZ] install;
+  make DESTDIR=[XYZ] install
 
-  mkdir [XYZ]/lib;
-  mv -v [XYZ]/usr/lib/libdbus-1.so.* [XYZ]/lib;
-ln -sfv ../../lib/$(readlink [XYZ]/usr/lib/libdbus-1.so) [XYZ]/usr/lib/libdbus-1.so;
-  ln -sfv /etc/machine-id [XYZ]/var/lib/dbus;
+<config>
+  cat > /etc/[NAME]-1/session-local.conf << "EOF"
+ 
+EOF;
+make install-[NAME];
+;
 
 
 <desc>
-  d-bus.
+  [NAME].
+

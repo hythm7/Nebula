@@ -1,0 +1,22 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/2.42/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  cairomm glibmm pango
+
+<law>
+  sed -e '/^libdocdir =/ s/$(book_name)/[NAME]-[AGE]/' \
+    -i docs/Makefile.in;
+./configure --prefix=/usr &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

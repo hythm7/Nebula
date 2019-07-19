@@ -1,0 +1,22 @@
+<proto>
+  srcurl https://libopenraw.freedesktop.org/download/[NAME]-[AGE].[TARBZ2]
+
+<cluster>
+  boost
+
+<law>
+  sed -i -r '/^\s?testadobesdk/d' [NAME]/tests/Makefile.am &&
+autoreconf -fiv;
+./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

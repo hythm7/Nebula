@@ -1,0 +1,19 @@
+<proto>
+  srcurl [GNOMEHTTP]/pyatspi/2.32/pyatspi-[AGE].[TARXZ]
+
+<cluster>
+  pygobject3 at-spi2-core
+
+<law>
+  ./configure --prefix=/usr --with-python=/usr/bin/python3;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

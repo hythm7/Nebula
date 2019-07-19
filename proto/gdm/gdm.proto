@@ -1,0 +1,48 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  accountsservice gtk3 iso-codes itstool keyutils libcanberra libdaemon linux-pam
+
+<law>
+  groupadd -g 21 [NAME] &&
+useradd -c "GDM Daemon Owner" -d /var/lib/[NAME] -u 21 \
+        -g [NAME] -s /bin/false [NAME] &&
+passwd -ql [NAME];
+sed 's@systemd@elogind@' -i data/pam-lfs/[NAME]-launch-environment.pam &&
+
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --without-plymouth    \
+            --disable-static      \
+	    --enable-[NAME]-xsession \
+            --with-systemdsystemunitdir=no \
+            --with-pam-mod-dir=/lib/security &&
+make;
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --without-plymouth    \
+            --disable-static      \
+            --enable-[NAME]-xsession \
+            --with-pam-mod-dir=/lib/security &&
+make;
+make install;
+make install &&
+install -v -m644 data/[NAME].service /lib/systemd/system/[NAME].service
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  make install-[NAME] &&
+sed /initdefault/s/3/5/ -i /etc/inittab;
+cat >> /etc/elogind/logind.conf << "EOF"
+ 
+EOF;
+systemctl enable [NAME]
+
+<desc>
+  [NAME].
+

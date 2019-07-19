@@ -1,0 +1,40 @@
+<proto>
+  srcurl https://www.eecis.udel.edu/~[NAME]/[NAME]_spool/[NAME]4/[NAME]-4.2/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  perl-io-socket-ssl
+
+<law>
+  groupadd -g 87 [NAME] &&
+useradd -c "Network Time Protocol" -d /var/lib/[NAME] -u 87 \
+        -g [NAME] -s /bin/false [NAME];
+sed -e 's/"(\\S+)"/"?([^\\s"]+)"?/' \
+    -i scripts/update-leap/update-leap.in;
+./configure CFLAGS="-O2 -g -fPIC" \
+            --prefix=/usr         \
+            --bindir=/usr/sbin    \
+            --sysconfdir=/etc     \
+            --enable-linuxcaps    \
+            --with-lineeditlibs=readline \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install &&
+install -v -o [NAME] -g [NAME] -d /var/lib/[NAME]
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat > /etc/[NAME].conf << "EOF"
+ 
+EOF;
+cat >> /etc/[NAME].conf << "EOF"
+ 
+EOF;
+make install-[NAME]d;
+ln -v -sf ../init.d/setclock /etc/rc.d/rc0.d/K46setclock &&
+ln -v -sf ../init.d/setclock /etc/rc.d/rc6.d/K46setclock
+
+<desc>
+  [NAME].
+

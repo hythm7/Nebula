@@ -1,0 +1,30 @@
+<proto>
+  srcurl [MOZILLA]/[NAME]/releases/[AGE]/source/[NAME]-[AGE].source.[TARXZ]
+
+<cluster>
+  autoconf213 gtk3 gtk2 llvm rust zip unzip yasm icu libevent nspr nss sqlite
+
+<law>
+  cat > mozconfig << "EOF"
+ 
+EOF;
+sed -i -e '/#!\[deny(missing_docs)\]/d' servo/components/style/lib.rs;
+sed -i -e 's/#!\[deny(unsafe_code, missing_docs)\]/#!\[deny(unsafe_code)\]/g' servo/components/style_traits/lib.rs;
+./mach install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  mkdir -pv /usr/share/{applications,pixmaps} &&
+
+cat > /usr/share/applications/[NAME].desktop << "EOF" &&
+ 
+EOF
+
+ln -sfv /usr/lib/[NAME]/chrome/icons/default/default256.png \
+        /usr/share/pixmaps/[NAME].png
+
+<desc>
+  [NAME].
+

@@ -1,0 +1,26 @@
+<proto>
+  srcurl https://download.videolan.org/[NAME]/[AGE]/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  alsa-lib ffmpeg liba52 libgcrypt libmad lua x-window-system
+
+<law>
+  sed -i '/[NAME]_demux.h/a #define LUA_COMPAT_APIINTCASTS' modules/lua/[NAME].h   &&
+sed -i '/LIBSSH2_VERSION_NUM/s/10801/10900/' modules/access/sftp.c &&
+
+BUILDCC=gcc ./configure --prefix=/usr    \
+                        --disable-opencv \
+                        --disable-vpx    &&
+
+make;
+make docdir=/usr/share/doc/[NAME]-[AGE] install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

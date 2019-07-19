@@ -1,0 +1,20 @@
+<proto>
+  srcurl [GNUHTTP]/libidn/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  libunistring
+
+<law>
+  ./configure --prefix=/usr --disable-static &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

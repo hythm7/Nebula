@@ -1,0 +1,37 @@
+<proto>
+  srcurl https://static.[NAME]-lang.org/dist/[NAME]c-[AGE]-src.[TARGZ]
+
+<cluster>
+  curl cmake libssh2 llvm
+
+<law>
+  mkdir /opt/[NAME]c-[AGE]             &&
+ln -svfin [NAME]c-[AGE] /opt/[NAME]c;
+cat << EOF > config.toml
+ 
+EOF;
+export RUSTFLAGS="$RUSTFLAGS -C link-args=-lffi" &&
+python3 ./x.py build --exclude src/tools/miri;
+export LIBSSH2_SYS_USE_PKG_CONFIG=1 &&
+DESTDIR=${PWD}/install python3 ./x.py install &&
+unset LIBSSH2_SYS_USE_PKG_CONFIG;
+chown -R root:root install &&
+cp -a install/* /
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  cat >> /etc/ld.so.conf << EOF
+ 
+EOF
+
+ldconfig;
+cat > /etc/profile.d/[NAME]c.sh << "EOF"
+ 
+EOF;
+source /etc/profile.d/[NAME]c.sh
+
+<desc>
+  [NAME].
+

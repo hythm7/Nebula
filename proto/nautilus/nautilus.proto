@@ -1,0 +1,29 @@
+<proto>
+  srcurl [GNOMEHTTP]/[NAME]/&gnome-minor-32;/[NAME]-[AGE].[TARXZ]
+
+<cluster>
+  bubblewrap gexiv2 gnome-autoar gnome-desktop libnotify libseccomp tracker-miners desktop-file-utils exempi gobject-introspection libexif
+
+<law>
+  mkdir build &&
+cd    build &&
+
+meson --prefix=/usr      \
+      --sysconfdir=/etc  \
+      -Dselinux=false    \
+      -Dpackagekit=false \
+      .. &&
+
+ninja;
+ninja install &&
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+

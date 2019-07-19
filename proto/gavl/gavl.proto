@@ -1,0 +1,23 @@
+<proto>
+  srcurl [SOURCEFORGE]/gmerlin/[NAME]-[AGE].[TARGZ]
+
+<cluster>
+  
+
+<law>
+  LIBS=-lm                      \
+./configure --prefix=/usr     \
+            --without-doxygen \
+            --docdir=/usr/share/doc/[NAME]-[AGE] &&
+make;
+make install
+
+<install>
+  make DESTDIR=[XYZ] install
+
+<config>
+  
+
+<desc>
+  [NAME].
+
